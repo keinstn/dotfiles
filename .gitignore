@@ -1,6 +1,13 @@
 # fish
 .config/fish/fishd*
 
+# fisherman
+.config/fish/completions/
+.config/fish/conf.d/
+.config/fish/fishfile
+.config/fish/functions/
+.config/fisherman/
+
 # macOS
 .DS_Store
 .AppleDouble
