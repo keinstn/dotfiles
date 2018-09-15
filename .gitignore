@@ -1,0 +1,7 @@
+# fish
+.config/fish/fishd*
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
