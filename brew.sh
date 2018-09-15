@@ -6,7 +6,6 @@ packages="\
   pass \
   python3 \
   rg \
-  rust \
   tmux \
   tree \
 "
@@ -24,3 +23,7 @@ brew install ${packages}
 
 # Install casks
 brew cask install ${casks}
+
+# Install Rust
+curl https://sh.rustup.rs -sSf | sh
+
