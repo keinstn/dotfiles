@@ -14,6 +14,7 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'rhysd/clever-f.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
 call plug#end()
 
