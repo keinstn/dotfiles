@@ -47,7 +47,8 @@ let mapleader=","
 
 " edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>:echo 'Reloaded vimrc!'<CR>
+nmap <silent> <leader>ef :e ~/.config/nvim/ftplugin/<C-R>=&filetype<CR>.vim<CR>
 
 """ Plugins
 
