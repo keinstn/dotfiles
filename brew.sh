@@ -1,9 +1,11 @@
 #!/bin/bash
-packages="\
+formulas="\
+  direnv \
   fish \
   fzf \
   neovim \
   pass \
+  pyenv \
   python3 \
   rg \
   tmux \
@@ -18,8 +20,8 @@ if [[ $(which brew) == '' ]]; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-# Install packages
-brew install ${packages}
+# Install formulas
+brew install ${formulas}
 
 # Install casks
 brew cask install ${casks}

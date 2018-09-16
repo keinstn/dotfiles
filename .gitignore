@@ -16,3 +16,6 @@
 # neovim
 .config/nvim/.netrwhist
 .config/nvim/plugged/
+
+# direnv
+.config/direnv/
