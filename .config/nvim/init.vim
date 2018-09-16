@@ -1,15 +1,15 @@
 call plug#begin()
+Plug '/usr/local/opt/fzf'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'dag/vim-fish'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rhysd/clever-f.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'dag/vim-fish'
 call plug#end()
 
 " Following commands are automatically executed by vim-plug.
@@ -57,10 +57,12 @@ nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
 " vim indent guides
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
 
 " vim fzf
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
+" ale
+let g:ale_fix_on_save = 1
+let g:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
