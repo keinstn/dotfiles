@@ -12,3 +12,7 @@
 .DS_Store
 .AppleDouble
 .LSOverride
+
+# neovim
+.config/nvim/.netrwhist
+.config/nvim/plugged/

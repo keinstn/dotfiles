@@ -18,3 +18,7 @@ fish ./fisherman.fish
 
 # Install Rust
 curl https://sh.rustup.rs -sSf | sh
+
+# Install vim-plug
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
