@@ -43,6 +43,11 @@ set hlsearch
 " leader
 let mapleader=","
 
+""" Indents
+autocmd FileType javascript setlocal sw=4 sts=4 ts=4 et
+autocmd FileType python setlocal sw=4 sts=4 ts=4 et
+autocmd FileType vim setlocal sw=2 sts=2 ts=2 et
+
 """ Mappings
 
 " edit/reload the vimrc file
@@ -68,7 +73,12 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
 
 " vim fzf
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find
+      \ call fzf#vim#grep(
+      \ 'rg --column --line-number --no-heading --fixed-strings
+      \ --ignore-case --no-ignore --hidden --follow --glob "!.git/*" 
+      \ --color "always" '.shellescape(<q-args>), 1, <bang>0
+      \ )
 
 " ale
 let g:ale_fix_on_save = 1
