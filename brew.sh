@@ -4,6 +4,7 @@ formulas="\
   fish \
   fzf \
   neovim \
+  nodejs \
   pass \
   pyenv \
   python3 \

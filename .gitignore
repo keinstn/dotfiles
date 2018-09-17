@@ -19,3 +19,6 @@
 
 # direnv
 .config/direnv/
+
+# npm
+.config/configstore/
