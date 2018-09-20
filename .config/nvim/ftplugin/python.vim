@@ -3,10 +3,6 @@
 
 """ Plugins
 
-" vim indent guides
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-
 " ale
 let b:ale_linters = ['flask8']
 let b:ale_fixers = ['autopep8']
