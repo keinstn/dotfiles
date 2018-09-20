@@ -3,6 +3,7 @@ formulas="\
   direnv \
   fish \
   fzf \
+  jq \
   neovim \
   nodejs \
   pass \
