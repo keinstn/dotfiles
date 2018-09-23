@@ -7,12 +7,14 @@ formulas="\
   neovim \
   nodejs \
   pass \
+  pipenv \
   pyenv \
   python3 \
   rg \
   tmux \
   tree \
 "
+
 casks="\
   docker \
 "
