@@ -2,7 +2,7 @@ call plug#begin()
 Plug '/usr/local/opt/fzf'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dag/vim-fish'
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf.vim'
