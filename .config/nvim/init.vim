@@ -2,15 +2,12 @@ call plug#begin()
 Plug '/usr/local/opt/fzf'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dag/vim-fish'
+Plug 'davidhalter/jedi-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/vim-lsp'
 Plug 'rhysd/clever-f.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
@@ -49,7 +46,6 @@ set clipboard+=unnamedplus
 
 """ Indents
 autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
-autocmd FileType python setlocal sw=4 sts=4 ts=4 et
 autocmd FileType vim setlocal sw=2 sts=2 ts=2 et
 
 """ Mappings
