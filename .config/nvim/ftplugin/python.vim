@@ -8,5 +8,5 @@ setlocal completeopt-=preview
 """ Plugins
 
 " ale
-let b:ale_linters = ['flask8']
+let b:ale_linters = ['flake8']
 let b:ale_fixers = ['autopep8']
