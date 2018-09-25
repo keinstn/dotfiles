@@ -9,5 +9,4 @@ set -g FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --follow --glob "!.g
 source $HOME/.cargo/env
 
 eval (direnv hook fish)
-status --is-interactive; and . (pyenv init -|psub)
-status --is-interactive; and . (pyenv virtualenv-init -|psub)
+. (pyenv init - | psub)
