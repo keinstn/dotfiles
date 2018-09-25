@@ -44,9 +44,10 @@ let mapleader=","
 " clipboard
 set clipboard+=unnamedplus
 
-""" Indents
+""" FileType
 autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
 autocmd FileType vim setlocal sw=2 sts=2 ts=2 et
+autocmd FileType gitcommit setlocal spell
 
 """ Mappings
 
