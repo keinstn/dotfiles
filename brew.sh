@@ -1,12 +1,16 @@
 #!/bin/bash
 formulas="\
+  awscli \
   direnv \
   fish \
   fzf \
+  htop \
   jq \
+  mycli \
   neovim \
   nodejs \
   pass \
+  pgcli \
   pipenv \
   pyenv \
   python3 \

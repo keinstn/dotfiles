@@ -1,5 +1,7 @@
 #!/bin/bash
 
+xcode-select --install
+
 # Install packages
 source ./brew.sh
 
