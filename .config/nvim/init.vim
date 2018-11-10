@@ -3,6 +3,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dag/vim-fish'
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+Plug 'ervandew/supertab'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf.vim'
@@ -11,6 +12,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rhysd/clever-f.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
 call plug#end()
@@ -80,6 +82,7 @@ command! -bang -nargs=* Find
       \ --ignore-case --no-ignore --hidden --follow --glob "!.git/*"
       \ --color "always" '.shellescape(<q-args>), 1, <bang>0
       \ )
+nnoremap ; :Files<Cr>
 
 " ale
 let g:ale_fix_on_save = 1
