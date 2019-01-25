@@ -1,5 +1,9 @@
 call plug#begin()
-Plug '/usr/local/opt/fzf'
+if executable('brew')
+  Plug '/usr/local/opt/fzf'
+else
+  Plug '~/.fzf'
+endif
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dag/vim-fish'
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
