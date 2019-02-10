@@ -17,6 +17,7 @@ formulas="\
   rg \
   tmux \
   tree \
+  yarn \
 "
 
 casks="\
