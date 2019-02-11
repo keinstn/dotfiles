@@ -8,5 +8,11 @@ set -g FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --follow --glob "!.g
 
 source $HOME/.cargo/env
 
+if ! type -q brew
+    set -x PATH "$HOME/.pyenv/bin" $PATH
+    set -x PATH "$HOME/.local/bin" $PATH
+    set -x PATH "$HOME/.yarn/bin" $PATH
+end
+
 eval (direnv hook fish)
 . (pyenv init - | psub)
