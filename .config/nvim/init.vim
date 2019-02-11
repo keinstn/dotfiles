@@ -13,6 +13,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'posva/vim-vue'
 Plug 'rhysd/clever-f.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
@@ -54,6 +55,7 @@ set clipboard+=unnamedplus
 autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
 autocmd FileType vim setlocal sw=2 sts=2 ts=2 et
 autocmd FileType yaml setlocal sw=2 sts=2 ts=2 et
+autocmd FileType vue setlocal sw=2 sts=2 ts=2 et
 autocmd FileType gitcommit setlocal spell
 
 """ Mappings
