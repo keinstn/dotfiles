@@ -4,6 +4,7 @@ if executable('brew')
 else
   Plug '~/.fzf'
 endif
+Plug 'altercation/vim-colors-solarized'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dag/vim-fish'
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
@@ -16,6 +17,7 @@ Plug 'posva/vim-vue'
 Plug 'raimondi/delimitmate'
 Plug 'rhysd/clever-f.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'szymonmaszke/vimpyter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -66,6 +68,10 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>:echo 'Reloaded vimrc!'<CR>
 nmap <silent> <leader>ef :e ~/.config/nvim/ftplugin/<C-R>=&filetype<CR>.vim<CR>
 
 """ Plugins
+
+" Colorscheme
+set background=dark
+colorscheme solarized
 
 " vim tmux navigator
 let g:tmux_navigator_no_mappings = 1
