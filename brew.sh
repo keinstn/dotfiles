@@ -6,6 +6,7 @@ formulas="\
   fzf \
   htop \
   jq \
+  kubernetes-cli \
   mycli \
   neovim \
   nodejs \
@@ -22,6 +23,7 @@ formulas="\
 
 casks="\
   docker \
+  minikube \
 "
 
 # Install homebrew
