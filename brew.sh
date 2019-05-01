@@ -2,6 +2,7 @@
 formulas="\
   awscli \
   direnv \
+  docker-machine-driver-hyperkit \
   fish \
   fzf \
   htop \
