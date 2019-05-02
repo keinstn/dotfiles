@@ -23,6 +23,7 @@ formulas="\
 "
 
 casks="\
+  google-cloud-sdk \
   docker \
   minikube \
 "
