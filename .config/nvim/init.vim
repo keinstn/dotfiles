@@ -5,18 +5,25 @@ else
   Plug '~/.fzf'
 endif
 Plug 'altercation/vim-colors-solarized'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dag/vim-fish'
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'ervandew/supertab'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'mechatroner/rainbow_csv'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
 Plug 'posva/vim-vue'
 Plug 'raimondi/delimitmate'
 Plug 'rhysd/clever-f.vim'
+Plug 'roxma/nvim-yarp' " For ncm2
 Plug 'scrooloose/nerdtree'
 Plug 'szymonmaszke/vimpyter'
 Plug 'tpope/vim-fugitive'
@@ -101,3 +108,21 @@ nnoremap ; :Files<Cr>
 " ale
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {'*': ['trim_whitespace', 'remove_trailing_lines']}
+
+" LanguageClient
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ 'vue': ['/usr/local/bin/vls'],
+    \ }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+" ncm2
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"

@@ -27,3 +27,8 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 
 # Install notedown
 pip install --prefix=/usr/local notedown
+
+# Install LSP
+pip3 install --prefix=/usr/local python-language-server
+yarn global add javascript-typescript-langserver
+yarn global add vue-language-server
