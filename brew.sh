@@ -1,8 +1,11 @@
 #!/bin/bash
 formulas="\
   awscli \
+  bat \
   direnv \
   docker-machine-driver-hyperkit \
+  exa \
+  fd \
   fish \
   fzf \
   htop \
