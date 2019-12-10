@@ -1,5 +1,6 @@
 alias cat="bat"
 alias find="fd"
-alias ls="exa -lahF"
+alias ls="exa"
+alias ll="exa -lahF"
 alias tmux="tmux -f ~/.config/tmux/.tmux.conf"
 alias vim="nvim"
