@@ -32,3 +32,9 @@ pip install --prefix=/usr/local notedown
 pip3 install --prefix=/usr/local python-language-server
 yarn global add javascript-typescript-langserver
 yarn global add vue-language-server
+
+# Install Volta
+curl https://get.volta.sh | bash
+
+# Install npm packages
+volta install tldr
