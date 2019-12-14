@@ -25,7 +25,6 @@ Plug 'raimondi/delimitmate'
 Plug 'rhysd/clever-f.vim'
 Plug 'roxma/nvim-yarp' " For ncm2
 Plug 'scrooloose/nerdtree'
-Plug 'szymonmaszke/vimpyter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
