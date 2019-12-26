@@ -12,6 +12,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dag/vim-fish'
 Plug 'ervandew/supertab'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
@@ -37,6 +38,7 @@ syntax enable
 filetype plugin indent on
 
 """ General
+set hidden
 set number
 set nowrap
 set cursorline
@@ -53,6 +55,9 @@ set tabstop=4
 
 set incsearch
 set hlsearch
+
+set nobackup
+set noswapfile
 
 " leader
 let mapleader=","
@@ -113,6 +118,7 @@ let g:ale_fixers = {'*': ['trim_whitespace', 'remove_trailing_lines']}
 
 " LanguageClient
 let g:LanguageClient_serverCommands = {
+    \ 'go': ['gopls'],
     \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
     \ 'python': ['/usr/local/bin/pyls'],
     \ 'vue': ['/usr/local/bin/vls'],

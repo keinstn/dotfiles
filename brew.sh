@@ -2,12 +2,14 @@
 formulas="\
   awscli \
   bat \
+  dep \
   direnv \
   docker-machine-driver-hyperkit \
   exa \
   fd \
   fish \
   fzf \
+  go \
   htop \
   jq \
   kubernetes-cli \

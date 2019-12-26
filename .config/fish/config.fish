@@ -14,5 +14,7 @@ if not type -q brew
     set -x PATH "$HOME/.yarn/bin" $PATH
 end
 
+set -x PATH "$HOME/go/bin" $PATH
+
 eval (direnv hook fish)
 . (pyenv init - | psub)
