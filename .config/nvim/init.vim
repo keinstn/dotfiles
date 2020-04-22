@@ -120,7 +120,7 @@ let g:ale_fixers = {'*': ['trim_whitespace', 'remove_trailing_lines']}
 let g:LanguageClient_serverCommands = {
     \ 'go': ['gopls'],
     \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'python': ['/usr/local/bin/pyls'],
+    \ 'python': ['pyls'],
     \ 'vue': ['/usr/local/bin/vls'],
     \ }
 
