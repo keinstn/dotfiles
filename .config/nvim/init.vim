@@ -14,6 +14,7 @@ Plug 'dag/vim-fish'
 Plug 'ervandew/supertab'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'itchyny/lightline.vim'
+Plug 'jparise/vim-graphql'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'mechatroner/rainbow_csv'
@@ -65,19 +66,39 @@ let mapleader=","
 " clipboard
 set clipboard+=unnamedplus
 
-""" FileType
+" Language support
+setlocal completeopt-=preview
+
+""" Python
+autocmd FileType python setlocal sw=4 sts=4 ts=4 et
+
+""" Javascript
 autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
+
+""" Vimscript
 autocmd FileType vim setlocal sw=2 sts=2 ts=2 et
+
+""" YAML
 autocmd FileType yaml setlocal sw=2 sts=2 ts=2 et
+
+
+""" Vue
 autocmd FileType vue setlocal sw=2 sts=2 ts=2 et
+
+
+""" Git commit
 autocmd FileType gitcommit setlocal spell
+
+""" Go
+autocmd FileType go BufWritePre :call LanguageClient#textDocument_formatting_sync()
+autocmd FileType go nmap <leader>b <Plug>(go-build)
+autocmd FileType go nmap <leader>r <Plug>(go-run)
 
 """ Mappings
 
 " edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>:echo 'Reloaded vimrc!'<CR>
-nmap <silent> <leader>ef :e ~/.config/nvim/ftplugin/<C-R>=&filetype<CR>.vim<CR>
 
 """ Plugins
 
@@ -114,7 +135,15 @@ nnoremap ; :Files<Cr>
 
 " ale
 let g:ale_fix_on_save = 1
-let g:ale_fixers = {'*': ['trim_whitespace', 'remove_trailing_lines']}
+let g:ale_linters = {
+      \ 'python': ['flake8'],
+      \ 'go': ['gopls']
+      \}
+let g:ale_fixers = {
+      \ '*': ['trim_whitespace', 'remove_trailing_lines'],
+      \ 'python': ['black', 'isort'],
+      \ 'vue': ['prettier', 'eslint']
+      \}
 
 " LanguageClient
 let g:LanguageClient_serverCommands = {
