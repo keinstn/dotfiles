@@ -18,7 +18,6 @@ formulas="\
   nodejs \
   pass \
   pgcli \
-  pipenv \
   pyenv \
   python3 \
   rg \
