@@ -6,6 +6,7 @@ else
 endif
 Plug 'altercation/vim-colors-solarized'
 Plug 'alvan/vim-closetag'
+Plug 'ap/vim-css-color'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -71,8 +72,8 @@ set clipboard+=unnamedplus
 setlocal completeopt-=preview
 
 """ CSS
-autocmd FileType css set completefunc=syntaxcomplete#Complete
-autocmd FileType css set omnifunc=syntaxcomplete#Complete
+autocmd FileType css let g:LanguageClient_setOmnifunc = v:false
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType css
     \ if &omnifunc != '' |
     \   call SuperTabChain(&omnifunc, "<c-n>") |
@@ -163,7 +164,6 @@ let g:LanguageClient_serverCommands = {
     \ 'python': ['pyls'],
     \ 'vue': ['/usr/local/bin/vls'],
     \ }
-
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
