@@ -5,6 +5,7 @@ else
   Plug '~/.fzf'
 endif
 Plug 'altercation/vim-colors-solarized'
+Plug 'alvan/vim-closetag'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -14,6 +15,7 @@ Plug 'dag/vim-fish'
 Plug 'ervandew/supertab'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'itchyny/lightline.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'jparise/vim-graphql'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
@@ -23,7 +25,6 @@ Plug 'ncm2/ncm2'
 Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-path'
 Plug 'posva/vim-vue'
-Plug 'raimondi/delimitmate'
 Plug 'rhysd/clever-f.vim'
 Plug 'roxma/nvim-yarp' " For ncm2
 Plug 'scrooloose/nerdtree'
@@ -68,6 +69,14 @@ set clipboard+=unnamedplus
 
 " Language support
 setlocal completeopt-=preview
+
+""" CSS
+autocmd FileType css set completefunc=syntaxcomplete#Complete
+autocmd FileType css set omnifunc=syntaxcomplete#Complete
+autocmd FileType css
+    \ if &omnifunc != '' |
+    \   call SuperTabChain(&omnifunc, "<c-n>") |
+    \ endif
 
 """ Python
 autocmd FileType python setlocal sw=4 sts=4 ts=4 et
@@ -148,11 +157,13 @@ let g:ale_fixers = {
 
 " LanguageClient
 let g:LanguageClient_serverCommands = {
+    \ 'css': ['/usr/local/bin/css-languageserver', '--stdio'],
     \ 'go': ['gopls'],
     \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
     \ 'python': ['pyls'],
     \ 'vue': ['/usr/local/bin/vls'],
     \ }
+
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>

@@ -31,6 +31,7 @@ pip install --prefix=/usr/local notedown
 # Install LSP
 pip3 install --prefix=/usr/local python-language-server
 yarn global add javascript-typescript-langserver
+yarn global add vscode-css-languageserver-bin
 yarn global add vue-language-server
 
 # Install Volta
