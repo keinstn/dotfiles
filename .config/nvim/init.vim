@@ -20,6 +20,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'jparise/vim-graphql'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'mattn/emmet-vim'
 Plug 'mechatroner/rainbow_csv'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ncm2/ncm2'
@@ -153,7 +154,8 @@ let g:ale_fixers = {
       \ '*': ['trim_whitespace', 'remove_trailing_lines'],
       \ 'python': ['black', 'isort'],
       \ 'javascript': ['prettier', 'eslint'],
-      \ 'vue': ['prettier', 'eslint']
+      \ 'vue': ['prettier', 'eslint'],
+      \ 'html': ['prettier'],
       \}
 
 " LanguageClient
@@ -175,3 +177,6 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+
+" emmet-vim
+let g:user_emmet_leader_key='<C-X>'
