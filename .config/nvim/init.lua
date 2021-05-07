@@ -21,7 +21,6 @@ paq {'alvan/vim-closetag'}
 paq {'ap/vim-css-color'}
 paq {'christoomey/vim-tmux-navigator'}
 paq {'ervandew/supertab'}
-paq {'glepnir/galaxyline.nvim'}
 paq {'jiangmiao/auto-pairs'}
 paq {'joshdick/onedark.vim'}
 paq {'junegunn/vim-easy-align'}
@@ -80,7 +79,6 @@ opt('o', 'splitbelow', true)              -- Put new windows below current
 opt('o', 'splitright', true)              -- Put new windows right of current
 opt('o', 'termguicolors', true)           -- True color support
 opt('o', 'updatetime', 100)               -- Delay before swap file is saved
-opt('o', 'wildmode', 'list:longest')      -- Command-line completion mode
 opt('o', 'clipboard', 'unnamedplus')      -- Clipboard
 opt('w', 'colorcolumn', tostring(width))  -- Line length marker
 opt('w', 'cursorline', true)              -- Highlight cursor line
@@ -93,7 +91,20 @@ opt('w', 'wrap', false)                   -- Disable line wrap
 map('n', '<leader>ev', ':e $MYVIMRC<CR>')
 map('n', '<leader>sv', ':so $MYVIMRC<CR>:echo \'Reloaded vimrc!\'<CR>')
 
+-------------------- TREE-SITTER ---------------------------
+local ts = require 'nvim-treesitter.configs'
+ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
+
 -------------------- LSP -----------------------------------
+local lsp = require 'lspconfig'
+
+for ls, cfg in pairs({
+  pyls = {
+    root_dir = lsp.util.root_pattern('.git', fn.getcwd()),
+    on_attach = require'completion'.on_attach
+  },
+}) do lsp[ls].setup(cfg) end
+
 map('n', '<space>,', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
 map('n', '<space>;', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
 map('n', '<space>a', '<cmd>lua vim.lsp.buf.code_action()<CR>')
