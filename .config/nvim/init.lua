@@ -106,6 +106,12 @@ opt('w', 'wrap', false)                   -- Disable line wrap
 map('n', '<leader>ev', ':e $MYVIMRC<CR>')
 map('n', '<leader>sv', ":so $MYVIMRC<CR>:echo 'Reloaded vimrc!'<CR>")
 
+-------------------- FILETYPES -----------------------------
+cmd 'autocmd FileType python setlocal sw=4 sts=4 ts=4 et'
+cmd 'autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et'
+cmd 'autocmd FileType lua setlocal sw=2 sts=2 ts=2 et'
+cmd 'autocmd FileType gitcommit setlocal spell'
+
 -------------------- TREE-SITTER ---------------------------
 local ts = require 'nvim-treesitter.configs'
 ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
