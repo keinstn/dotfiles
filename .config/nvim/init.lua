@@ -25,6 +25,7 @@ paq {'jiangmiao/auto-pairs'}
 paq {'joshdick/onedark.vim'}
 paq {'junegunn/vim-easy-align'}
 paq {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+paq {'lukas-reineke/format.nvim'}
 paq {'mechatroner/rainbow_csv'}
 paq {'neovim/nvim-lspconfig'}
 paq {'nvim-lua/completion-nvim'}
@@ -49,6 +50,20 @@ g['SuperTabDefaultCompletionType'] = '<c-n>'
 g['context_enabled'] = 0
 map('n', '<leader>cd', ':ContextDisable<CR>')
 map('n', '<leader>ce', ':ContextEnable<CR>')
+
+-- format.nvim
+require "format".setup {
+  ["*"] = {
+    {cmd = {"sed -i '' 's/[ \t]*$//'"}}
+  }
+}
+
+cmd([[
+augroup Format
+  autocmd!
+  autocmd BufWritePost * FormatWrite
+augroup END
+]])
 
 -- telescope
 map('n', ';', ':Telescope find_files<CR>')
@@ -89,7 +104,7 @@ opt('w', 'wrap', false)                   -- Disable line wrap
 
 -------------------- MAPPINGS ------------------------------
 map('n', '<leader>ev', ':e $MYVIMRC<CR>')
-map('n', '<leader>sv', ':so $MYVIMRC<CR>:echo \'Reloaded vimrc!\'<CR>')
+map('n', '<leader>sv', ":so $MYVIMRC<CR>:echo 'Reloaded vimrc!'<CR>")
 
 -------------------- TREE-SITTER ---------------------------
 local ts = require 'nvim-treesitter.configs'
