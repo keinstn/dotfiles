@@ -17,6 +17,8 @@ end
 -------------------- PLUGINS -------------------------------
 cmd 'packadd paq-nvim'
 local paq = require('paq-nvim').paq
+paq {'savq/paq-nvim', opt=true}
+
 paq {'alvan/vim-closetag'}
 paq {'ap/vim-css-color'}
 paq {'christoomey/vim-tmux-navigator'}
