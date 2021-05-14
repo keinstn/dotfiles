@@ -129,10 +129,12 @@ local lsp = require 'lspconfig'
 for ls, cfg in pairs({
   pyls = {
     root_dir = lsp.util.root_pattern('.git', fn.getcwd()),
-    on_attach = require'completion'.on_attach
   },
   gopls = {},
-}) do lsp[ls].setup(cfg) end
+}) do
+  cfg["on_attach"] = require'completion'.on_attach
+  lsp[ls].setup(cfg)
+end
 
 map('n', '<space>,', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
 map('n', '<space>;', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
