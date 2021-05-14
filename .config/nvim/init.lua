@@ -28,6 +28,7 @@ paq {'joshdick/onedark.vim'}
 paq {'junegunn/vim-easy-align'}
 paq {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
 paq {'lukas-reineke/format.nvim'}
+paq {'mattn/vim-goimports'}
 paq {'mechatroner/rainbow_csv'}
 paq {'neovim/nvim-lspconfig'}
 paq {'nvim-lua/completion-nvim'}
@@ -57,7 +58,10 @@ map('n', '<leader>ce', ':ContextEnable<CR>')
 require "format".setup {
   ["*"] = {
     {cmd = {"sed -i '' 's/[ \t]*$//'"}}
-  }
+  },
+  go = {
+    {cmd = {"gofmt -w", "goimports -w"}}
+  },
 }
 
 cmd([[
@@ -112,6 +116,7 @@ map('n', '<leader>sv', ":so $MYVIMRC<CR>:echo 'Reloaded vimrc!'<CR>")
 cmd 'autocmd FileType python setlocal sw=4 sts=4 ts=4 et'
 cmd 'autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et'
 cmd 'autocmd FileType lua setlocal sw=2 sts=2 ts=2 et'
+cmd 'autocmd FileType go setlocal sw=4 sts=4 ts=4 noet'
 cmd 'autocmd FileType gitcommit setlocal spell'
 
 -------------------- TREE-SITTER ---------------------------
@@ -126,6 +131,7 @@ for ls, cfg in pairs({
     root_dir = lsp.util.root_pattern('.git', fn.getcwd()),
     on_attach = require'completion'.on_attach
   },
+  gopls = {},
 }) do lsp[ls].setup(cfg) end
 
 map('n', '<space>,', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
