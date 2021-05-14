@@ -28,7 +28,6 @@ paq {'joshdick/onedark.vim'}
 paq {'junegunn/vim-easy-align'}
 paq {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
 paq {'lukas-reineke/format.nvim'}
-paq {'mattn/vim-goimports'}
 paq {'mechatroner/rainbow_csv'}
 paq {'neovim/nvim-lspconfig'}
 paq {'nvim-lua/completion-nvim'}
