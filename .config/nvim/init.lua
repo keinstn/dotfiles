@@ -63,6 +63,7 @@ require "format".setup {
   },
 }
 
+
 cmd([[
 augroup Format
   autocmd!
@@ -109,7 +110,7 @@ opt('w', 'wrap', false)                   -- Disable line wrap
 
 -------------------- MAPPINGS ------------------------------
 map('n', '<leader>ev', ':e $MYVIMRC<CR>')
-map('n', '<leader>sv', ":so $MYVIMRC<CR>:echo 'Reloaded vimrc!'<CR>")
+map('n', '<leader>sv', ":luafile $MYVIMRC<CR>:echo 'Reloaded vimrc!'<CR>")
 
 -------------------- FILETYPES -----------------------------
 cmd 'autocmd FileType python setlocal sw=4 sts=4 ts=4 et'
