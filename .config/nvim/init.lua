@@ -28,6 +28,7 @@ paq {'joshdick/onedark.vim'}
 paq {'junegunn/vim-easy-align'}
 paq {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
 paq {'lukas-reineke/format.nvim'}
+paq {'mattn/emmet-vim'}
 paq {'mechatroner/rainbow_csv'}
 paq {'neovim/nvim-lspconfig'}
 paq {'nvim-lua/completion-nvim'}
@@ -77,6 +78,9 @@ map('n', '<leader>ff', ':Telescope find_files<CR>')
 map('n', '<leader>fg', ':Telescope live_grep<CR>')
 map('n', '<leader>fb', ':Telescope buffers<CR>')
 map('n', '<leader>fh', ':Telescope help_tags<CR>')
+
+-- emmet-vim
+g['user_emmet_leader_key'] = '<C-Z>'
 
 -------------------- OPTIONS -------------------------------
 local indent, width = 4, 80
