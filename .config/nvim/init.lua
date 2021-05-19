@@ -59,6 +59,9 @@ require "format".setup {
   ["*"] = {
     {cmd = {"sed -i '' 's/[ \t]*$//'"}}
   },
+  javascript = {
+    {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
+  },
   go = {
     {cmd = {"gofmt -w", "goimports -w"}}
   },
@@ -135,6 +138,7 @@ for ls, cfg in pairs({
     root_dir = lsp.util.root_pattern('.git', fn.getcwd()),
   },
   gopls = {},
+  tsserver = {},
 }) do
   cfg["on_attach"] = require'completion'.on_attach
   lsp[ls].setup(cfg)
