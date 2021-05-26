@@ -65,6 +65,9 @@ require "format".setup {
   go = {
     {cmd = {"gofmt -w", "goimports -w"}}
   },
+  rust = {
+    {cmd = {"rustfmt"}}
+  },
 }
 
 
@@ -139,6 +142,7 @@ for ls, cfg in pairs({
   },
   gopls = {},
   tsserver = {},
+  rust_analyzer = {},
 }) do
   cfg["on_attach"] = require'completion'.on_attach
   lsp[ls].setup(cfg)
