@@ -27,6 +27,7 @@ formulas="\
 "
 
 casks="\
+  alacritty \
   google-cloud-sdk \
   docker \
   minikube \
