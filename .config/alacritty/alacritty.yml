@@ -15,22 +15,22 @@ window:
 font:
   normal:
     # Font name
-    family: Monaco
+    family: Hack Nerd Font Mono
     # Font face
     style: Regular
 
   # Bold font face
   bold:
-    family: Monaco
+    family: Hack Nerd Font Mono
     style: Bold
 
   # Italic font face
   italic:
-    family: Monaco
+    family: Hack Nerd Font Mono
     style: Italic
 
   # Font size
-  size: 12.5
+  size: 13.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter

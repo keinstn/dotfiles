@@ -27,8 +27,13 @@ formulas="\
   yarn \
 "
 
+taps="\
+  homebrew/cask-fonts
+"
+
 casks="\
   alacritty \
+  font-hack-nerd-font \
   google-cloud-sdk \
   docker \
   minikube \
@@ -42,5 +47,10 @@ fi
 # Install formulas
 brew install ${formulas}
 
+# tap
+for tap in ${taps}; do
+  brew tap ${tap}
+done
+
 # Install casks
-brew cask install ${casks}
+brew install ${casks} --cask
