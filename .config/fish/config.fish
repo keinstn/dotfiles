@@ -18,3 +18,5 @@ set -x PATH "$HOME/go/bin" $PATH
 
 eval (direnv hook fish)
 source (pyenv init - | psub)
+
+starship init fish | source

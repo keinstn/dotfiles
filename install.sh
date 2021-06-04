@@ -15,9 +15,6 @@ fi
 # Change default shell to fish
 chsh -s $(which fish)
 
-# Install fisherman
-fish ./fisherman.fish
-
 # Install Rust
 curl https://sh.rustup.rs -sSf | sh
 

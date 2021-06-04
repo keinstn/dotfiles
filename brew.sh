@@ -21,6 +21,7 @@ formulas="\
   pyenv \
   python3 \
   rg \
+  starship \
   tmux \
   tree \
   yarn \
