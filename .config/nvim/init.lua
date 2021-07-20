@@ -137,7 +137,7 @@ ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
 local lsp = require 'lspconfig'
 
 for ls, cfg in pairs({
-  pyls = {
+  pylsp = {
     root_dir = lsp.util.root_pattern('.git', fn.getcwd()),
   },
   gopls = {},
