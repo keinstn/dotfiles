@@ -11,6 +11,7 @@ formulas="\
   fzf \
   go \
   htop \
+  kind \
   jq \
   kubernetes-cli \
   mycli \
@@ -36,7 +37,6 @@ casks="\
   font-hack-nerd-font \
   google-cloud-sdk \
   docker \
-  minikube \
 "
 
 # Install homebrew
