@@ -65,6 +65,9 @@ require "format".setup {
   go = {
     {cmd = {"gofmt -w", "goimports -w"}}
   },
+  ruby = {
+    {cmd = {"bundle exec rbprettier --write"}}
+  },
   rust = {
     {cmd = {"rustfmt"}}
   },
@@ -141,6 +144,7 @@ for ls, cfg in pairs({
     root_dir = lsp.util.root_pattern('.git', fn.getcwd()),
   },
   gopls = {},
+  solargraph = {},
   tsserver = {},
   rust_analyzer = {},
 }) do

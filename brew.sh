@@ -21,6 +21,7 @@ formulas="\
   pgcli \
   pyenv \
   python3 \
+  rbenv \
   rg \
   starship \
   tmux \
