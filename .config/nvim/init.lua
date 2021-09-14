@@ -66,7 +66,7 @@ require "format".setup {
     {cmd = {"gofmt -w", "goimports -w"}}
   },
   ruby = {
-    {cmd = {"bundle exec rbprettier --write"}}
+    {cmd = {"rbprettier --write"}}
   },
   rust = {
     {cmd = {"rustfmt"}}
