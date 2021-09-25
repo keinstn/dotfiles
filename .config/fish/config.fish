@@ -17,7 +17,7 @@ end
 set -x PATH "$HOME/go/bin" $PATH
 
 eval (direnv hook fish)
-source (pyenv init - | psub)
+source (pyenv init --path | psub)
 
 status --is-interactive; and source (rbenv init -|psub)
 
