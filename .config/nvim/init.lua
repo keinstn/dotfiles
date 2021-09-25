@@ -62,6 +62,9 @@ require "format".setup {
   javascript = {
     {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
   },
+  python = {
+    {cmd = {"black", "isort"}}
+  },
   go = {
     {cmd = {"gofmt -w", "goimports -w"}}
   },
