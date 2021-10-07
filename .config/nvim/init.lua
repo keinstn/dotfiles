@@ -26,7 +26,7 @@ paq {'ervandew/supertab'}
 paq {'jiangmiao/auto-pairs'}
 paq {'joshdick/onedark.vim'}
 paq {'junegunn/vim-easy-align'}
-paq {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+paq {'lukas-reineke/indent-blankline.nvim'}
 paq {'lukas-reineke/format.nvim'}
 paq {'mattn/emmet-vim'}
 paq {'mechatroner/rainbow_csv'}
@@ -142,7 +142,13 @@ ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
 -------------------- LSP -----------------------------------
 local lsp = require 'lspconfig'
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 for ls, cfg in pairs({
+  cssls = {
+    capabilities = capabilities,
+  },
   pylsp = {
     root_dir = lsp.util.root_pattern('.git', fn.getcwd()),
   },
