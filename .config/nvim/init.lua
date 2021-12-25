@@ -19,14 +19,14 @@ require 'paq' {
   'savq/paq-nvim';
 
   'alvan/vim-closetag';
-  'ap/vim-css-color';
   'christoomey/vim-tmux-navigator';
   'ervandew/supertab';
+  'gorodinskiy/vim-coloresque';
   'jiangmiao/auto-pairs';
   'joshdick/onedark.vim';
   'junegunn/vim-easy-align';
-  'lukas-reineke/indent-blankline.nvim';
   'lukas-reineke/format.nvim';
+  'lukas-reineke/indent-blankline.nvim';
   'mattn/emmet-vim';
   'mechatroner/rainbow_csv';
   'neovim/nvim-lspconfig';
