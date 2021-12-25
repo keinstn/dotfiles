@@ -15,32 +15,32 @@ local function opt(scope, key, value)
 end
 
 -------------------- PLUGINS -------------------------------
-cmd 'packadd paq-nvim'
-local paq = require('paq-nvim').paq
-paq {'savq/paq-nvim', opt=true}
+require 'paq' {
+  'savq/paq-nvim';
 
-paq {'alvan/vim-closetag'}
-paq {'ap/vim-css-color'}
-paq {'christoomey/vim-tmux-navigator'}
-paq {'ervandew/supertab'}
-paq {'jiangmiao/auto-pairs'}
-paq {'joshdick/onedark.vim'}
-paq {'junegunn/vim-easy-align'}
-paq {'lukas-reineke/indent-blankline.nvim'}
-paq {'lukas-reineke/format.nvim'}
-paq {'mattn/emmet-vim'}
-paq {'mechatroner/rainbow_csv'}
-paq {'neovim/nvim-lspconfig'}
-paq {'nvim-lua/completion-nvim'}
-paq {'nvim-lua/plenary.nvim'}
-paq {'nvim-lua/popup.nvim'}
-paq {'nvim-telescope/telescope.nvim'}
-paq {'nvim-treesitter/nvim-treesitter'}
-paq {'rhysd/clever-f.vim'}
-paq {'tpope/vim-fugitive'}
-paq {'tpope/vim-repeat'}
-paq {'tpope/vim-surround'}
-paq {'wellle/context.vim'}
+  'alvan/vim-closetag';
+  'ap/vim-css-color';
+  'christoomey/vim-tmux-navigator';
+  'ervandew/supertab';
+  'jiangmiao/auto-pairs';
+  'joshdick/onedark.vim';
+  'junegunn/vim-easy-align';
+  'lukas-reineke/indent-blankline.nvim';
+  'lukas-reineke/format.nvim';
+  'mattn/emmet-vim';
+  'mechatroner/rainbow_csv';
+  'neovim/nvim-lspconfig';
+  'nvim-lua/completion-nvim';
+  'nvim-lua/plenary.nvim';
+  'nvim-lua/popup.nvim';
+  'nvim-telescope/telescope.nvim';
+  'nvim-treesitter/nvim-treesitter';
+  'rhysd/clever-f.vim';
+  'tpope/vim-fugitive';
+  'tpope/vim-repeat';
+  'tpope/vim-surround';
+  'wellle/context.vim';
+}
 
 -------------------- GLOBAL --------------------------------
 g['mapleader'] = ','
