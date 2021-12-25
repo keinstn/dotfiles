@@ -15,32 +15,38 @@ local function opt(scope, key, value)
 end
 
 -------------------- PLUGINS -------------------------------
-require 'paq' {
-  'savq/paq-nvim';
+local use = require('packer').use
+require('packer').startup(function()
+  use 'wbthomason/packer.nvim'
 
-  'alvan/vim-closetag';
-  'christoomey/vim-tmux-navigator';
-  'ervandew/supertab';
-  'gorodinskiy/vim-coloresque';
-  'jiangmiao/auto-pairs';
-  'joshdick/onedark.vim';
-  'junegunn/vim-easy-align';
-  'lukas-reineke/format.nvim';
-  'lukas-reineke/indent-blankline.nvim';
-  'mattn/emmet-vim';
-  'mechatroner/rainbow_csv';
-  'neovim/nvim-lspconfig';
-  'nvim-lua/completion-nvim';
-  'nvim-lua/plenary.nvim';
-  'nvim-lua/popup.nvim';
-  'nvim-telescope/telescope.nvim';
-  'nvim-treesitter/nvim-treesitter';
-  'rhysd/clever-f.vim';
-  'tpope/vim-fugitive';
-  'tpope/vim-repeat';
-  'tpope/vim-surround';
-  'wellle/context.vim';
-}
+  use 'alvan/vim-closetag'
+  use 'christoomey/vim-tmux-navigator'
+  use 'ervandew/supertab'
+  use 'gorodinskiy/vim-coloresque'
+  use 'jiangmiao/auto-pairs'
+  use 'joshdick/onedark.vim'
+  use 'junegunn/vim-easy-align'
+  use 'lukas-reineke/format.nvim'
+  use 'lukas-reineke/indent-blankline.nvim'
+  use 'mattn/emmet-vim'
+  use 'mechatroner/rainbow_csv'
+  use 'neovim/nvim-lspconfig'
+  use 'nvim-lua/plenary.nvim'
+  use 'nvim-lua/popup.nvim'
+  use 'nvim-telescope/telescope.nvim'
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use 'rhysd/clever-f.vim'
+  use 'tpope/vim-fugitive'
+  use 'tpope/vim-repeat'
+  use 'tpope/vim-surround'
+  use 'wellle/context.vim'
+
+  -- Autocompletion related
+  use 'hrsh7th/nvim-cmp'         -- Autocompletion plugin
+  use 'hrsh7th/cmp-nvim-lsp'     -- LSP source for nvim-cmp
+  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+  use 'L3MON4D3/LuaSnip'         -- Snippets plugin
+end)
 
 -------------------- GLOBAL --------------------------------
 g['mapleader'] = ','
@@ -143,7 +149,7 @@ ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
 local lsp = require 'lspconfig'
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 for ls, cfg in pairs({
   cssls = {
@@ -157,9 +163,55 @@ for ls, cfg in pairs({
   tsserver = {},
   rust_analyzer = {},
 }) do
-  cfg["on_attach"] = require'completion'.on_attach
   lsp[ls].setup(cfg)
 end
+
+-- luasnip setup
+local luasnip = require 'luasnip'
+
+-- nvim-cmp setup
+local cmp = require 'cmp'
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end,
+    ['<S-Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end,
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
+}
 
 map('n', '<space>,', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
 map('n', '<space>;', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
