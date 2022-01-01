@@ -26,10 +26,10 @@ require('packer').startup(function()
   use 'jiangmiao/auto-pairs'
   use 'joshdick/onedark.vim'
   use 'junegunn/vim-easy-align'
-  use 'lukas-reineke/format.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
   use 'mattn/emmet-vim'
   use 'mechatroner/rainbow_csv'
+  use 'mhartington/formatter.nvim'
   use 'neovim/nvim-lspconfig'
   use 'nvim-lua/plenary.nvim'
   use 'nvim-lua/popup.nvim'
@@ -60,33 +60,64 @@ g['context_enabled'] = 0
 map('n', '<leader>cd', ':ContextDisable<CR>')
 map('n', '<leader>ce', ':ContextEnable<CR>')
 
--- format.nvim
-require "format".setup {
-  ["*"] = {
-    {cmd = {"sed -i '' 's/[ \t]*$//'"}}
-  },
-  javascript = {
-    {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
-  },
-  python = {
-    {cmd = {"black", "isort"}}
-  },
-  go = {
-    {cmd = {"gofmt -w", "goimports -w"}}
-  },
-  ruby = {
-    {cmd = {"rbprettier --write"}}
-  },
-  rust = {
-    {cmd = {"rustfmt"}}
-  },
-}
+-- formatter.nvim
+require("formatter").setup({
+  filetype = {
+    javascript = {
+      -- prettier
+      function()
+        return {
+          exe = "prettier",
+          args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), '--single-quote'},
+          stdin = true
+        }
+      end
+    },
+    python = {
+      -- Configuration for psf/black
+      function()
+        return {
+          exe = "black", -- this should be available on your $PATH
+          args = { '-' },
+          stdin = true,
+        }
+      end
+    },
+    ruby = {
+       -- rubocop
+       function()
+         return {
+           exe = "rubocop", -- might prepend `bundle exec `
+           args = { '--auto-correct', '--stdin', '%:p', '2>/dev/null', '|', "awk 'f; /^====================$/{f=1}'"},
+           stdin = true,
+         }
+       end
+    },
+    rust = {
+      -- Rustfmt
+      function()
+        return {
+          exe = "rustfmt",
+          args = {"--emit=stdout"},
+          stdin = true
+        }
+      end
+    },
+  }
+})
 
+cmd([[
+augroup TrimTrailingWhiteSpace
+    autocmd!
+    autocmd BufWritePre * %s/\s\+$//e
+    autocmd BufWritePre * %s/\n\+\%$//e
+augroup END
+]])
 
 cmd([[
 augroup Format
   autocmd!
-  autocmd BufWritePost * FormatWrite
+  autocmd BufWritePost * silent! FormatWrite
 augroup END
 ]])
 
