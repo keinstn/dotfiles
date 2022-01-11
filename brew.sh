@@ -11,6 +11,7 @@ formulas="\
   fzf \
   go \
   htop \
+  litecli \
   kind \
   jq \
   kubernetes-cli \
@@ -30,7 +31,8 @@ formulas="\
 "
 
 taps="\
-  homebrew/cask-fonts
+  homebrew/cask-fonts \
+  dbcli/tap \
 "
 
 casks="\
@@ -45,13 +47,14 @@ if [[ $(which brew) == '' ]]; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-# Install formulas
-brew install ${formulas}
-
 # tap
 for tap in ${taps}; do
   brew tap ${tap}
 done
+
+
+# Install formulas
+brew install ${formulas}
 
 # Install casks
 brew install ${casks} --cask
