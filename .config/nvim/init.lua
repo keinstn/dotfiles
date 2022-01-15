@@ -73,6 +73,26 @@ require("formatter").setup({
         }
       end
     },
+    css = {
+      -- prettier
+      function()
+        return {
+          exe = "prettier",
+          args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+          stdin = true
+        }
+      end
+    },
+    scss = {
+      -- prettier
+      function()
+        return {
+          exe = "prettier",
+          args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+          stdin = true
+        }
+      end
+    },
     python = {
       -- Configuration for psf/black
       function()
@@ -168,6 +188,8 @@ map('n', '<leader>sv', ":luafile $MYVIMRC<CR>:echo 'Reloaded vimrc!'<CR>")
 -------------------- FILETYPES -----------------------------
 cmd 'autocmd FileType python setlocal sw=4 sts=4 ts=4 et'
 cmd 'autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et'
+cmd 'autocmd FileType css setlocal sw=2 sts=2 ts=2 et'
+cmd 'autocmd FileType scss setlocal sw=2 sts=2 ts=2 et'
 cmd 'autocmd FileType lua setlocal sw=2 sts=2 ts=2 et'
 cmd 'autocmd FileType go setlocal sw=4 sts=4 ts=4 noet'
 cmd 'autocmd FileType gitcommit setlocal spell'
