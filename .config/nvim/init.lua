@@ -21,6 +21,7 @@ require('packer').startup(function()
 
   use 'alvan/vim-closetag'
   use 'christoomey/vim-tmux-navigator'
+  use 'elihunter173/dirbuf.nvim'
   use 'ervandew/supertab'
   use 'gorodinskiy/vim-coloresque'
   use 'jiangmiao/auto-pairs'
@@ -150,6 +151,9 @@ map('n', '<leader>fh', ':Telescope help_tags<CR>')
 
 -- emmet-vim
 g['user_emmet_leader_key'] = '<C-Z>'
+
+-- dirbuf.nvim
+map('n', '<leader>d', ':Dirbuf<CR>')
 
 -------------------- OPTIONS -------------------------------
 local indent, width = 4, 80
