@@ -22,3 +22,7 @@ source (pyenv init --path | psub)
 status --is-interactive; and source (rbenv init -|psub)
 
 starship init fish | source
+
+# Wasmer
+export WASMER_DIR="$HOME/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
