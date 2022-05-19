@@ -12,6 +12,9 @@ window:
   # Startup Mode (changes require restart)
   startup_mode: SimpleFullscreen # mac only
 
+  # Background opacity
+  opacity: 0.90
+
 font:
   normal:
     # Font name
@@ -99,6 +102,3 @@ colors:
     magenta:    '#c678dd'
     cyan:       '#56b6c2'
     white:      '#828997' # mono-2
-
-# Background opacity
-background_opacity: 0.90
