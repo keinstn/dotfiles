@@ -18,9 +18,9 @@ chsh -s $(which fish)
 # Install Rust
 curl https://sh.rustup.rs -sSf | sh
 
-# Install paq-nvim
-git clone https://github.com/savq/paq-nvim.git \
-    "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/opt/paq-nvim
+# Install packer.nvim
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 # Install notedown
 pip install --prefix=/usr/local notedown
