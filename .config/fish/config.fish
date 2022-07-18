@@ -16,6 +16,8 @@ end
 
 set -x PATH "$HOME/go/bin" $PATH
 
+set -x PATH "/usr/local/opt/llvm/bin" $PATH
+
 eval (direnv hook fish)
 source (pyenv init --path | psub)
 

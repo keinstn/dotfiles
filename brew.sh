@@ -11,10 +11,11 @@ formulas="\
   fzf \
   go \
   htop \
-  litecli \
-  kind \
   jq \
+  kind \
   kubernetes-cli \
+  litecli \
+  llvm \
   mycli \
   neovim \
   nodejs \
