@@ -63,6 +63,16 @@ map('n', '<leader>ce', ':ContextEnable<CR>')
 -- formatter.nvim
 require("formatter").setup({
   filetype = {
+    c = {
+      -- clang-format
+      function()
+        return {
+          exe = "clang-format",
+          args = {},
+          stdin = true
+        }
+      end
+    },
     javascript = {
       -- prettier
       function()
@@ -196,7 +206,7 @@ cmd 'autocmd FileType gitcommit setlocal spell'
 
 -------------------- TREE-SITTER ---------------------------
 local ts = require 'nvim-treesitter.configs'
-ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
+ts.setup {ensure_installed = 'all', highlight = {enable = true}}
 
 -------------------- LSP -----------------------------------
 local lsp = require 'lspconfig'
@@ -205,6 +215,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 for ls, cfg in pairs({
+  clangd = {},
   cssls = {
     capabilities = capabilities,
   },
