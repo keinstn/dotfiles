@@ -30,6 +30,7 @@ require('packer').startup(function()
   use 'mattn/emmet-vim'
   use 'mechatroner/rainbow_csv'
   use 'mhartington/formatter.nvim'
+  use 'folke/tokyonight.nvim'
   use 'neovim/nvim-lspconfig'
   use 'nvim-lua/plenary.nvim'
   use 'nvim-lua/popup.nvim'
@@ -163,7 +164,7 @@ g['user_emmet_leader_key'] = '<C-Z>'
 
 -------------------- OPTIONS -------------------------------
 local indent, width = 4, 80
-cmd 'colorscheme onedark'
+cmd 'colorscheme tokyonight-night'
 opt('b', 'expandtab', true)               -- Use spaces instead of tabs
 opt('b', 'formatoptions', 'crqnj')        -- Automatic formatting options
 opt('b', 'shiftwidth', indent)            -- Size of an indent
