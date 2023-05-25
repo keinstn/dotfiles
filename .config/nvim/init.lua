@@ -195,7 +195,15 @@ cmd("autocmd FileType gitcommit setlocal spell")
 
 -------------------- TREE-SITTER ---------------------------
 local ts = require("nvim-treesitter.configs")
-ts.setup({ ensure_installed = "all", highlight = { enable = true } })
+ts.setup({
+	ensure_installed = "all",
+	highlight = {
+		enable = true,
+	},
+	indent = {
+		enable = true,
+	},
+})
 
 -------------------- LSP -----------------------------------
 local lsp = require("lspconfig")
@@ -208,7 +216,7 @@ for ls, cfg in pairs({
 		capabilities = capabilities,
 	},
 	lua_ls = {},
-	psalm = {},
+	intelephense = {},
 	pylsp = {
 		root_dir = lsp.util.root_pattern(".git", fn.getcwd()),
 	},
@@ -225,6 +233,7 @@ local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
 		null_ls.builtins.formatting.black,
+		null_ls.builtins.formatting.phpcsfixer,
 		null_ls.builtins.formatting.stylua,
 	},
 	on_attach = function(client, bufnr)

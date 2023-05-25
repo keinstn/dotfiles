@@ -23,6 +23,12 @@ source (pyenv init --path | psub)
 
 status --is-interactive; and source (rbenv init -|psub)
 
+set -x PHPENV_ROOT "$HOME/.phpenv"
+if test -d "$HOME/.phpenv"
+    set -x PATH "$HOME/.phpenv/bin" $PATH
+    status --is-interactive; and . (phpenv init -|psub)
+end
+
 starship init fish | source
 
 # Wasmer
