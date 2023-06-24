@@ -235,7 +235,10 @@ null_ls.setup({
 		null_ls.builtins.formatting.black,
 		null_ls.builtins.formatting.phpcsfixer,
 		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.formatting.gofumpt,
+		null_ls.builtins.formatting.goimports,
 	},
+	--- Format files on save synchronously
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then
 			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
