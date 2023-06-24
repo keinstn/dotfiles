@@ -185,12 +185,13 @@ map("n", "<leader>ev", ":e $MYVIMRC<CR>")
 map("n", "<leader>sv", ":luafile $MYVIMRC<CR>:echo 'Reloaded vimrc!'<CR>")
 
 -------------------- FILETYPES -----------------------------
-cmd("autocmd FileType python setlocal sw=4 sts=4 ts=4 et")
-cmd("autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et")
 cmd("autocmd FileType css setlocal sw=2 sts=2 ts=2 et")
-cmd("autocmd FileType scss setlocal sw=2 sts=2 ts=2 et")
-cmd("autocmd FileType lua setlocal sw=2 sts=2 ts=2 et")
+cmd("autocmd FileType dart setlocal sw=2 sts=2 ts=2 et")
 cmd("autocmd FileType go setlocal sw=4 sts=4 ts=4 noet")
+cmd("autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et")
+cmd("autocmd FileType lua setlocal sw=2 sts=2 ts=2 et")
+cmd("autocmd FileType python setlocal sw=4 sts=4 ts=4 et")
+cmd("autocmd FileType scss setlocal sw=2 sts=2 ts=2 et")
 cmd("autocmd FileType gitcommit setlocal spell")
 
 -------------------- TREE-SITTER ---------------------------
@@ -215,6 +216,7 @@ for ls, cfg in pairs({
 	cssls = {
 		capabilities = capabilities,
 	},
+	dartls = {},
 	lua_ls = {},
 	intelephense = {},
 	pylsp = {
@@ -233,6 +235,7 @@ local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
 		null_ls.builtins.formatting.black,
+		null_ls.builtins.formatting.dart_format,
 		null_ls.builtins.formatting.phpcsfixer,
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.gofumpt,
