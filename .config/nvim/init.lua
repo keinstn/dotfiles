@@ -42,7 +42,7 @@ require("packer").startup(function(use)
   use("wbthomason/packer.nvim")
 
   use({
-    "TimUntersberger/neogit",
+    "NeogitOrg/neogit",
     config = function()
       require("neogit").setup({})
     end,
