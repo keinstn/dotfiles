@@ -10,6 +10,7 @@ formulas="\
   fish \
   fzf \
   go \
+  hashicorp/tap/hashicorp-vagrant \
   htop \
   jq \
   kind \
