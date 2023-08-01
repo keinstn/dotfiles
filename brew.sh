@@ -20,6 +20,7 @@ formulas="\
   mycli \
   neovim \
   nodejs \
+  silicon \
   pass \
   pgcli \
   pyenv \
