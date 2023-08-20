@@ -30,6 +30,7 @@ formulas="\
   starship \
   tmux \
   tree \
+  wasmer \
   yarn \
 "
 
