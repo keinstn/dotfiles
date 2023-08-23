@@ -44,6 +44,7 @@ casks="\
   font-hack-nerd-font \
   google-cloud-sdk \
   docker \
+  wezterm \
 "
 
 # Install homebrew

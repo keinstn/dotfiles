@@ -33,3 +33,5 @@ starship init fish | source
 
 # flutter
 set -x PATH "$HOME/.pub-cache/bin" $PATH
+
+set -x WEZTERM_CONFIG_FILE "$HOME/.config/wezterm/wezterm.lua"
