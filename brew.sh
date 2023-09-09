@@ -9,6 +9,7 @@ formulas="\
   fd \
   fish \
   fzf \
+  git-secrets \
   go \
   hashicorp/tap/hashicorp-vagrant \
   htop \
@@ -28,6 +29,7 @@ formulas="\
   rbenv \
   rg \
   starship \
+  tfenv \
   tmux \
   tree \
   wasmer \
