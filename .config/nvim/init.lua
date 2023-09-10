@@ -235,6 +235,7 @@ for ls, cfg in pairs({
 	},
 	gopls = {},
 	tsserver = {},
+	terraformls = {},
 	rust_analyzer = {},
 }) do
 	lsp[ls].setup(cfg)

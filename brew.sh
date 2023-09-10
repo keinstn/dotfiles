@@ -11,6 +11,7 @@ formulas="\
   fzf \
   git-secrets \
   go \
+  hashicorp/tap/terraform-ls \
   hashicorp/tap/hashicorp-vagrant \
   htop \
   jq \
