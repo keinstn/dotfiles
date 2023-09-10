@@ -31,6 +31,8 @@ formulas="\
   rg \
   starship \
   tfenv \
+  tflint \
+  tfsec \
   tmux \
   tree \
   wasmer \
