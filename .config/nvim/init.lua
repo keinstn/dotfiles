@@ -204,6 +204,7 @@ cmd("autocmd FileType lua setlocal sw=2 sts=2 ts=2 et")
 cmd("autocmd FileType python setlocal sw=4 sts=4 ts=4 et")
 cmd("autocmd FileType scss setlocal sw=2 sts=2 ts=2 et")
 cmd("autocmd FileType gitcommit setlocal spell")
+cmd("autocmd FileType terraform setlocal sw=2 sts=2 ts=2")
 
 -------------------- TREE-SITTER ---------------------------
 local ts = require("nvim-treesitter.configs")
