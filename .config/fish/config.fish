@@ -35,3 +35,5 @@ starship init fish | source
 set -x PATH "$HOME/.pub-cache/bin" $PATH
 
 set -x WEZTERM_CONFIG_FILE "$HOME/.config/wezterm/wezterm.lua"
+
+set -Ua fish_user_paths "$HOME/.rye/shims"
