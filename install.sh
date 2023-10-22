@@ -33,9 +33,6 @@ yarn global add typescript
 # Install Volta
 curl https://get.volta.sh | bash
 
-# Install npm packages
-volta install tldr
-
 # Install diff-so-fancy
 curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy \
     -o /usr/local/bin/diff-so-fancy

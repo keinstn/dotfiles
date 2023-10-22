@@ -33,6 +33,7 @@ formulas="\
   tfenv \
   tflint \
   tfsec \
+  tldr \
   tmux \
   tree \
   wasmer \
