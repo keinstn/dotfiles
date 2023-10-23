@@ -38,6 +38,7 @@ formulas="\
   tree \
   wasmer \
   yarn \
+  zig \
 "
 
 taps="\
