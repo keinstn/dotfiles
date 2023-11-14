@@ -9,7 +9,6 @@ set -g FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --follow --glob "!.g
 source $HOME/.cargo/env
 
 if not type -q brew
-    set -x PATH "$HOME/.pyenv/bin" $PATH
     set -x PATH "$HOME/.local/bin" $PATH
     set -x PATH "$HOME/.yarn/bin" $PATH
 end
@@ -19,7 +18,6 @@ set -x PATH "$HOME/go/bin" $PATH
 set -x PATH "/usr/local/opt/llvm/bin" $PATH
 
 eval (direnv hook fish)
-source (pyenv init --path | psub)
 
 status --is-interactive; and source (rbenv init -|psub)
 

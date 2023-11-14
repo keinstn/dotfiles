@@ -25,7 +25,6 @@ formulas="\
   silicon \
   pass \
   pgcli \
-  pyenv \
   python3 \
   rbenv \
   rg \
