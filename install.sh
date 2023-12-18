@@ -22,14 +22,6 @@ curl https://sh.rustup.rs -sSf | sh
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-# Install notedown
-pip install --prefix=/usr/local notedown
-
-# Install LSP
-pip3 install --prefix=/usr/local python-language-server
-yarn global add typescript-language-server
-yarn global add typescript
-
 # Install Volta
 curl https://get.volta.sh | bash
 
