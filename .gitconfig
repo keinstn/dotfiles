@@ -1,0 +1,18 @@
+[user]
+    name = keinstn
+    email = kei.sj.nstn@gmail.com
+[color]
+    ui = true
+[core]
+    editor = nvim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
