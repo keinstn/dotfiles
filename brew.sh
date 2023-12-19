@@ -3,8 +3,10 @@ formulas="\
   awscli \
   bat \
   dep \
+  diff-so-fancy \
   direnv \
   docker-machine-driver-hyperkit \
+  dust \
   exa \
   fd \
   fish \
@@ -12,7 +14,6 @@ formulas="\
   git-secrets \
   go \
   hashicorp/tap/terraform-ls \
-  hashicorp/tap/hashicorp-vagrant \
   htop \
   jq \
   kind \
@@ -25,14 +26,11 @@ formulas="\
   silicon \
   pass \
   pgcli \
-  python3 \
-  rbenv \
   rg \
   starship \
   tfenv \
   tflint \
   tfsec \
-  tldr \
   tmux \
   tree \
   wasmer \
@@ -65,7 +63,9 @@ done
 
 
 # Install formulas
-brew install ${formulas}
+for formula in ${formulas}; do
+  brew install ${formula}
+done
 
 # Install casks
 brew install ${casks} --cask
