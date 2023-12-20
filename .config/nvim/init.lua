@@ -159,6 +159,7 @@ for _, plugin in ipairs(plugins) do
 end
 
 --- transparent.nvim
+require("transparent").clear_prefix("neogit")
 require("tokyonight").setup({ transparent = g.transparent_enabled })
 
 -------------------- OPTIONS -------------------------------
