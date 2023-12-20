@@ -46,6 +46,7 @@ taps="\
 casks="\
   alacritty \
   font-hack-nerd-font \
+  flutter \
   google-cloud-sdk \
   docker \
   wezterm \
