@@ -31,4 +31,5 @@ set -x WEZTERM_CONFIG_FILE "$HOME/.config/wezterm/wezterm.lua"
 set -Ua fish_user_paths "$HOME/.rye/shims"
 
 # phpbrew
+set -x PHPBREW_RC_ENABLE 1
 source $HOME/.phpbrew/phpbrew.fish
