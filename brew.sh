@@ -49,6 +49,7 @@ casks="\
   flutter \
   google-cloud-sdk \
   docker \
+  neovide \
   wezterm \
 "
 
