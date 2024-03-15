@@ -62,7 +62,7 @@ require("packer").startup(function(use)
 		},
 	})
 	use("kylechui/nvim-surround")
-	use("jose-elias-alvarez/null-ls.nvim")
+	use("nvimtools/none-ls.nvim")
 	use("junegunn/vim-easy-align")
 	use("lukas-reineke/indent-blankline.nvim")
 	use("lewis6991/gitsigns.nvim")
@@ -244,7 +244,7 @@ for ls, cfg in pairs({
 	lsp[ls].setup(cfg)
 end
 
--------------------- NULL-LS -------------------------------
+-------------------- none-ls -------------------------------
 local null_ls = require("null-ls")
 
 null_ls.setup({
