@@ -175,7 +175,6 @@ opt("o", "completeopt", "menuone,noinsert,noselect") -- Completion options
 opt("o", "hidden", true) -- Enable background buffers
 opt("o", "ignorecase", true) -- Ignore case
 opt("o", "joinspaces", false) -- No double spaces with join
-opt("o", "pastetoggle", "<F2>") -- Paste mode
 opt("o", "scrolloff", 4) -- Lines of context
 opt("o", "shiftround", true) -- Round indent
 opt("o", "sidescrolloff", 8) -- Columns of context
