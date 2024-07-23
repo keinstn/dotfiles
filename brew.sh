@@ -7,7 +7,7 @@ formulas="\
   direnv \
   docker-machine-driver-hyperkit \
   dust \
-  exa \
+  eza \
   fd \
   fish \
   fzf \
