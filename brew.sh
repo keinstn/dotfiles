@@ -26,6 +26,7 @@ formulas="\
   silicon \
   pass \
   pgcli \
+  rbenv \
   rg \
   starship \
   tfenv \

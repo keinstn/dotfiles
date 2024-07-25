@@ -34,3 +34,6 @@ set -Ua fish_user_paths "$HOME/.rye/shims"
 # phpbrew
 set -x PHPBREW_RC_ENABLE 1
 source $HOME/.phpbrew/phpbrew.fish
+
+# Added by `rbenv init`
+status --is-interactive; and rbenv init - --no-rehash fish | source
