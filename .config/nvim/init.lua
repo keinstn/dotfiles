@@ -238,6 +238,7 @@ for ls, cfg in pairs({
 	tsserver = {},
 	terraformls = {},
 	rust_analyzer = {},
+	ruby_ls = {},
 	zls = {},
 }) do
 	lsp[ls].setup(cfg)
