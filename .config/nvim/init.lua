@@ -1,4 +1,3 @@
--------------------- HELPERS -------------------------------
 local api, cmd, fn, g = vim.api, vim.cmd, vim.fn, vim.g
 local scopes = { o = vim.o, b = vim.bo, w = vim.wo }
 
@@ -254,6 +253,11 @@ opt("w", "wrap", false) -- Disable line wrap
 -------------------- MAPPINGS ------------------------------
 map("n", "<leader>ev", ":e $MYVIMRC<CR>")
 map("n", "<leader>rv", ":luafile $MYVIMRC<CR>:echo 'Reloaded vimrc!'<CR>")
+
+map("n", "<S-t>", "<cmd>tabnew<cr>")
+map("n", "<S-c>", "<cmd>tabclose<cr>")
+map("n", "<S-TAB>", "<cmd>tabnext<cr>")
+map("n", "<C-TAB>", "<cmd>tabprevious<cr>")
 
 -------------------- FILETYPES -----------------------------
 cmd("autocmd FileType css setlocal sw=2 sts=2 ts=2 et")
