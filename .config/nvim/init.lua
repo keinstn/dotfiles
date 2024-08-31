@@ -52,6 +52,16 @@ require("lazy").setup({
       end,
     },
     { "L3MON4D3/LuaSnip" },
+    {
+      "utilyre/barbecue.nvim",
+      name = "barbecue",
+      version = "*",
+      dependencies = {
+        "SmiteshP/nvim-navic",
+        "nvim-tree/nvim-web-devicons",
+      },
+      opts = {},
+    },
     { "christoomey/vim-tmux-navigator" },
     {
       "ervandew/supertab",
@@ -155,20 +165,6 @@ require("lazy").setup({
     {
       "nvim-treesitter/nvim-treesitter",
       build = ":TSUpdate",
-    },
-    {
-      "nvim-treesitter/nvim-treesitter-context",
-      dependencies = "nvim-treesitter/nvim-treesitter",
-      lazy = false,
-      config = function()
-        require("treesitter-context").setup({
-          enable = false,
-        })
-      end,
-      keys = {
-        { "<leader>ce", "<cmd>TSContextEnable<cr>", desc = "Enable TSContext" },
-        { "<leader>cd", "<cmd>TSContextDisable<cr>", desc = "Disable TSContext" },
-      },
     },
     {
       "nvim-treesitter/nvim-treesitter-textobjects",
