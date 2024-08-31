@@ -2,6 +2,7 @@
 formulas="\
   awscli \
   bat \
+  bottom \
   dep \
   diff-so-fancy \
   direnv \
