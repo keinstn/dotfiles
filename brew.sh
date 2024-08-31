@@ -21,6 +21,7 @@ formulas="\
   kubernetes-cli \
   litecli \
   llvm \
+  lua-language-server \
   mycli \
   neovim \
   nodejs \
@@ -30,6 +31,7 @@ formulas="\
   rbenv \
   rg \
   starship \
+  stylua \
   tfenv \
   tflint \
   tfsec \

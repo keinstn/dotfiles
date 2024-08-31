@@ -3,22 +3,22 @@ local api, cmd, fn, g = vim.api, vim.cmd, vim.fn, vim.g
 local scopes = { o = vim.o, b = vim.bo, w = vim.wo }
 
 local function map(mode, lhs, rhs, opts)
-	local options = { noremap = true }
-	if opts then
-		options = vim.tbl_extend("force", options, opts)
-	end
-	api.nvim_set_keymap(mode, lhs, rhs, options)
+  local options = { noremap = true }
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
+  api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 local function opt(scope, key, value)
-	scopes[scope][key] = value
-	if scope ~= "o" then
-		scopes["o"][key] = value
-	end
+  scopes[scope][key] = value
+  if scope ~= "o" then
+    scopes["o"][key] = value
+  end
 end
 
 -------------------- GLOBAL --------------------------------
-g["mapleader"] = ","
+g.mapleader = ","
 
 -------------------- PLUGINS -------------------------------
 -- Bootstrap lazy.nvim
@@ -51,12 +51,37 @@ require("lazy").setup({
         require("neogit").setup({})
       end,
     },
-    {"L3MON4D3/LuaSnip"},
-    {"christoomey/vim-tmux-navigator"},
-    {"ervandew/supertab"},
-    {"folke/tokyonight.nvim"},
-    {"f-person/git-blame.nvim"},
-    {"gorodinskiy/vim-coloresque"},
+    { "L3MON4D3/LuaSnip" },
+    { "christoomey/vim-tmux-navigator" },
+    {
+      "ervandew/supertab",
+      config = function()
+        vim.g.SuperTabDefaultCompletionType = "<c-n>"
+      end,
+    },
+    {
+      "folke/tokyonight.nvim",
+      lazy = true,
+      opts = { style = "moon" },
+      config = function()
+        require("tokyonight").setup({ transparent = vim.g.transparent_enabled })
+      end,
+    },
+    {
+      "folke/which-key.nvim",
+      event = "VeryLazy",
+      keys = {
+        {
+          "<leader>?",
+          function()
+            require("which-key").show({ global = false })
+          end,
+          desc = "Buffer Local Keymaps (which-key)",
+        },
+      },
+    },
+    { "f-person/git-blame.nvim" },
+    { "brenoprata10/nvim-highlight-colors" },
     {
       "hrsh7th/nvim-cmp",
       dependencies = {
@@ -65,18 +90,46 @@ require("lazy").setup({
         "saadparwaiz1/cmp_luasnip",
       },
     },
-    {"kylechui/nvim-surround"},
-    {"nvimtools/none-ls.nvim"},
-    {"junegunn/vim-easy-align"},
-    {"lukas-reineke/indent-blankline.nvim"},
-    {"lewis6991/gitsigns.nvim"},
-    {"mattn/emmet-vim"},
-    {"mechatroner/rainbow_csv"},
-    {"mfussenegger/nvim-dap"},
-    {"neovim/nvim-lspconfig"},
-    {"numToStr/Comment.nvim"},
-    {"nvim-lua/plenary.nvim"},
-    {"nvim-lua/popup.nvim"},
+    {
+      "kylechui/nvim-surround",
+      version = "*", -- Use for stability; omit to use `main` branch for the latest features
+      event = "VeryLazy",
+      config = function()
+        require("nvim-surround").setup({})
+      end,
+    },
+    { "nvimtools/none-ls.nvim" },
+    {
+      "junegunn/vim-easy-align",
+      keys = {
+        { "ga", "<Plug>(EasyAlign)" },
+        { "ga", { "<Plug>(EasyAlign)", mode = "x" } },
+      },
+    },
+    { "lukas-reineke/indent-blankline.nvim" },
+    {
+      "lewis6991/gitsigns.nvim",
+      config = function()
+        require("gitsigns").setup()
+      end,
+    },
+    {
+      "mattn/emmet-vim",
+      config = function()
+        vim.g.user_emmet_leader_key = "<C-Z>"
+      end,
+    },
+    { "mechatroner/rainbow_csv" },
+    { "mfussenegger/nvim-dap" },
+    { "neovim/nvim-lspconfig" },
+    {
+      "numToStr/Comment.nvim",
+      config = function()
+        require("Comment").setup()
+      end,
+    },
+    { "nvim-lua/plenary.nvim" },
+    { "nvim-lua/popup.nvim" },
     {
       "nvim-neo-tree/neo-tree.nvim",
       branch = "v3.x",
@@ -85,79 +138,71 @@ require("lazy").setup({
         "nvim-tree/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
       },
+      keys = {
+        { "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
+      },
     },
-    {"nvim-telescope/telescope.nvim"},
+    {
+      "nvim-telescope/telescope.nvim",
+      keys = {
+        { ";", "<cmd>Telescope find_files<cr>", desc = "Telescope Find Files" },
+        { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope Find Files" },
+        { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope Live Grep" },
+        { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope Find Buffers" },
+        { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope Help Tags" },
+      },
+    },
     {
       "nvim-treesitter/nvim-treesitter",
       build = ":TSUpdate",
     },
     {
+      "nvim-treesitter/nvim-treesitter-context",
+      dependencies = "nvim-treesitter/nvim-treesitter",
+      lazy = false,
+      config = function()
+        require("treesitter-context").setup({
+          enable = false,
+        })
+      end,
+      keys = {
+        { "<leader>ce", "<cmd>TSContextEnable<cr>", desc = "Enable TSContext" },
+        { "<leader>cd", "<cmd>TSContextDisable<cr>", desc = "Disable TSContext" },
+      },
+    },
+    {
       "nvim-treesitter/nvim-treesitter-textobjects",
       dependencies = "nvim-treesitter/nvim-treesitter",
     },
-    {"ray-x/go.nvim"},
-    {"segeljakt/vim-silicon"},
-    {"tpope/vim-repeat"},
-    {"windwp/nvim-autopairs"},
+    { "segeljakt/vim-silicon" },
+    { "tpope/vim-repeat" },
+    {
+      "windwp/nvim-autopairs",
+      event = "InsertEnter",
+      config = true,
+    },
     {
       "williamboman/mason.nvim",
       build = ":MasonUpdate",
       dependencies = {
         "williamboman/mason-lspconfig.nvim",
       },
+      config = function()
+        require("mason").setup()
+        require("mason-lspconfig").setup()
+      end,
     },
-    {"xiyaowong/transparent.nvim"},
+    {
+      "xiyaowong/transparent.nvim",
+      config = function()
+        require("transparent").clear_prefix("neogit")
+        require("transparent").clear_prefix("NeoTree")
+      end,
+    },
   },
   install = { colorscheme = { "habamax" } },
   checker = { enabled = true },
 })
-
--------------------- PLUGIN SETUP --------------------------
--- supertab
-g["SuperTabDefaultCompletionType"] = "<c-n>"
-
--- context.vim
-g["context_enabled"] = 0
-map("n", "<leader>cd", ":ContextDisable<CR>")
-map("n", "<leader>ce", ":ContextEnable<CR>")
-
--- git-blame.nvim
-g["gitblame_enabled"] = 0
-
--- telescope
-map("n", ";", ":Telescope find_files<CR>")
-map("n", "<leader>ff", ":Telescope find_files<CR>")
-map("n", "<leader>fg", ":Telescope live_grep<CR>")
-map("n", "<leader>fb", ":Telescope buffers<CR>")
-map("n", "<leader>fh", ":Telescope help_tags<CR>")
-
--- emmet-vim
-g["user_emmet_leader_key"] = "<C-Z>"
-
--- vim-easy-align
-map("n", "ga", "<Plug>(EasyAlign)")
-map("x", "ga", "<Plug>(EasyAlign)")
-
--- neo-tree
-map("n", "\\", ":Neotree reveal<CR>")
-
-local plugins = {
-	"Comment",
-	"gitsigns",
-	"go",
-	"mason",
-	"mason-lspconfig",
-	"nvim-autopairs",
-	"nvim-surround",
-}
-
-for _, plugin in ipairs(plugins) do
-	require(plugin).setup()
-end
-
---- transparent.nvim
-require("transparent").clear_prefix("neogit")
-require("tokyonight").setup({ transparent = g.transparent_enabled })
 
 -------------------- OPTIONS -------------------------------
 local indent, width = 4, 80
@@ -190,7 +235,7 @@ opt("w", "wrap", false) -- Disable line wrap
 
 -------------------- MAPPINGS ------------------------------
 map("n", "<leader>ev", ":e $MYVIMRC<CR>")
-map("n", "<leader>sv", ":luafile $MYVIMRC<CR>:echo 'Reloaded vimrc!'<CR>")
+map("n", "<leader>rv", ":luafile $MYVIMRC<CR>:echo 'Reloaded vimrc!'<CR>")
 
 -------------------- FILETYPES -----------------------------
 cmd("autocmd FileType css setlocal sw=2 sts=2 ts=2 et")
@@ -206,13 +251,13 @@ cmd("autocmd FileType terraform setlocal sw=2 sts=2 ts=2")
 -------------------- TREE-SITTER ---------------------------
 local ts = require("nvim-treesitter.configs")
 ts.setup({
-	ensure_installed = "all",
-	highlight = {
-		enable = true,
-	},
-	indent = {
-		enable = true,
-	},
+  ensure_installed = "all",
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true,
+  },
 })
 
 -------------------- LSP -----------------------------------
@@ -222,52 +267,51 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 for ls, cfg in pairs({
-	cssls = {
-		capabilities = capabilities,
-	},
-	dartls = {},
-	lua_ls = {},
-	intelephense = {},
-	pylsp = {
-		root_dir = lsp.util.root_pattern(".git", fn.getcwd()),
-	},
-	gopls = {},
-	tsserver = {},
-	terraformls = {},
-	rust_analyzer = {},
-	ruby_ls = {},
-	zls = {},
+  cssls = {
+    capabilities = capabilities,
+  },
+  dartls = {},
+  lua_ls = {},
+  intelephense = {},
+  pyright = {
+    root_dir = lsp.util.root_pattern(".git", fn.getcwd()),
+  },
+  gopls = {},
+  tsserver = {},
+  terraformls = {},
+  rust_analyzer = {},
+  ruby_lsp = {},
+  zls = {},
 }) do
-	lsp[ls].setup(cfg)
+  lsp[ls].setup(cfg)
 end
 
 -------------------- none-ls -------------------------------
 local null_ls = require("null-ls")
 
 null_ls.setup({
-	sources = {
-		null_ls.builtins.formatting.black,
-		null_ls.builtins.formatting.dart_format,
-		null_ls.builtins.formatting.phpcsfixer,
-		null_ls.builtins.formatting.rustfmt,
-		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.formatting.gofumpt,
-		null_ls.builtins.formatting.goimports,
-		null_ls.builtins.formatting.terraform_fmt,
-	},
-	--- Format files on save synchronously
-	on_attach = function(client, bufnr)
-		if client.supports_method("textDocument/formatting") then
-			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				group = augroup,
-				buffer = bufnr,
-				callback = function()
-					vim.lsp.buf.format({ bufnr = bufnr })
-				end,
-			})
-		end
-	end,
+  sources = {
+    null_ls.builtins.formatting.black,
+    null_ls.builtins.formatting.dart_format,
+    null_ls.builtins.formatting.phpcsfixer,
+    null_ls.builtins.formatting.stylua,
+    null_ls.builtins.formatting.gofumpt,
+    null_ls.builtins.formatting.goimports,
+    null_ls.builtins.formatting.terraform_fmt,
+  },
+  --- Format files on save synchronously
+  on_attach = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = bufnr })
+        end,
+      })
+    end
+  end,
 })
 
 -------------------- NVIM-CMP ------------------------------
@@ -277,46 +321,46 @@ local luasnip = require("luasnip")
 -- nvim-cmp setup
 local cmp = require("cmp")
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
-		end,
-	},
-	mapping = {
-		["<C-p>"] = cmp.mapping.select_prev_item(),
-		["<C-n>"] = cmp.mapping.select_next_item(),
-		["<C-d>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<C-e>"] = cmp.mapping.close(),
-		["<CR>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
-		}),
-		["<Tab>"] = function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			else
-				fallback()
-			end
-		end,
-		["<S-Tab>"] = function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end,
-	},
-	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
-		{ name = "buffer" },
-	},
+  snippet = {
+    expand = function(args)
+      require("luasnip").lsp_expand(args.body)
+    end,
+  },
+  mapping = {
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
+    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.close(),
+    ["<CR>"] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    }),
+    ["<Tab>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end,
+    ["<S-Tab>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end,
+  },
+  sources = {
+    { name = "nvim_lsp" },
+    { name = "luasnip" },
+    { name = "buffer" },
+  },
 })
 
 map("n", "<space>,", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
