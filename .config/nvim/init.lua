@@ -17,103 +17,100 @@ local function opt(scope, key, value)
 	end
 end
 
--------------------- PLUGINS -------------------------------
---- bootstrap packer.nvim
-local ensure_packer = function()
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({
-			"git",
-			"clone",
-			"--depth",
-			"1",
-			"https://github.com/wbthomason/packer.nvim",
-			install_path,
-		})
-		cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
-end
-
-local packer_bootstrap = ensure_packer()
-
-require("packer").startup(function(use)
-	use("wbthomason/packer.nvim")
-
-	use({
-		"NeogitOrg/neogit",
-		config = function()
-			require("neogit").setup({})
-		end,
-	})
-	use("L3MON4D3/LuaSnip")
-	use("christoomey/vim-tmux-navigator")
-	use("ervandew/supertab")
-	use("folke/tokyonight.nvim")
-	use("f-person/git-blame.nvim")
-	use("gorodinskiy/vim-coloresque")
-	use({
-		"hrsh7th/nvim-cmp",
-		requires = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"saadparwaiz1/cmp_luasnip",
-		},
-	})
-	use("kylechui/nvim-surround")
-	use("nvimtools/none-ls.nvim")
-	use("junegunn/vim-easy-align")
-	use("lukas-reineke/indent-blankline.nvim")
-	use("lewis6991/gitsigns.nvim")
-	use("mattn/emmet-vim")
-	use("mechatroner/rainbow_csv")
-	use("mfussenegger/nvim-dap")
-	use("neovim/nvim-lspconfig")
-	use("numToStr/Comment.nvim")
-	use("nvim-lua/plenary.nvim")
-	use("nvim-lua/popup.nvim")
-	use({
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v2.x",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"MunifTanjim/nui.nvim",
-		},
-	})
-	use("nvim-telescope/telescope.nvim")
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-	})
-	use({
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		after = "nvim-treesitter",
-		requires = "nvim-treesitter/nvim-treesitter",
-	})
-	use("ray-x/go.nvim")
-	use("segeljakt/vim-silicon")
-	use("tpope/vim-repeat")
-	use("wellle/context.vim")
-	use("windwp/nvim-autopairs")
-	use({
-		"williamboman/mason.nvim",
-		run = ":MasonUpdate",
-		requires = {
-			"williamboman/mason-lspconfig.nvim",
-		},
-	})
-	use("xiyaowong/transparent.nvim")
-
-	-- Automatically set up the configuration after cloning packer.nvim
-	if packer_bootstrap then
-		require("packer").sync()
-	end
-end)
-
 -------------------- GLOBAL --------------------------------
 g["mapleader"] = ","
+
+-------------------- PLUGINS -------------------------------
+-- Bootstrap lazy.nvim
+local ensure_lazy = function()
+  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+  if not (vim.uv or vim.loop).fs_stat(lazypath) then
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    if vim.v.shell_error ~= 0 then
+      vim.api.nvim_echo({
+        { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+        { out, "WarningMsg" },
+        { "\nPress any key to exit..." },
+      }, true, {})
+      vim.fn.getchar()
+      os.exit(1)
+    end
+  end
+  vim.opt.rtp:prepend(lazypath)
+end
+
+ensure_lazy()
+
+-- Setup lazy.nvim
+require("lazy").setup({
+  spec = {
+    {
+      "NeogitOrg/neogit",
+      config = function()
+        require("neogit").setup({})
+      end,
+    },
+    {"L3MON4D3/LuaSnip"},
+    {"christoomey/vim-tmux-navigator"},
+    {"ervandew/supertab"},
+    {"folke/tokyonight.nvim"},
+    {"f-person/git-blame.nvim"},
+    {"gorodinskiy/vim-coloresque"},
+    {
+      "hrsh7th/nvim-cmp",
+      dependencies = {
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "saadparwaiz1/cmp_luasnip",
+      },
+    },
+    {"kylechui/nvim-surround"},
+    {"nvimtools/none-ls.nvim"},
+    {"junegunn/vim-easy-align"},
+    {"lukas-reineke/indent-blankline.nvim"},
+    {"lewis6991/gitsigns.nvim"},
+    {"mattn/emmet-vim"},
+    {"mechatroner/rainbow_csv"},
+    {"mfussenegger/nvim-dap"},
+    {"neovim/nvim-lspconfig"},
+    {"numToStr/Comment.nvim"},
+    {"nvim-lua/plenary.nvim"},
+    {"nvim-lua/popup.nvim"},
+    {
+      "nvim-neo-tree/neo-tree.nvim",
+      branch = "v3.x",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-tree/nvim-web-devicons",
+        "MunifTanjim/nui.nvim",
+      },
+    },
+    {"nvim-telescope/telescope.nvim"},
+    {
+      "nvim-treesitter/nvim-treesitter",
+      build = ":TSUpdate",
+    },
+    {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      dependencies = "nvim-treesitter/nvim-treesitter",
+    },
+    {"ray-x/go.nvim"},
+    {"segeljakt/vim-silicon"},
+    {"tpope/vim-repeat"},
+    {"windwp/nvim-autopairs"},
+    {
+      "williamboman/mason.nvim",
+      build = ":MasonUpdate",
+      dependencies = {
+        "williamboman/mason-lspconfig.nvim",
+      },
+    },
+    {"xiyaowong/transparent.nvim"},
+  },
+  install = { colorscheme = { "habamax" } },
+  checker = { enabled = true },
+})
 
 -------------------- PLUGIN SETUP --------------------------
 -- supertab
