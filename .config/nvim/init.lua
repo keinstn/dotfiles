@@ -47,9 +47,15 @@ require("lazy").setup({
   spec = {
     {
       "NeogitOrg/neogit",
-      config = function()
-        require("neogit").setup({})
-      end,
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "sindrets/diffview.nvim",
+        "nvim-telescope/telescope.nvim",
+      },
+      config = true,
+      keys = {
+        { "<leader>n", "<cmd>Neogit<cr>", desc = "Neogit" },
+      },
     },
     { "L3MON4D3/LuaSnip" },
     {
