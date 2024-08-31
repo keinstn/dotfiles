@@ -114,7 +114,6 @@ require("lazy").setup({
         require("nvim-surround").setup({})
       end,
     },
-    { "nvimtools/none-ls.nvim" },
     {
       "junegunn/vim-easy-align",
       keys = {
@@ -177,6 +176,23 @@ require("lazy").setup({
       dependencies = "nvim-treesitter/nvim-treesitter",
     },
     { "segeljakt/vim-silicon" },
+    {
+      "stevearc/conform.nvim",
+      config = function()
+        require("conform").setup({
+          formatters_by_ft = {
+            lua = { "stylua" },
+            python = { "isort", "black" },
+            rust = { "rustfmt" },
+            javascript = { "prettierd", "prettier", stop_after_first = true },
+          },
+          format_on_save = {
+            timeout_ms = 500,
+            lsp_format = "fallback",
+          },
+        })
+      end,
+    },
     { "tpope/vim-repeat" },
     {
       "windwp/nvim-autopairs",
@@ -287,34 +303,6 @@ for ls, cfg in pairs({
 }) do
   lsp[ls].setup(cfg)
 end
-
--------------------- none-ls -------------------------------
-local null_ls = require("null-ls")
-
-null_ls.setup({
-  sources = {
-    null_ls.builtins.formatting.black,
-    null_ls.builtins.formatting.dart_format,
-    null_ls.builtins.formatting.phpcsfixer,
-    null_ls.builtins.formatting.stylua,
-    null_ls.builtins.formatting.gofumpt,
-    null_ls.builtins.formatting.goimports,
-    null_ls.builtins.formatting.terraform_fmt,
-  },
-  --- Format files on save synchronously
-  on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.format({ bufnr = bufnr })
-        end,
-      })
-    end
-  end,
-})
 
 -------------------- NVIM-CMP ------------------------------
 -- luasnip setup
