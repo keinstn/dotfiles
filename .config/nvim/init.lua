@@ -115,10 +115,11 @@ require("lazy").setup({
     },
     {
       "junegunn/vim-easy-align",
-      keys = {
-        { "ga", "<Plug>(EasyAlign)" },
-        { "ga", { "<Plug>(EasyAlign)", mode = "x" } },
-      },
+      lazy = false,
+      config = function()
+        map("n", "ga", "<Plug>(EasyAlign)")
+        map("x", "ga", "<Plug>(EasyAlign)")
+      end,
     },
     { "lukas-reineke/indent-blankline.nvim" },
     {
