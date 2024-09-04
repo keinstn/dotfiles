@@ -129,6 +129,13 @@ require("lazy").setup({
       end,
     },
     {
+      "nvim-lualine/lualine.nvim",
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+      config = function()
+        require("lualine").setup()
+      end,
+    },
+    {
       "mattn/emmet-vim",
       config = function()
         vim.g.user_emmet_leader_key = "<C-Z>"
