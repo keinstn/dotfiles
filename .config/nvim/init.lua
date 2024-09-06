@@ -307,6 +307,7 @@ for ls, cfg in pairs({
     root_dir = lsp.util.root_pattern(".git", fn.getcwd()),
   },
   gopls = {},
+  powershell_es = {},
   tsserver = {},
   terraformls = {},
   rust_analyzer = {},
