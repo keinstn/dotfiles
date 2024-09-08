@@ -77,7 +77,6 @@ require("lazy").setup({
     {
       "folke/tokyonight.nvim",
       lazy = true,
-      opts = { style = "moon" },
       config = function()
         require("tokyonight").setup({ transparent = vim.g.transparent_enabled })
       end,
@@ -231,7 +230,7 @@ require("lazy").setup({
 
 -------------------- OPTIONS -------------------------------
 local indent, width = 4, 80
-cmd("colorscheme tokyonight-night")
+cmd("colorscheme tokyonight-moon")
 opt("b", "expandtab", true) -- Use spaces instead of tabs
 opt("b", "formatoptions", "crqnj") -- Automatic formatting options
 opt("b", "shiftwidth", indent) -- Size of an indent
