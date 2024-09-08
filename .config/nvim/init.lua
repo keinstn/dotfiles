@@ -261,8 +261,8 @@ opt("w", "wrap", false) -- Disable line wrap
 map("n", "<leader>ev", ":e $MYVIMRC<CR>")
 map("n", "<leader>rv", ":luafile $MYVIMRC<CR>:echo 'Reloaded vimrc!'<CR>")
 
-map("n", "<S-t>", "<cmd>tabnew<cr>")
-map("n", "<S-c>", "<cmd>tabclose<cr>")
+map("n", "<C-t>", "<cmd>tabnew<cr>")
+map("n", "<C-c>", "<cmd>tabclose<cr>")
 map("n", "<S-TAB>", "<cmd>tabnext<cr>")
 map("n", "<C-TAB>", "<cmd>tabprevious<cr>")
 
