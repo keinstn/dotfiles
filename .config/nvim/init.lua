@@ -58,6 +58,19 @@ require("lazy").setup({
     },
     { "L3MON4D3/LuaSnip" },
     {
+      "aserowy/tmux.nvim",
+      config = function()
+        require("tmux").setup()
+
+        -- TODO:
+        -- Map the key to move right pane explicitly because
+        -- the default key mapping does not work on MacOS
+        if vim.loop.os_uname().sysname == "Darwin" then
+          map("n", "C-l", "<cmd>lua require('tmux').move_right()<cr>")
+        end
+      end,
+    },
+    {
       "utilyre/barbecue.nvim",
       name = "barbecue",
       version = "*",
@@ -67,7 +80,6 @@ require("lazy").setup({
       },
       opts = {},
     },
-    { "christoomey/vim-tmux-navigator" },
     {
       "ervandew/supertab",
       config = function()
