@@ -319,7 +319,7 @@ for ls, cfg in pairs({
   },
   gopls = {},
   powershell_es = {},
-  tsserver = {},
+  ts_ls = {},
   terraformls = {},
   rust_analyzer = {},
   ruby_lsp = {},
