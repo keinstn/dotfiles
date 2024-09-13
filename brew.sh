@@ -37,6 +37,7 @@ formulas="\
   tfsec \
   tmux \
   tree \
+  uv \
   wasmer \
   yarn \
   zig \
