@@ -200,7 +200,7 @@ require("lazy").setup({
         require("conform").setup({
           formatters_by_ft = {
             lua = { "stylua" },
-            python = { "isort", "black" },
+            python = { "isort", "ruff", "black" },
             rust = { "rustfmt" },
             javascript = { "prettierd", "prettier", stop_after_first = true },
           },
