@@ -11,6 +11,7 @@ formulas="\
   eza \
   fd \
   fish \
+  fvm \
   fzf \
   git-secrets \
   go \
@@ -46,6 +47,7 @@ formulas="\
 taps="\
   homebrew/cask-fonts \
   dbcli/tap \
+  leoafarias/fvm \
 "
 
 casks="\
