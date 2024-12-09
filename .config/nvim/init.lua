@@ -218,6 +218,7 @@ require("lazy").setup({
             lua = { "stylua" },
             python = { "isort", "ruff", "black" },
             rust = { "rustfmt" },
+            html = { "prettierd", "prettier", stop_after_first = true },
             javascript = { "prettierd", "prettier", stop_after_first = true },
           },
           format_on_save = {
