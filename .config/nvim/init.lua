@@ -88,10 +88,7 @@ require("lazy").setup({
     },
     {
       "folke/tokyonight.nvim",
-      lazy = true,
-      config = function()
-        require("tokyonight").setup({ transparent = vim.g.transparent_enabled })
-      end,
+      lazy = false,
     },
     {
       "folke/which-key.nvim",
@@ -302,7 +299,6 @@ require("lazy").setup({
       },
     },
   },
-  install = { colorscheme = { "habamax" } },
   checker = { enabled = true },
 })
 
