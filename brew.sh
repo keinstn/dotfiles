@@ -7,6 +7,7 @@ formulas="\
   diff-so-fancy \
   direnv \
   docker-machine-driver-hyperkit \
+  duckdb \
   dust \
   eza \
   fd \
