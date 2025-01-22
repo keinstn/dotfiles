@@ -320,6 +320,13 @@ require("lazy").setup({
         window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
       },
     },
+    {
+      "quarto-dev/quarto-nvim",
+      dependencies = {
+        "jmbuhr/otter.nvim",
+        "nvim-treesitter/nvim-treesitter",
+      },
+    },
   },
   checker = { enabled = true },
 })
