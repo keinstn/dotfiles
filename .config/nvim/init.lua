@@ -16,6 +16,10 @@ local function opt(scope, key, value)
   end
 end
 
+local function get_os()
+  return package.config:sub(1, 1) == "/" and "Linux" or "Windows"
+end
+
 -------------------- GLOBAL --------------------------------
 g.mapleader = ","
 
@@ -301,15 +305,33 @@ require("lazy").setup({
     {
       "benlubas/molten-nvim",
       version = "^1.0.0",
-      dependencies = { "3rd/image.nvim" },
       build = ":UpdateRemotePlugins",
+      dependencies = {
+        "3rd/image.nvim",
+        "willothy/wezterm.nvim",
+      },
       init = function()
-        g.molten_image_provider = "image.nvim"
-        g.molten_output_win_max_height = 20
+        if get_os() == "Linux" then
+          g.molten_image_provider = "image.nvim"
+          g.molten_output_win_max_height = 20
+        else
+          g.molten_image_provider = "wezterm"
+          g.molten_auto_open_output = false -- cannot be true if molten_image_provider = "wezterm"
+          g.molten_output_show_more = true
+          g.molten_image_provider = "wezterm"
+          g.molten_output_virt_lines = true
+          g.molten_split_direction = "right" --direction of the output window, options are "right", "left", "top", "bottom"
+          g.molten_split_size = 40 --(0-100) % size of the screen dedicated to the output window
+          g.molten_virt_text_output = true
+          g.molten_use_border_highlights = true
+          g.molten_virt_lines_off_by_1 = true
+          g.molten_auto_image_popup = false
+        end
       end,
     },
     {
       "3rd/image.nvim",
+      enabled = get_os() == "Linux", -- don't install on windows because build is failed on it
       opts = {
         backend = "kitty",
         max_width = 100,
@@ -319,6 +341,10 @@ require("lazy").setup({
         window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
         window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
       },
+    },
+    {
+      "willothy/wezterm.nvim",
+      config = true,
     },
     {
       "quarto-dev/quarto-nvim",
