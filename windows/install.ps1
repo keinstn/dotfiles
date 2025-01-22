@@ -1,4 +1,4 @@
-$packages = @(
+$ChocoPackages = @(
     "awk",
     "bat",
     "fd",
@@ -18,7 +18,16 @@ $packages = @(
     "tree"
 )
 
-foreach ($package in $packages)
+foreach ($package in $ChocoPackages)
 {
     choco install $package
+}
+
+$WingetPackages = @(
+    "eza-community.eza"
+)
+
+foreach ($package in $WingetPackages)
+{
+    winget install $package
 }
