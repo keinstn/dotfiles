@@ -396,6 +396,16 @@ map("n", "<C-c>", "<cmd>tabclose<cr>")
 map("n", "<S-TAB>", "<cmd>tabnext<cr>")
 map("n", "<C-TAB>", "<cmd>tabprevious<cr>")
 
+-- Molten
+map("n", "<leader>mi", ":MoltenInit<CR>", { silent = true, desc = "Initialize the plugin" })
+map("n", "<leader>e", ":MoltenEvaluateOperator<CR>", { silent = true, desc = "run operator selection" })
+map("n", "<leader>rl", ":MoltenEvaluateLine<CR>", { silent = true, desc = "evaluate line" })
+map("n", "<leader>rr", ":MoltenReevaluateCell<CR>", { silent = true, desc = "re-evaluate cell" })
+map("v", "<leader>r", ":<C-u>MoltenEvaluateVisual<CR>gv", { silent = true, desc = "evaluate visual selection" })
+map("n", "<leader>rd", ":MoltenDelete<CR>", { silent = true, desc = "molten delete cell" })
+map("n", "<leader>oh", ":MoltenHideOutput<CR>", { silent = true, desc = "hide output" })
+map("n", "<leader>os", ":noautocmd MoltenEnterOutput<CR>", { silent = true, desc = "show/enter output" })
+
 -------------------- FILETYPES -----------------------------
 cmd("autocmd FileType css setlocal sw=2 sts=2 ts=2 et")
 cmd("autocmd FileType dart setlocal sw=2 sts=2 ts=2 et")
