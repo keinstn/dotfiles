@@ -2,23 +2,25 @@ local api, cmd, fn, g = vim.api, vim.cmd, vim.fn, vim.g
 local scopes = { o = vim.o, b = vim.bo, w = vim.wo }
 
 local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true }
-  if opts then
-    options = vim.tbl_extend("force", options, opts)
-  end
-  api.nvim_set_keymap(mode, lhs, rhs, options)
+	local options = { noremap = true }
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
+	api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 local function opt(scope, key, value)
-  scopes[scope][key] = value
-  if scope ~= "o" then
-    scopes["o"][key] = value
-  end
+	scopes[scope][key] = value
+	if scope ~= "o" then
+		scopes["o"][key] = value
+	end
 end
 
 local function get_os()
-  return package.config:sub(1, 1) == "/" and "Linux" or "Windows"
+	return package.config:sub(1, 1) == "/" and "Linux" or "Windows"
 end
+
+local is_unix = get_os() == "Linux"
 
 -------------------- GLOBAL --------------------------------
 g.mapleader = ","
@@ -26,336 +28,336 @@ g.mapleader = ","
 -------------------- PLUGINS -------------------------------
 -- Bootstrap lazy.nvim
 local ensure_lazy = function()
-  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-  if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-    if vim.v.shell_error ~= 0 then
-      vim.api.nvim_echo({
-        { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-        { out, "WarningMsg" },
-        { "\nPress any key to exit..." },
-      }, true, {})
-      vim.fn.getchar()
-      os.exit(1)
-    end
-  end
-  vim.opt.rtp:prepend(lazypath)
+	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+	if not (vim.uv or vim.loop).fs_stat(lazypath) then
+		local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+		local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+		if vim.v.shell_error ~= 0 then
+			vim.api.nvim_echo({
+				{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+				{ out, "WarningMsg" },
+				{ "\nPress any key to exit..." },
+			}, true, {})
+			vim.fn.getchar()
+			os.exit(1)
+		end
+	end
+	vim.opt.rtp:prepend(lazypath)
 end
 
 ensure_lazy()
 
 -- Setup lazy.nvim
 require("lazy").setup({
-  spec = {
-    {
-      "NeogitOrg/neogit",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "sindrets/diffview.nvim",
-        "nvim-telescope/telescope.nvim",
-      },
-      config = true,
-      keys = {
-        { "<leader>n", "<cmd>Neogit<cr>", desc = "Neogit" },
-      },
-    },
-    { "L3MON4D3/LuaSnip" },
-    {
-      "aserowy/tmux.nvim",
-      config = function()
-        require("tmux").setup()
+	spec = {
+		{
+			"NeogitOrg/neogit",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"sindrets/diffview.nvim",
+				"nvim-telescope/telescope.nvim",
+			},
+			config = true,
+			keys = {
+				{ "<leader>n", "<cmd>Neogit<cr>", desc = "Neogit" },
+			},
+		},
+		{ "L3MON4D3/LuaSnip" },
+		{
+			"aserowy/tmux.nvim",
+			config = function()
+				require("tmux").setup()
 
-        -- TODO:
-        -- Map the key to move right pane explicitly because
-        -- the default key mapping does not work on MacOS
-        if vim.loop.os_uname().sysname == "Darwin" then
-          map("n", "C-l", "<cmd>lua require('tmux').move_right()<cr>")
-        end
-      end,
-    },
-    {
-      "utilyre/barbecue.nvim",
-      name = "barbecue",
-      version = "*",
-      dependencies = {
-        "SmiteshP/nvim-navic",
-        "nvim-tree/nvim-web-devicons",
-      },
-      opts = {},
-    },
-    {
-      "ervandew/supertab",
-      config = function()
-        vim.g.SuperTabDefaultCompletionType = "<c-n>"
-      end,
-    },
-    {
-      "folke/tokyonight.nvim",
-      lazy = false,
-    },
-    {
-      "folke/which-key.nvim",
-      event = "VeryLazy",
-      keys = {
-        {
-          "<leader>?",
-          function()
-            require("which-key").show({ global = false })
-          end,
-          desc = "Buffer Local Keymaps (which-key)",
-        },
-      },
-    },
-    { "f-person/git-blame.nvim" },
-    { "brenoprata10/nvim-highlight-colors" },
-    {
-      "hrsh7th/nvim-cmp",
-      dependencies = {
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "saadparwaiz1/cmp_luasnip",
-      },
-    },
-    {
-      "kylechui/nvim-surround",
-      version = "*", -- Use for stability; omit to use `main` branch for the latest features
-      event = "VeryLazy",
-      config = function()
-        require("nvim-surround").setup({})
-      end,
-    },
-    {
-      "junegunn/vim-easy-align",
-      lazy = false,
-      config = function()
-        map("n", "ga", "<Plug>(EasyAlign)")
-        map("x", "ga", "<Plug>(EasyAlign)")
-      end,
-    },
-    { "lukas-reineke/indent-blankline.nvim" },
-    {
-      "lewis6991/gitsigns.nvim",
-      config = function()
-        require("gitsigns").setup()
-      end,
-    },
-    {
-      "nvim-lualine/lualine.nvim",
-      dependencies = { "nvim-tree/nvim-web-devicons" },
-      config = function()
-        require("lualine").setup()
-      end,
-    },
-    {
-      "mattn/emmet-vim",
-      config = function()
-        vim.g.user_emmet_leader_key = "<C-Z>"
-      end,
-    },
-    { "mechatroner/rainbow_csv" },
-    { "mfussenegger/nvim-dap" },
-    { "neovim/nvim-lspconfig" },
-    {
-      "numToStr/Comment.nvim",
-      config = function()
-        require("Comment").setup()
-      end,
-    },
-    {
-      "nvim-flutter/flutter-tools.nvim",
-      lazy = false,
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "stevearc/dressing.nvim",
-      },
-      config = function()
-        require("flutter-tools").setup({
-          fvm = true,
-          widget_guides = {
-            enabled = true,
-          },
-        })
-      end,
-    },
-    { "nvim-lua/plenary.nvim" },
-    { "nvim-lua/popup.nvim" },
-    {
-      "nvim-neo-tree/neo-tree.nvim",
-      branch = "v3.x",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons",
-        "MunifTanjim/nui.nvim",
-      },
-      keys = {
-        { "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
-      },
-    },
-    {
-      "nvim-telescope/telescope.nvim",
-      keys = {
-        { ";", "<cmd>Telescope find_files<cr>", desc = "Telescope Find Files" },
-        { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope Find Files" },
-        { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope Live Grep" },
-        { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope Find Buffers" },
-        { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope Help Tags" },
-      },
-    },
-    {
-      "nvim-treesitter/nvim-treesitter",
-      build = ":TSUpdate",
-    },
-    {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      dependencies = "nvim-treesitter/nvim-treesitter",
-    },
-    { "segeljakt/vim-silicon" },
-    {
-      "stevearc/conform.nvim",
-      config = function()
-        require("conform").setup({
-          formatters_by_ft = {
-            lua = { "stylua" },
-            python = { "isort", "ruff", "black" },
-            rust = { "rustfmt" },
-            html = { "prettierd", "prettier", stop_after_first = true },
-            javascript = { "prettierd", "prettier", stop_after_first = true },
-          },
-          format_on_save = {
-            timeout_ms = 500,
-            lsp_format = "fallback",
-          },
-        })
-      end,
-    },
-    { "tpope/vim-repeat" },
-    {
-      "windwp/nvim-autopairs",
-      event = "InsertEnter",
-      config = true,
-    },
-    {
-      "williamboman/mason.nvim",
-      build = ":MasonUpdate",
-      dependencies = {
-        "williamboman/mason-lspconfig.nvim",
-      },
-      config = function()
-        require("mason").setup()
-        require("mason-lspconfig").setup()
-      end,
-    },
-    {
-      "xiyaowong/transparent.nvim",
-      config = function()
-        require("transparent").clear_prefix("neogit")
-        require("transparent").clear_prefix("NeoTree")
-      end,
-    },
-    {
-      "yetone/avante.nvim",
-      enabled = false,
-      event = "VeryLazy",
-      lazy = false,
-      version = false,
-      opts = {
-        provider = "copilot",
-      },
-      build = "make",
-      dependencies = {
-        "stevearc/dressing.nvim",
-        "nvim-lua/plenary.nvim",
-        "MunifTanjim/nui.nvim",
-        "hrsh7th/nvim-cmp",
-        "nvim-tree/nvim-web-devicons",
-        {
-          "zbirenbaum/copilot.lua",
-          cmd = "Copilot",
-          event = "InsertEnter",
-          config = function()
-            require("copilot").setup({})
-          end,
-        },
-        {
-          -- support for image pasting
-          "HakonHarnes/img-clip.nvim",
-          event = "VeryLazy",
-          opts = {
-            -- recommended settings
-            default = {
-              embed_image_as_base64 = false,
-              prompt_for_file_name = false,
-              drag_and_drop = {
-                insert_mode = true,
-              },
-              -- required for Windows users
-              use_absolute_path = true,
-            },
-          },
-        },
-        {
-          "MeanderingProgrammer/render-markdown.nvim",
-          opts = {
-            file_types = { "markdown", "Avante" },
-          },
-          ft = { "markdown", "Avante" },
-        },
-      },
-    },
-    {
-      "benlubas/molten-nvim",
-      version = "^1.0.0",
-      build = ":UpdateRemotePlugins",
-      dependencies = {
-        "3rd/image.nvim",
-        "willothy/wezterm.nvim",
-      },
-      init = function()
-        if get_os() == "Linux" then
-          g.molten_image_provider = "image.nvim"
-          g.molten_output_win_max_height = 20
-        else
-          g.molten_image_provider = "wezterm"
-          g.molten_auto_open_output = false -- cannot be true if molten_image_provider = "wezterm"
-          g.molten_output_show_more = true
-          g.molten_image_provider = "wezterm"
-          g.molten_output_virt_lines = true
-          g.molten_split_direction = "right" --direction of the output window, options are "right", "left", "top", "bottom"
-          g.molten_split_size = 40 --(0-100) % size of the screen dedicated to the output window
-          g.molten_virt_text_output = true
-          g.molten_use_border_highlights = true
-          g.molten_virt_lines_off_by_1 = true
-          g.molten_auto_image_popup = false
-        end
-      end,
-    },
-    {
-      "3rd/image.nvim",
-      enabled = get_os() == "Linux", -- don't install on windows because build is failed on it
-      opts = {
-        backend = "kitty",
-        max_width = 100,
-        max_height = 12,
-        max_height_window_percentage = math.huge,
-        max_width_window_percentage = math.huge,
-        window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
-        window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-      },
-    },
-    {
-      "willothy/wezterm.nvim",
-      config = true,
-    },
-    {
-      "quarto-dev/quarto-nvim",
-      dependencies = {
-        "jmbuhr/otter.nvim",
-        "nvim-treesitter/nvim-treesitter",
-      },
-    },
-  },
-  checker = { enabled = true },
+				-- TODO:
+				-- Map the key to move right pane explicitly because
+				-- the default key mapping does not work on MacOS
+				if vim.loop.os_uname().sysname == "Darwin" then
+					map("n", "C-l", "<cmd>lua require('tmux').move_right()<cr>")
+				end
+			end,
+		},
+		{
+			"utilyre/barbecue.nvim",
+			name = "barbecue",
+			version = "*",
+			dependencies = {
+				"SmiteshP/nvim-navic",
+				"nvim-tree/nvim-web-devicons",
+			},
+			opts = {},
+		},
+		{
+			"ervandew/supertab",
+			config = function()
+				vim.g.SuperTabDefaultCompletionType = "<c-n>"
+			end,
+		},
+		{
+			"folke/tokyonight.nvim",
+			lazy = false,
+		},
+		{
+			"folke/which-key.nvim",
+			event = "VeryLazy",
+			keys = {
+				{
+					"<leader>?",
+					function()
+						require("which-key").show({ global = false })
+					end,
+					desc = "Buffer Local Keymaps (which-key)",
+				},
+			},
+		},
+		{ "f-person/git-blame.nvim" },
+		{ "brenoprata10/nvim-highlight-colors" },
+		{
+			"hrsh7th/nvim-cmp",
+			dependencies = {
+				"hrsh7th/cmp-nvim-lsp",
+				"hrsh7th/cmp-buffer",
+				"saadparwaiz1/cmp_luasnip",
+			},
+		},
+		{
+			"kylechui/nvim-surround",
+			version = "*", -- Use for stability; omit to use `main` branch for the latest features
+			event = "VeryLazy",
+			config = function()
+				require("nvim-surround").setup({})
+			end,
+		},
+		{
+			"junegunn/vim-easy-align",
+			lazy = false,
+			config = function()
+				map("n", "ga", "<Plug>(EasyAlign)")
+				map("x", "ga", "<Plug>(EasyAlign)")
+			end,
+		},
+		{ "lukas-reineke/indent-blankline.nvim" },
+		{
+			"lewis6991/gitsigns.nvim",
+			config = function()
+				require("gitsigns").setup()
+			end,
+		},
+		{
+			"nvim-lualine/lualine.nvim",
+			dependencies = { "nvim-tree/nvim-web-devicons" },
+			config = function()
+				require("lualine").setup()
+			end,
+		},
+		{
+			"mattn/emmet-vim",
+			config = function()
+				vim.g.user_emmet_leader_key = "<C-Z>"
+			end,
+		},
+		{ "mechatroner/rainbow_csv" },
+		{ "mfussenegger/nvim-dap" },
+		{ "neovim/nvim-lspconfig" },
+		{
+			"numToStr/Comment.nvim",
+			config = function()
+				require("Comment").setup()
+			end,
+		},
+		{
+			"nvim-flutter/flutter-tools.nvim",
+			lazy = false,
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"stevearc/dressing.nvim",
+			},
+			config = function()
+				require("flutter-tools").setup({
+					fvm = true,
+					widget_guides = {
+						enabled = true,
+					},
+				})
+			end,
+		},
+		{ "nvim-lua/plenary.nvim" },
+		{ "nvim-lua/popup.nvim" },
+		{
+			"nvim-neo-tree/neo-tree.nvim",
+			branch = "v3.x",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"nvim-tree/nvim-web-devicons",
+				"MunifTanjim/nui.nvim",
+			},
+			keys = {
+				{ "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
+			},
+		},
+		{
+			"nvim-telescope/telescope.nvim",
+			keys = {
+				{ ";", "<cmd>Telescope find_files<cr>", desc = "Telescope Find Files" },
+				{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope Find Files" },
+				{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope Live Grep" },
+				{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope Find Buffers" },
+				{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope Help Tags" },
+			},
+		},
+		{
+			"nvim-treesitter/nvim-treesitter",
+			build = ":TSUpdate",
+		},
+		{
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			dependencies = "nvim-treesitter/nvim-treesitter",
+		},
+		{ "segeljakt/vim-silicon" },
+		{
+			"stevearc/conform.nvim",
+			config = function()
+				require("conform").setup({
+					formatters_by_ft = {
+						lua = { "stylua" },
+						python = { "isort", "ruff", "black" },
+						rust = { "rustfmt" },
+						html = { "prettierd", "prettier", stop_after_first = true },
+						javascript = { "prettierd", "prettier", stop_after_first = true },
+					},
+					format_on_save = {
+						timeout_ms = 500,
+						lsp_format = "fallback",
+					},
+				})
+			end,
+		},
+		{ "tpope/vim-repeat" },
+		{
+			"windwp/nvim-autopairs",
+			event = "InsertEnter",
+			config = true,
+		},
+		{
+			"williamboman/mason.nvim",
+			build = ":MasonUpdate",
+			dependencies = {
+				"williamboman/mason-lspconfig.nvim",
+			},
+			config = function()
+				require("mason").setup()
+				require("mason-lspconfig").setup()
+			end,
+		},
+		{
+			"xiyaowong/transparent.nvim",
+			config = function()
+				require("transparent").clear_prefix("neogit")
+				require("transparent").clear_prefix("NeoTree")
+			end,
+		},
+		{
+			"yetone/avante.nvim",
+			enabled = false,
+			event = "VeryLazy",
+			lazy = false,
+			version = false,
+			opts = {
+				provider = "copilot",
+			},
+			build = "make",
+			dependencies = {
+				"stevearc/dressing.nvim",
+				"nvim-lua/plenary.nvim",
+				"MunifTanjim/nui.nvim",
+				"hrsh7th/nvim-cmp",
+				"nvim-tree/nvim-web-devicons",
+				{
+					"zbirenbaum/copilot.lua",
+					cmd = "Copilot",
+					event = "InsertEnter",
+					config = function()
+						require("copilot").setup({})
+					end,
+				},
+				{
+					-- support for image pasting
+					"HakonHarnes/img-clip.nvim",
+					event = "VeryLazy",
+					opts = {
+						-- recommended settings
+						default = {
+							embed_image_as_base64 = false,
+							prompt_for_file_name = false,
+							drag_and_drop = {
+								insert_mode = true,
+							},
+							-- required for Windows users
+							use_absolute_path = true,
+						},
+					},
+				},
+				{
+					"MeanderingProgrammer/render-markdown.nvim",
+					opts = {
+						file_types = { "markdown", "Avante" },
+					},
+					ft = { "markdown", "Avante" },
+				},
+			},
+		},
+		{
+			"benlubas/molten-nvim",
+			version = "^1.0.0",
+			build = ":UpdateRemotePlugins",
+			dependencies = {
+				"3rd/image.nvim",
+				"willothy/wezterm.nvim",
+			},
+			init = function()
+				if is_unix then
+					g.molten_image_provider = "image.nvim"
+					g.molten_output_win_max_height = 20
+				else
+					g.molten_image_provider = "wezterm"
+					g.molten_auto_open_output = false -- cannot be true if molten_image_provider = "wezterm"
+					g.molten_output_show_more = true
+					g.molten_image_provider = "wezterm"
+					g.molten_output_virt_lines = true
+					g.molten_split_direction = "right" --direction of the output window, options are "right", "left", "top", "bottom"
+					g.molten_split_size = 40 --(0-100) % size of the screen dedicated to the output window
+					g.molten_virt_text_output = true
+					g.molten_use_border_highlights = true
+					g.molten_virt_lines_off_by_1 = true
+					g.molten_auto_image_popup = false
+				end
+			end,
+		},
+		{
+			"3rd/image.nvim",
+			enabled = is_unix, -- don't install on windows because build is failed on it
+			opts = {
+				backend = "kitty",
+				max_width = 100,
+				max_height = 12,
+				max_height_window_percentage = math.huge,
+				max_width_window_percentage = math.huge,
+				window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
+				window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+			},
+		},
+		{
+			"willothy/wezterm.nvim",
+			config = true,
+		},
+		{
+			"quarto-dev/quarto-nvim",
+			dependencies = {
+				"jmbuhr/otter.nvim",
+				"nvim-treesitter/nvim-treesitter",
+			},
+		},
+	},
+	checker = { enabled = true },
 })
 
 -------------------- OPTIONS -------------------------------
@@ -417,16 +419,20 @@ cmd("autocmd FileType scss setlocal sw=2 sts=2 ts=2 et")
 cmd("autocmd FileType gitcommit setlocal spell")
 cmd("autocmd FileType terraform setlocal sw=2 sts=2 ts=2")
 
+if not is_unix then
+	cmd("autocmd BufRead,BufNewFile * set fileformat=unix")
+end
+
 -------------------- TREE-SITTER ---------------------------
 local ts = require("nvim-treesitter.configs")
 ts.setup({
-  ensure_installed = "all",
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
+	ensure_installed = "all",
+	highlight = {
+		enable = true,
+	},
+	indent = {
+		enable = true,
+	},
 })
 
 -------------------- LSP -----------------------------------
@@ -436,24 +442,24 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 for ls, cfg in pairs({
-  cssls = {
-    capabilities = capabilities,
-  },
-  dartls = {},
-  lua_ls = {},
-  intelephense = {},
-  pyright = {
-    root_dir = lsp.util.root_pattern(".git", fn.getcwd()),
-  },
-  gopls = {},
-  powershell_es = {},
-  ts_ls = {},
-  terraformls = {},
-  rust_analyzer = {},
-  ruby_lsp = {},
-  zls = {},
+	cssls = {
+		capabilities = capabilities,
+	},
+	dartls = {},
+	lua_ls = {},
+	intelephense = {},
+	pyright = {
+		root_dir = lsp.util.root_pattern(".git", fn.getcwd()),
+	},
+	gopls = {},
+	powershell_es = {},
+	ts_ls = {},
+	terraformls = {},
+	rust_analyzer = {},
+	ruby_lsp = {},
+	zls = {},
 }) do
-  lsp[ls].setup(cfg)
+	lsp[ls].setup(cfg)
 end
 
 -------------------- NVIM-CMP ------------------------------
@@ -463,46 +469,46 @@ local luasnip = require("luasnip")
 -- nvim-cmp setup
 local cmp = require("cmp")
 cmp.setup({
-  snippet = {
-    expand = function(args)
-      require("luasnip").lsp_expand(args.body)
-    end,
-  },
-  mapping = {
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.close(),
-    ["<CR>"] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    }),
-    ["<Tab>"] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end,
-    ["<S-Tab>"] = function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end,
-  },
-  sources = {
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "buffer" },
-  },
+	snippet = {
+		expand = function(args)
+			require("luasnip").lsp_expand(args.body)
+		end,
+	},
+	mapping = {
+		["<C-p>"] = cmp.mapping.select_prev_item(),
+		["<C-n>"] = cmp.mapping.select_next_item(),
+		["<C-d>"] = cmp.mapping.scroll_docs(-4),
+		["<C-f>"] = cmp.mapping.scroll_docs(4),
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-e>"] = cmp.mapping.close(),
+		["<CR>"] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Replace,
+			select = true,
+		}),
+		["<Tab>"] = function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			else
+				fallback()
+			end
+		end,
+		["<S-Tab>"] = function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end,
+	},
+	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" },
+		{ name = "buffer" },
+	},
 })
 
 map("n", "<space>,", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
