@@ -6,6 +6,8 @@ local function get_os()
   return package.config:sub(1, 1) == "/" and "Linux" or "Windows"
 end
 
+local is_unix = get_os() == "Linux"
+
 -- This table will hold the configuration.
 local config = {}
 
@@ -15,13 +17,13 @@ end
 
 -- Color and Appearance
 config.color_scheme = "Dracula"
-config.window_background_opacity = get_os() == "Windows" and 0.7 or 0.9
+config.window_background_opacity = is_unix and 0.9 or 0.7
 
 -- Font
 config.font = wezterm.font("Hack Nerd Font Mono")
 config.font_size = 14.0
 
-if get_os() == "Windows" then
+if is_unix then
   -- Emulate tmux key bingings
   config.leader = { key = "q", mods = "CTRL", timeout_milliseconds = 1000 }
   config.keys = {
