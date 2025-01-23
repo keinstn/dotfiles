@@ -11,6 +11,7 @@ $ChocoPackages = @(
     "make",
     "neovim",
     "nerd-fonts-Hack",
+    "pass-winmenu",
     "ripgrep",
     "sed",
     "sqlcmd",
