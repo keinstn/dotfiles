@@ -23,7 +23,7 @@ config.window_background_opacity = is_unix and 0.9 or 0.7
 config.font = wezterm.font("Hack Nerd Font Mono")
 config.font_size = 14.0
 
-if is_unix then
+if not is_unix then
   -- Emulate tmux key bingings
   config.leader = { key = "q", mods = "CTRL", timeout_milliseconds = 1000 }
   config.keys = {
