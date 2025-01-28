@@ -6,6 +6,8 @@ Import-Module "$profile_dir\Functions.ps1"
 $env:Path = "$HOME\.cargo\bin;$env:Path"
 $env:PATH = "$HOME\.local`\bin;$env:PATH"
 
+[Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding('utf-8')
+
 Invoke-Expression (&starship init powershell)
 
 # Import the Chocolatey Profile that contains the necessary code to enable
