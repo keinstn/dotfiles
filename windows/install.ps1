@@ -1,7 +1,7 @@
 $ChocoPackages = @(
     "awk",
     "bat",
-    "difftastic",
+    "delta",
     "fd",
     "file",
     "gawk",
