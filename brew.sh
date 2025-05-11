@@ -28,6 +28,7 @@ formulas="\
   mycli \
   neovim \
   nodejs \
+  nushell \
   silicon \
   pass \
   pgcli \

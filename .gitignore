@@ -22,3 +22,6 @@
 
 # npm
 .config/configstore/
+
+# nushell
+nushell/*.txt
