@@ -14,6 +14,7 @@ formulas="\
   fish \
   fvm \
   fzf \
+  gh \
   git-secrets \
   go \
   hashicorp/tap/terraform-ls \
