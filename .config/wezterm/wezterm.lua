@@ -76,7 +76,7 @@ if not is_unix then
     },
   }
 
-  config.default_prog = { "pwsh.exe" }
+  config.default_prog = { "nu.exe" }
 end
 
 -- and finally, return the configuration to wezterm
