@@ -42,5 +42,5 @@ $env.PROMPT_INDICATOR_VI_NORMAL = "〉"
 $env.PROMPT_MULTILINE_INDICATOR = "::: "
 
 if $nu.os-info.name == "macos" {
-    $env.PATH = ($env.PATH | split row (char esep) | append "/opt/homebrew/bin")
+    $env.PATH ++= ["/opt/homebrew/bin"]
 }
