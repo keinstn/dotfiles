@@ -24,4 +24,4 @@
 .config/configstore/
 
 # nushell
-nushell/*.txt
+.config/nushell/*.txt
