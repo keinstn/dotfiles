@@ -19,4 +19,6 @@
 
 # Aliases
 alias vim = nvim
+alias cat = bat
 alias l = eza
+alias ll = eza -lh --git
