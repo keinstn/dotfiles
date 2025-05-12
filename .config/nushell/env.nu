@@ -18,3 +18,7 @@
 # them for future reference.
 
 $env.config.buffer_editor = "nvim"
+
+# Prevent screen scrolling up when pressing a key
+# See https://github.com/nushell/nushell/issues/5585#issuecomment-2663632002
+$env.config.shell_integration.osc133 = false
