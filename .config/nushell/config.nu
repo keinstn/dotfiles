@@ -20,8 +20,12 @@
 # Aliases
 alias vim = nvim
 alias cat = bat
-alias l = eza
-alias ll = eza -lh --git
+alias x = eza --icons
+alias xa = eza --icons --all
+alias xl = eza --icons -lh --git
+alias xla = eza --icons --long --all
+alias xt = eza --icons --tree
+alias xta = eza --icons --tree --all
 alias vimdiff = nvim -d
 alias nu-open = open
 
