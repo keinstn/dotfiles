@@ -5,3 +5,11 @@ export def ln-s [src:path, dest:path] {
         ^ln -s $src $dest
     }
 }
+
+export def open [it:path] {
+    if $nu.os-info.name == "windows" {
+        pwsh -c $"Invoke-Item ($it)"
+    } else {
+        ^open $"($it)"
+    }
+}
