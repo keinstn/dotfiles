@@ -35,7 +35,7 @@ local ensure_lazy = function()
     if vim.v.shell_error ~= 0 then
       vim.api.nvim_echo({
         { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-        { out, "WarningMsg" },
+        { out,                            "WarningMsg" },
         { "\nPress any key to exit..." },
       }, true, {})
       vim.fn.getchar()
@@ -197,11 +197,11 @@ require("lazy").setup({
     {
       "nvim-telescope/telescope.nvim",
       keys = {
-        { ";", "<cmd>Telescope find_files<cr>", desc = "Telescope Find Files" },
+        { ";",          "<cmd>Telescope find_files<cr>", desc = "Telescope Find Files" },
         { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope Find Files" },
-        { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope Live Grep" },
-        { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope Find Buffers" },
-        { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope Help Tags" },
+        { "<leader>fg", "<cmd>Telescope live_grep<cr>",  desc = "Telescope Live Grep" },
+        { "<leader>fb", "<cmd>Telescope buffers<cr>",    desc = "Telescope Find Buffers" },
+        { "<leader>fh", "<cmd>Telescope help_tags<cr>",  desc = "Telescope Help Tags" },
       },
     },
     {
@@ -250,7 +250,7 @@ require("lazy").setup({
       config = function()
         require("conform").setup({
           formatters_by_ft = {
-            lua = { "stylua" },
+            lua = { "stylua --config-file ~/.config/stylua.toml" },
             python = { "isort", "ruff", "black" },
             rust = { "rustfmt" },
             html = { "prettierd", "prettier", stop_after_first = true },
@@ -305,7 +305,8 @@ require("lazy").setup({
           g.molten_output_show_more = true
           g.molten_image_provider = "wezterm"
           g.molten_output_virt_lines = true
-          g.molten_split_direction = "right" --direction of the output window, options are "right", "left", "top", "bottom"
+          g.molten_split_direction =
+          "right"                  --direction of the output window, options are "right", "left", "top", "bottom"
           g.molten_split_size = 40 --(0-100) % size of the screen dedicated to the output window
           g.molten_virt_text_output = true
           g.molten_use_border_highlights = true
@@ -345,31 +346,31 @@ require("lazy").setup({
 -------------------- OPTIONS -------------------------------
 local indent, width = 4, 80
 cmd("colorscheme tokyonight-moon")
-opt("b", "expandtab", true) -- Use spaces instead of tabs
-opt("b", "formatoptions", "crqnj") -- Automatic formatting options
-opt("b", "shiftwidth", indent) -- Size of an indent
-opt("b", "smartindent", true) -- Insert indents automatically
-opt("b", "tabstop", indent) -- Number of spaces tabs count for
-opt("b", "textwidth", width) -- Maximum width of text
+opt("b", "expandtab", true)                          -- Use spaces instead of tabs
+opt("b", "formatoptions", "crqnj")                   -- Automatic formatting options
+opt("b", "shiftwidth", indent)                       -- Size of an indent
+opt("b", "smartindent", true)                        -- Insert indents automatically
+opt("b", "tabstop", indent)                          -- Number of spaces tabs count for
+opt("b", "textwidth", width)                         -- Maximum width of text
 opt("o", "completeopt", "menuone,noinsert,noselect") -- Completion options
-opt("o", "hidden", true) -- Enable background buffers
-opt("o", "ignorecase", true) -- Ignore case
-opt("o", "joinspaces", false) -- No double spaces with join
-opt("o", "scrolloff", 4) -- Lines of context
-opt("o", "shiftround", true) -- Round indent
-opt("o", "sidescrolloff", 8) -- Columns of context
-opt("o", "smartcase", true) -- Don't ignore case with capitals
-opt("o", "splitbelow", true) -- Put new windows below current
-opt("o", "splitright", true) -- Put new windows right of current
-opt("o", "termguicolors", true) -- True color support
-opt("o", "updatetime", 100) -- Delay before swap file is saved
-opt("o", "clipboard", "unnamedplus") -- Clipboard
-opt("w", "colorcolumn", tostring(width)) -- Line length marker
-opt("w", "cursorline", true) -- Highlight cursor line
-opt("w", "list", true) -- Show some invisible characters
-opt("w", "number", true) -- Show line numbers
-opt("w", "signcolumn", "yes") -- Show sign column
-opt("w", "wrap", false) -- Disable line wrap
+opt("o", "hidden", true)                             -- Enable background buffers
+opt("o", "ignorecase", true)                         -- Ignore case
+opt("o", "joinspaces", false)                        -- No double spaces with join
+opt("o", "scrolloff", 4)                             -- Lines of context
+opt("o", "shiftround", true)                         -- Round indent
+opt("o", "sidescrolloff", 8)                         -- Columns of context
+opt("o", "smartcase", true)                          -- Don't ignore case with capitals
+opt("o", "splitbelow", true)                         -- Put new windows below current
+opt("o", "splitright", true)                         -- Put new windows right of current
+opt("o", "termguicolors", true)                      -- True color support
+opt("o", "updatetime", 100)                          -- Delay before swap file is saved
+opt("o", "clipboard", "unnamedplus")                 -- Clipboard
+opt("w", "colorcolumn", tostring(width))             -- Line length marker
+opt("w", "cursorline", true)                         -- Highlight cursor line
+opt("w", "list", true)                               -- Show some invisible characters
+opt("w", "number", true)                             -- Show line numbers
+opt("w", "signcolumn", "yes")                        -- Show sign column
+opt("w", "wrap", false)                              -- Disable line wrap
 
 -------------------- MAPPINGS ------------------------------
 map("n", "<leader>ev", ":e $MYVIMRC<CR>")
