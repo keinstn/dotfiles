@@ -50,7 +50,7 @@ export def shutdown [] {
     if $nu.os-info.name == "windows" {
         pwsh -c "Stop-Computer"
     } else {
-        ^shutdown -h now
+        sudo shutdown -h now
     }
 }
 
@@ -58,6 +58,6 @@ export def reboot [] {
     if $nu.os-info.name == "windows" {
         pwsh -c "Restart-Computer"
     } else {
-        ^reboot
+        sudo reboot
     }
 }
