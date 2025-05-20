@@ -41,6 +41,8 @@ $env.PROMPT_INDICATOR_VI_INSERT = ": "
 $env.PROMPT_INDICATOR_VI_NORMAL = "〉"
 $env.PROMPT_MULTILINE_INDICATOR = "::: "
 
+$env.PATH ++= [$"($nu.home-path)/.local/bin"]
+
 if $nu.os-info.name == "macos" {
     $env.PATH ++= ["/opt/homebrew/bin", "/Applications/Docker.app/Contents/Resources/bin"]
 }
