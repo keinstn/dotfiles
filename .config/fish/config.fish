@@ -14,6 +14,8 @@ if not type -q brew
     set -x PATH "$HOME/.yarn/bin" $PATH
 end
 
+set -x PATH "/usr/local/bin" $PATH
+
 set -x PATH "$HOME/.cargo/bin" $PATH
 
 set -x PATH "$HOME/go/bin" $PATH

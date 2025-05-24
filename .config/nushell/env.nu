@@ -44,5 +44,10 @@ $env.PROMPT_MULTILINE_INDICATOR = "::: "
 $env.PATH ++= [$"($nu.home-path)/.local/bin"]
 
 if $nu.os-info.name == "macos" {
-    $env.PATH ++= ["/opt/homebrew/bin", "/Applications/Docker.app/Contents/Resources/bin", "/Applications/Amazon Q.app/Contents/MacOS/"]
+    $env.PATH ++= [
+        "/opt/homebrew/bin", 
+        "/usr/local/bin", 
+        "/Applications/Docker.app/Contents/Resources/bin", 
+        "/Applications/Amazon Q.app/Contents/MacOS/",
+    ]
 }
