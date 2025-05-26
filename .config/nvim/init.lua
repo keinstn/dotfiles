@@ -138,6 +138,7 @@ require("lazy").setup({
     { "lukas-reineke/indent-blankline.nvim" },
     {
       "lewis6991/gitsigns.nvim",
+      enabled = is_unix, -- don't install on windows because error occurs
       config = function()
         require("gitsigns").setup()
       end,
@@ -271,6 +272,7 @@ require("lazy").setup({
     },
     {
       "williamboman/mason.nvim",
+      enabled = is_unix, -- don't install on windows because error occurs
       build = ":MasonUpdate",
       dependencies = {
         "williamboman/mason-lspconfig.nvim",
