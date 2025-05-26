@@ -263,7 +263,11 @@ require("lazy").setup({
       "ravitemer/mcphub.nvim",
       build = "npm install -g mcp-hub@latest",
       config = function()
-        require("mcphub").setup()
+        require("mcphub").setup({
+          -- NOTE:
+          -- Set the `cmd` option because the default command is `mcp-hub.cmd` in Windows
+          cmd = "mcp-hub",
+        })
       end
     },
     { "segeljakt/vim-silicon" },
