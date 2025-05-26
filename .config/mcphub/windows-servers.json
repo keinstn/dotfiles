@@ -1,0 +1,56 @@
+{
+  "mcpServers": {
+    "awslabs.core-mcp-server": {
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "args": [
+        "--from",
+        "awslabs.core-mcp-server@latest",
+        "awslabs.core-mcp-server.exe"
+      ],
+      "command": "uvx"
+    },
+    "awslabs.cloudformation": {
+      "autoApprove": [
+        
+      ],
+      "disabled": false,
+      "command": "uvx",
+      "args": [
+        "--from",
+        "awslabs.cfn-mcp-server@latest",
+        "awslabs.cfn-mcp-server.exe"
+      ]
+    },
+    "awslabs.cost-analysis-mcp-server": {
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "args": [
+        "--from",
+        "awslabs.cost-analysis-mcp-server@latest",
+        "awslabs.cost-analysis-mcp-server.exe"
+      ],
+      "command": "uvx"
+    },
+    "awslabs.aws-documentation-mcp-server": {
+      "autoApprove": [
+        
+      ],
+      "command": "uvx",
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "disabled_tools": [
+        
+      ],
+      "args": [
+        "--from",
+        "awslabs.aws-documentation-mcp-server@latest",
+        "awslabs.aws-documentation-mcp-server.exe"
+      ]
+    }
+  }
+}
