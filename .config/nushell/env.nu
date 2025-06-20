@@ -41,7 +41,10 @@ $env.PROMPT_INDICATOR_VI_INSERT = ": "
 $env.PROMPT_INDICATOR_VI_NORMAL = "〉"
 $env.PROMPT_MULTILINE_INDICATOR = "::: "
 
-$env.PATH ++= [$"($nu.home-path)/.local/bin"]
+$env.PATH ++= [
+    $"($nu.home-path)/.local/bin",
+    $"($nu.home-path)/.cargo/bin",
+]
 
 if $nu.os-info.name == "macos" {
     $env.PATH ++= [
