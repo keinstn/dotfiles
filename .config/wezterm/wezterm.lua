@@ -73,6 +73,11 @@ config.keys = {
       mode = "SwapWithActive",
     }),
   },
+  {
+    key = "Enter",
+    mods = "SHIFT",
+    action = act.SendString("\x1b[13;2u"),
+  },
 }
 
 if not is_unix then
