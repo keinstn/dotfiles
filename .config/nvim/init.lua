@@ -109,6 +109,75 @@ require("lazy").setup({
         },
       },
     },
+    {
+      "folke/sidekick.nvim",
+      opts = {},
+      keys = {
+        {
+          "<tab>",
+          function()
+            -- if there is a next edit, jump to it, otherwise apply it if any
+            if not require("sidekick").nes_jump_or_apply() then
+              return "<Tab>" -- fallback to normal tab
+            end
+          end,
+          expr = true,
+          desc = "Goto/Apply Next Edit Suggestion",
+        },
+        {
+          "<c-.>",
+          function() require("sidekick.cli").toggle() end,
+          desc = "Sidekick Toggle",
+          mode = { "n", "t", "i", "x" },
+        },
+        {
+          "<leader>aa",
+          function() require("sidekick.cli").toggle() end,
+          desc = "Sidekick Toggle CLI",
+        },
+        {
+          "<leader>as",
+          function() require("sidekick.cli").select() end,
+          -- Or to select only installed tools:
+          -- require("sidekick.cli").select({ filter = { installed = true } })
+          desc = "Select CLI",
+        },
+        {
+          "<leader>ad",
+          function() require("sidekick.cli").close() end,
+          desc = "Detach a CLI Session",
+        },
+        {
+          "<leader>at",
+          function() require("sidekick.cli").send({ msg = "{this}" }) end,
+          mode = { "x", "n" },
+          desc = "Send This",
+        },
+        {
+          "<leader>af",
+          function() require("sidekick.cli").send({ msg = "{file}" }) end,
+          desc = "Send File",
+        },
+        {
+          "<leader>av",
+          function() require("sidekick.cli").send({ msg = "{selection}" }) end,
+          mode = { "x" },
+          desc = "Send Visual Selection",
+        },
+        {
+          "<leader>ap",
+          function() require("sidekick.cli").prompt() end,
+          mode = { "n", "x" },
+          desc = "Sidekick Select Prompt",
+        },
+        -- Example of a keybinding to open Claude directly
+        {
+          "<leader>ac",
+          function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
+          desc = "Sidekick Toggle Claude",
+        },
+      },
+    },
     { "f-person/git-blame.nvim" },
     { "brenoprata10/nvim-highlight-colors" },
     {
@@ -212,41 +281,6 @@ require("lazy").setup({
     {
       "nvim-treesitter/nvim-treesitter-textobjects",
       dependencies = "nvim-treesitter/nvim-treesitter",
-    },
-    {
-      "olimorris/codecompanion.nvim",
-      opts = {
-        strategies = {
-          chat = {
-            adapter = "copilot",
-          },
-          inline = {
-            adapter = "copilot",
-          },
-          cmd = {
-            adapter = "copilot",
-          },
-        },
-      },
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-treesitter/nvim-treesitter",
-        "github/copilot.vim",
-      },
-      config = function()
-        require("codecompanion").setup({
-          extensions = {
-            mcphub = {
-              callback = "mcphub.extensions.codecompanion",
-              opts = {
-                show_result_in_chat = true, -- Show mcp tool results in chat
-                make_vars = true,           -- Convert resources to #variables
-                make_slash_commands = true, -- Add prompts as /slash commands
-              },
-            },
-          },
-        })
-      end,
     },
     {
       "pwntester/octo.nvim",
@@ -366,6 +400,23 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter",
       },
     },
+    {
+      "WilliamHsieh/overlook.nvim",
+      opts = {},
+
+      -- Optional: set up common keybindings
+      keys = {
+        { "<leader>pd", function() require("overlook.api").peek_definition() end, desc = "Overlook: Peek definition" },
+        { "<leader>pc", function() require("overlook.api").close_all() end,       desc = "Overlook: Close all popup" },
+        { "<leader>pu", function() require("overlook.api").restore_popup() end,   desc = "Overlook: Restore popup" },
+      },
+    },
+    {
+      "max397574/better-escape.nvim",
+      config = function()
+        require("better_escape").setup()
+      end,
+    }
   },
   checker = { enabled = true },
 })
