@@ -83,7 +83,7 @@ config.keys = {
 if not is_unix then
   config.default_prog = { "nu.exe" }
 else
-  config.default_prog = { "/opt/homebrew/bin/nu" }
+  config.default_prog = { "/opt/homebrew/bin/fish" }
 end
 
 -- and finally, return the configuration to wezterm
