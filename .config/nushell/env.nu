@@ -54,3 +54,7 @@ if $nu.os-info.name == "macos" {
         "/Applications/Amazon Q.app/Contents/MacOS/",
     ]
 }
+
+if $nu.os-info.name == "windows" {
+    ^chcp 65001 | ignore
+}
