@@ -5,11 +5,18 @@
     ui = true
 [core]
     editor = nvim
+    autocrlf = false
 [alias]
+    a = add
     co = checkout
     br = branch
-    ci = commit
-    st = status
+    ci = commit --verbose
+    st = status -sb
+    wt = worktree
+    wtl = worktree list
+    wta = worktree add
+    wtr = worktree remove
+    wtp = worktree prune
 [filter "lfs"]
     process = git-lfs filter-process
     required = true
