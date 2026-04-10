@@ -73,11 +73,6 @@ config.keys = {
       mode = "SwapWithActive",
     }),
   },
-  {
-    key = "Enter",
-    mods = "SHIFT",
-    action = act.SendString("\x1b[13;2u"),
-  },
 }
 
 if not is_unix then
@@ -85,6 +80,8 @@ if not is_unix then
 else
   config.default_prog = { "/opt/homebrew/bin/fish" }
 end
+
+config.enable_kitty_keyboard = true
 
 -- and finally, return the configuration to wezterm
 return config
