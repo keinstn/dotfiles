@@ -276,11 +276,21 @@ require("lazy").setup({
     },
     {
       "nvim-treesitter/nvim-treesitter",
+      lazy = false,
       build = ":TSUpdate",
-    },
-    {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      dependencies = "nvim-treesitter/nvim-treesitter",
+      config = function()
+        -- New API (v2): setup only accepts install_dir
+        require("nvim-treesitter").setup({})
+        -- Enable treesitter highlighting for all filetypes
+        vim.api.nvim_create_autocmd("FileType", {
+          callback = function()
+            pcall(vim.treesitter.start)
+          end,
+        })
+      end,
+      dependencies = {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+      },
     },
     {
       "pwntester/octo.nvim",
@@ -378,7 +388,7 @@ require("lazy").setup({
     },
     {
       "3rd/image.nvim",
-      enabled = is_unix, -- don't install on windows because build is failed on it
+      enabled = false, -- don't install on windows because build is failed on it
       opts = {
         backend = "kitty",
         max_width = 100,
@@ -483,18 +493,6 @@ cmd("autocmd FileType terraform setlocal sw=2 sts=2 ts=2")
 if not is_unix then
   cmd("autocmd BufRead,BufNewFile * set fileformat=unix")
 end
-
--------------------- TREE-SITTER ---------------------------
-local ts = require("nvim-treesitter.configs")
-ts.setup({
-  ensure_installed = "all",
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
-})
 
 -------------------- LSP -----------------------------------
 local lsp = require("lspconfig")
