@@ -20,6 +20,7 @@ formulas="\
   hashicorp/tap/terraform-ls \
   htop \
   jq \
+  just \
   kind \
   kubernetes-cli \
   litecli \
@@ -54,6 +55,7 @@ taps="\
 "
 
 casks="\
+  claude-code \
   font-hack-nerd-font \
   flutter \
   google-cloud-sdk \
