@@ -281,6 +281,9 @@ require("lazy").setup({
       config = function()
         -- New API (v2): setup only accepts install_dir
         require("nvim-treesitter").setup({})
+        -- nvim-treesitter v2 bundles queries under runtime/ which lazy.nvim
+        -- does not add to runtimepath — add it so highlights.scm is found.
+        vim.opt.rtp:append(require("nvim-treesitter.install").get_package_path("runtime"))
         -- Enable treesitter highlighting for all filetypes
         vim.api.nvim_create_autocmd("FileType", {
           callback = function()
