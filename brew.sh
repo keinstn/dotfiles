@@ -23,6 +23,7 @@ formulas="\
   just \
   kind \
   kubernetes-cli \
+  leaf-md \
   litecli \
   llvm \
   lua-language-server \
