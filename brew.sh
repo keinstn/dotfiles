@@ -46,6 +46,7 @@ formulas="\
   tree \
   uv \
   wasmer \
+  xcodebuildmcp \
   yarn \
   zig \
 "
@@ -54,6 +55,7 @@ taps="\
   homebrew/cask-fonts \
   dbcli/tap \
   leoafarias/fvm \
+  getsentry/xcodebuildmcp \
 "
 
 casks="\
