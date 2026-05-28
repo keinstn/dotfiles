@@ -3,10 +3,11 @@ formulas="\
   awscli \
   bat \
   bottom \
+  colima \
   dep \
   diff-so-fancy \
   direnv \
-  docker-machine-driver-hyperkit \
+  docker \
   duckdb \
   dust \
   eza \
@@ -60,7 +61,6 @@ casks="\
   font-hack-nerd-font \
   flutter \
   google-cloud-sdk \
-  docker \
   neovide \
   wezterm \
 "
