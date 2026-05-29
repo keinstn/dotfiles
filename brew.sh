@@ -35,6 +35,7 @@ formulas="\
   silicon \
   pass \
   pgcli \
+  pngquant \
   rbenv \
   rg \
   starship \
