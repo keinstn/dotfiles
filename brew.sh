@@ -40,6 +40,7 @@ formulas="\
   rg \
   starship \
   stylua \
+  tdf \
   tfenv \
   tflint \
   tfsec \
