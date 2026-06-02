@@ -58,10 +58,12 @@ taps="\
   dbcli/tap \
   leoafarias/fvm \
   getsentry/xcodebuildmcp \
+  manaflow-ai/cmux \
 "
 
 casks="\
   claude-code \
+  cmux \
   font-hack-nerd-font \
   flutter \
   ghostty \
