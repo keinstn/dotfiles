@@ -1,7 +1,6 @@
 # Color and Appearance
 theme = Dracula
 background-opacity = 0.8
-background-blur = 20
 
 # Font
 font-family = Hack Nerd Font Mono
@@ -19,3 +18,4 @@ keybind = ctrl+l=goto_split:right
 keybind = ctrl+k=goto_split:up
 keybind = ctrl+j=goto_split:down
 keybind = ctrl+q>c=new_tab
+keybind = ctrl+q>r=reload_config
