@@ -262,6 +262,8 @@
       "reloadConfiguration" : "ctrl+shift+r",
       "goToWorkspace"       : "ctrl+shift+p",
       "renameWorkspace"     : "ctrl+shift+n",
+      "nextSidebarTab"      : "ctrl+shift+.",
+      "prevSidebarTab"      : "ctrl+shift+,",
       "toggleSidebar"       : "ctrl+shift+b",
       "commandPalette"      : "ctrl+shift+;"
     }
