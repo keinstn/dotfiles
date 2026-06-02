@@ -25,3 +25,6 @@
 
 # nushell
 .config/nushell/*.txt
+
+# wezterm
+.config/wezterm/env.lua

@@ -82,6 +82,10 @@ config.keys = {
 
 if not is_unix then
   config.default_prog = { "nu.exe" }
+  local ok, env = pcall(require, "env")
+  if ok then
+    config.set_environment_variables = env.vars
+  end
 else
   config.default_prog = { "/opt/homebrew/bin/fish" }
 end
