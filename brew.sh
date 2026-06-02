@@ -64,6 +64,7 @@ casks="\
   claude-code \
   font-hack-nerd-font \
   flutter \
+  ghostty \
   google-cloud-sdk \
   neovide \
   wezterm \
