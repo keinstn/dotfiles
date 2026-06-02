@@ -4,6 +4,7 @@ formulas="\
   bat \
   bottom \
   colima \
+  csvlens \
   dep \
   diff-so-fancy \
   direnv \
