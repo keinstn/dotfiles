@@ -1,0 +1,11 @@
+# Stow/Git metadata (replaces default ignore list, so must be explicit)
+^/\.git$
+^/\.gitignore$
+^/\.gitattributes$
+
+# Scripts
+^/install\.sh$
+^/brew\.sh$
+
+# Windows-specific configs
+^/windows
