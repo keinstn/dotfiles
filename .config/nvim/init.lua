@@ -498,12 +498,10 @@ if not is_unix then
 end
 
 -------------------- LSP -----------------------------------
-local lsp = require("lspconfig")
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-for ls, cfg in pairs({
+local servers = {
   cssls = {
     capabilities = capabilities,
   },
@@ -511,7 +509,9 @@ for ls, cfg in pairs({
   lua_ls = {},
   intelephense = {},
   pyright = {
-    root_dir = lsp.util.root_pattern(".git", fn.getcwd()),
+    root_dir = function(bufnr, cb)
+      cb(vim.fs.root(bufnr, { ".git" }) or fn.getcwd())
+    end,
   },
   gopls = {},
   powershell_es = {},
@@ -520,9 +520,12 @@ for ls, cfg in pairs({
   rust_analyzer = {},
   ruby_lsp = {},
   zls = {},
-}) do
-  lsp[ls].setup(cfg)
+}
+
+for ls, cfg in pairs(servers) do
+  vim.lsp.config(ls, cfg)
 end
+vim.lsp.enable(vim.tbl_keys(servers))
 
 -------------------- NVIM-CMP ------------------------------
 -- luasnip setup
