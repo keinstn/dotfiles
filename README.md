@@ -6,6 +6,9 @@ Personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ```
 dotfiles/
+├── .claude/
+│   ├── settings.json  # Claude Code settings
+│   └── CLAUDE.md      # Global instructions
 ├── .config/
 │   ├── cmux/
 │   ├── fish/          # Fish shell
