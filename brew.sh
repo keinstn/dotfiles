@@ -40,6 +40,7 @@ formulas="\
   rbenv \
   rg \
   starship \
+  stow \
   stylua \
   tdf \
   tfenv \
