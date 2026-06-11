@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Fetching and pruning remote tracking branches..."
+git fetch --prune
+
+# Find local branches whose remote tracking branch is gone.
+# git branch -vv marks such branches with ": gone]".
+# $1 is "*" for the current branch, "+" for a worktree branch, or the branch name itself.
+gone_branches=$(git branch -vv | awk '/: gone\]/ { print ($1=="*"||$1=="+") ? $2 : $1 }')
+
+if [ -z "$gone_branches" ]; then
+    echo "No branches with deleted remote found."
+    git worktree prune
+    echo "Done."
+    exit 0
+fi
+
+# Build a map of branch name -> worktree path from non-main worktrees.
+declare -A wt_map
+while read -r wt_path branch; do
+    short="${branch#refs/heads/}"
+    wt_map["$short"]="$wt_path"
+done < <(git worktree list --porcelain | awk '
+    /^worktree / { path=substr($0,10); n++ }
+    /^branch /   { if (n>1) print path, substr($0,8) }
+')
+
+while IFS= read -r branch; do
+    if [[ -n "${wt_map[$branch]+_}" ]]; then
+        wt_path="${wt_map[$branch]}"
+        echo "Removing worktree: $wt_path ($branch)"
+        git worktree remove --force "$wt_path"
+    fi
+    git branch -D "$branch" && echo "Deleted branch: $branch" || true
+done <<< "$gone_branches"
+
+git worktree prune
+echo "Done."
