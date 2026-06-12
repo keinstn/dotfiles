@@ -33,6 +33,7 @@ formulas="\
   neovim \
   nodejs \
   nushell \
+  ollama \
   silicon \
   pass \
   pgcli \

@@ -23,6 +23,9 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 # Install Volta
 curl https://get.volta.sh | bash
 
+# Install Aider
+uv tool install aider-chat
+
 # Install diff-so-fancy
 curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy \
     -o /usr/local/bin/diff-so-fancy
