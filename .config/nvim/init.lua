@@ -87,12 +87,6 @@ require("lazy").setup({
       opts = {},
     },
     {
-      "ervandew/supertab",
-      config = function()
-        vim.g.SuperTabDefaultCompletionType = "<c-n>"
-      end,
-    },
-    {
       "folke/tokyonight.nvim",
       lazy = false,
     },
@@ -178,7 +172,6 @@ require("lazy").setup({
         },
       },
     },
-    { "f-person/git-blame.nvim" },
     { "brenoprata10/nvim-highlight-colors" },
     {
       "hrsh7th/nvim-cmp",
@@ -209,7 +202,9 @@ require("lazy").setup({
       "lewis6991/gitsigns.nvim",
       enabled = is_unix, -- don't install on windows because error occurs
       config = function()
-        require("gitsigns").setup()
+        require("gitsigns").setup({
+          current_line_blame = true,
+        })
       end,
     },
     {
@@ -226,14 +221,6 @@ require("lazy").setup({
       end,
     },
     { "mechatroner/rainbow_csv" },
-    { "mfussenegger/nvim-dap" },
-    { "neovim/nvim-lspconfig" },
-    {
-      "numToStr/Comment.nvim",
-      config = function()
-        require("Comment").setup()
-      end,
-    },
     {
       "nvim-flutter/flutter-tools.nvim",
       lazy = false,
@@ -251,7 +238,6 @@ require("lazy").setup({
       end,
     },
     { "nvim-lua/plenary.nvim" },
-    { "nvim-lua/popup.nvim" },
     {
       "nvim-neo-tree/neo-tree.nvim",
       branch = "v3.x",
@@ -306,17 +292,6 @@ require("lazy").setup({
         require("octo").setup()
       end,
     },
-    {
-      "ravitemer/mcphub.nvim",
-      build = "npm install -g mcp-hub@latest",
-      config = function()
-        require("mcphub").setup({
-          -- NOTE:
-          -- Set the `cmd` option because the default command is `mcp-hub.cmd` in Windows
-          cmd = "mcp-hub",
-        })
-      end
-    },
     { "segeljakt/vim-silicon" },
     {
       "stevearc/conform.nvim",
@@ -343,75 +318,11 @@ require("lazy").setup({
       config = true,
     },
     {
-      "williamboman/mason.nvim",
-      enabled = is_unix, -- don't install on windows because error occurs
-      build = ":MasonUpdate",
-      dependencies = {
-        "williamboman/mason-lspconfig.nvim",
-      },
-      config = function()
-        require("mason").setup()
-        require("mason-lspconfig").setup()
-      end,
-    },
-    {
       "xiyaowong/transparent.nvim",
       config = function()
         require("transparent").clear_prefix("neogit")
         require("transparent").clear_prefix("NeoTree")
       end,
-    },
-    {
-      "benlubas/molten-nvim",
-      version = "^1.0.0",
-      build = ":UpdateRemotePlugins",
-      dependencies = {
-        "3rd/image.nvim",
-        "willothy/wezterm.nvim",
-      },
-      init = function()
-        if is_unix then
-          g.molten_image_provider = "image.nvim"
-          g.molten_output_win_max_height = 20
-        else
-          g.molten_image_provider = "wezterm"
-          g.molten_auto_open_output = false -- cannot be true if molten_image_provider = "wezterm"
-          g.molten_output_show_more = true
-          g.molten_image_provider = "wezterm"
-          g.molten_output_virt_lines = true
-          g.molten_split_direction =
-          "right"                  --direction of the output window, options are "right", "left", "top", "bottom"
-          g.molten_split_size = 40 --(0-100) % size of the screen dedicated to the output window
-          g.molten_virt_text_output = true
-          g.molten_use_border_highlights = true
-          g.molten_virt_lines_off_by_1 = true
-          g.molten_auto_image_popup = false
-        end
-      end,
-    },
-    {
-      "3rd/image.nvim",
-      enabled = false, -- don't install on windows because build is failed on it
-      opts = {
-        backend = "kitty",
-        max_width = 100,
-        max_height = 12,
-        max_height_window_percentage = math.huge,
-        max_width_window_percentage = math.huge,
-        window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
-        window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-      },
-    },
-    {
-      "willothy/wezterm.nvim",
-      config = true,
-    },
-    {
-      "quarto-dev/quarto-nvim",
-      dependencies = {
-        "jmbuhr/otter.nvim",
-        "nvim-treesitter/nvim-treesitter",
-      },
     },
     {
       "WilliamHsieh/overlook.nvim",
@@ -471,16 +382,6 @@ map("n", "<C-t>", "<cmd>tabnew<cr>")
 map("n", "<C-c>", "<cmd>tabclose<cr>")
 map("n", "<S-TAB>", "<cmd>tabnext<cr>")
 map("n", "<C-TAB>", "<cmd>tabprevious<cr>")
-
--- Molten
-map("n", "<leader>mi", ":MoltenInit<CR>", { silent = true, desc = "Initialize the plugin" })
-map("n", "<leader>e", ":MoltenEvaluateOperator<CR>", { silent = true, desc = "run operator selection" })
-map("n", "<leader>rl", ":MoltenEvaluateLine<CR>", { silent = true, desc = "evaluate line" })
-map("n", "<leader>rr", ":MoltenReevaluateCell<CR>", { silent = true, desc = "re-evaluate cell" })
-map("v", "<leader>r", ":<C-u>MoltenEvaluateVisual<CR>gv", { silent = true, desc = "evaluate visual selection" })
-map("n", "<leader>rd", ":MoltenDelete<CR>", { silent = true, desc = "molten delete cell" })
-map("n", "<leader>oh", ":MoltenHideOutput<CR>", { silent = true, desc = "hide output" })
-map("n", "<leader>os", ":noautocmd MoltenEnterOutput<CR>", { silent = true, desc = "show/enter output" })
 
 -------------------- FILETYPES -----------------------------
 cmd("autocmd FileType css setlocal sw=2 sts=2 ts=2 et")
