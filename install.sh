@@ -23,9 +23,6 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 # Install Volta
 curl https://get.volta.sh | bash
 
-# Install Aider with Python 3.12 because pydub still expects audioop, which was removed in 3.13
-uv tool install --python 3.12 --reinstall aider-chat
-
 # Install diff-so-fancy
 curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy \
     -o /usr/local/bin/diff-so-fancy

@@ -34,6 +34,7 @@ formulas="\
   nodejs \
   nushell \
   ollama \
+  opencode \
   silicon \
   pass \
   pgcli \
@@ -57,6 +58,7 @@ formulas="\
 "
 
 taps="\
+  anomalyco/tap \
   homebrew/cask-fonts \
   dbcli/tap \
   leoafarias/fvm \
