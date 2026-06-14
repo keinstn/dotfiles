@@ -9,6 +9,10 @@ set -g FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --follow --glob "!.g
 set -x PATH "/opt/homebrew/bin" $PATH
 eval (brew shellenv)
 
+if type -q gh
+    set -gx GITHUB_MCP_PAT (gh auth token 2>/dev/null)
+end
+
 if not type -q brew
     set -x PATH "$HOME/.local/bin" $PATH
     set -x PATH "$HOME/.yarn/bin" $PATH
