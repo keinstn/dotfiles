@@ -46,6 +46,16 @@ $env.PATH ++= [
     $"($nu.home-path)/.cargo/bin",
 ]
 
+if (which gh | is-not-empty) {
+    let gh_auth = (^gh auth token | complete)
+    if $gh_auth.exit_code == 0 {
+        let gh_pat = ($gh_auth.stdout | str trim)
+        if ($gh_pat | is-not-empty) {
+            $env.GITHUB_MCP_PAT = $gh_pat
+        }
+    }
+}
+
 if $nu.os-info.name == "macos" {
     $env.PATH ++= [
         "/opt/homebrew/bin", 
