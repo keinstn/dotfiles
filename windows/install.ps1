@@ -26,7 +26,8 @@ foreach ($package in $ChocoPackages)
 }
 
 $WingetPackages = @(
-    "eza-community.eza"
+    "eza-community.eza",
+    "psmux"
 )
 
 foreach ($package in $WingetPackages)
