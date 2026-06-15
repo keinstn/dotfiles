@@ -7,7 +7,6 @@ formulas="\
   csvlens \
   dep \
   diff-so-fancy \
-  direnv \
   docker \
   duckdb \
   dust \

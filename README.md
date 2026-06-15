@@ -24,7 +24,6 @@ dotfiles/
 │   ├── PowerShell/
 │   └── WindowsTerminal/
 ├── .gitconfig
-├── .direnvrc
 ├── brew.sh            # Homebrew packages
 ├── install.sh         # macOS setup script
 └── .stow-local-ignore
