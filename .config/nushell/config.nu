@@ -61,3 +61,36 @@ export def reboot [] {
         sudo reboot
     }
 }
+
+export def terminal-splits [action?: string] {
+    let marker  = ($nu.home-path | path join ".config" "terminal-splits-on")
+    let splits  = ($nu.home-path | path join ".config" "ghostty" "splits.ghostty")
+    let ts_on   = ($nu.home-path | path join ".config" "ghostty" "splits-terminal.ghostty")
+    let ts_off  = ($nu.home-path | path join ".config" "ghostty" "splits-tmux.ghostty")
+    let wez_lua = ($nu.home-path | path join ".config" "wezterm" "wezterm.lua")
+    let is_on   = ($marker | path exists)
+    let cmd     = if ($action == null) { "toggle" } else { $action }
+
+    match $cmd {
+        "status" => { print (if $is_on { "terminal-splits: ON" } else { "terminal-splits: OFF (tmux mode)" }) }
+        "on"     => { if $is_on { print "already ON" } else { ts-apply "on"  $marker $splits $ts_on $ts_off $wez_lua } }
+        "off"    => { if not $is_on { print "already OFF" } else { ts-apply "off" $marker $splits $ts_on $ts_off $wez_lua } }
+        "toggle" => { if $is_on { ts-apply "off" $marker $splits $ts_on $ts_off $wez_lua } else { ts-apply "on" $marker $splits $ts_on $ts_off $wez_lua } }
+        _ => { error make { msg: "Usage: terminal-splits [on|off|toggle|status]" } }
+    }
+}
+
+def ts-apply [mode: string, marker: string, splits: string, ts_on: string, ts_off: string, wez: string] {
+    if $mode == "on" {
+        touch $marker
+        if $nu.os-info.name != "windows" { ^ln -sf $ts_on $splits }
+        print "terminal-splits: ON"
+    } else {
+        if ($marker | path exists) { rm $marker }
+        if $nu.os-info.name != "windows" { ^ln -sf $ts_off $splits }
+        print "terminal-splits: OFF (tmux mode)"
+    }
+    if ($wez | path exists) { touch $wez }
+    print "  wezterm: reloading automatically"
+    print "  ghostty: Ctrl+Q R (or View > Reload Config) to apply"
+}

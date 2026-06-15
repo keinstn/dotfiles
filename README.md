@@ -89,6 +89,36 @@ Manual usage:
 ./windows/Invoke-Stow.ps1 -Target C:\tmp\fake-home
 ```
 
+## Terminal splits mode
+
+`terminal-splits` resolves keybinding conflicts between ghostty/wezterm and tmux, both of which use `Ctrl+Q` as a leader/prefix and `Ctrl+H/J/K/L` for pane navigation.
+
+| Mode | Who handles splits and navigation |
+|------|----------------------------------|
+| ON | ghostty / wezterm (`Ctrl+Q` leader, `Ctrl+H/J/K/L` movement) |
+| OFF | tmux (`Ctrl+Q` passes through as tmux prefix) |
+
+```bash
+terminal-splits on      # ghostty/wezterm handles splits
+terminal-splits off     # tmux handles splits
+terminal-splits toggle  # switch between modes
+terminal-splits status  # show current mode
+```
+
+Available in fish, nushell, and PowerShell.
+
+**First-time setup (run once after `stow .`):**
+
+```bash
+terminal-splits on   # or off
+```
+
+- **wezterm**: reloads automatically when the marker file changes
+- **ghostty**: requires a manual reload via `Ctrl+Q R` or View > Reload Config
+
+Mode state is tracked by `~/.config/terminal-splits-on` (file exists = ON).
+The ghostty keybinding file (`~/.config/ghostty/splits.ghostty`) is a runtime symlink managed by the toggle command and is excluded from git.
+
 ## Managing dotfiles
 
 ```bash

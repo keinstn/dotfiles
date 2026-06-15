@@ -28,3 +28,6 @@
 
 # wezterm
 .config/wezterm/env.lua
+
+# ghostty: runtime symlink managed by terminal-splits toggle
+.config/ghostty/splits.ghostty

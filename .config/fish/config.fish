@@ -1,4 +1,5 @@
 source ~/.config/fish/aliases.fish
+source ~/.config/fish/terminal-splits.fish
 
 fish_vi_key_bindings
 

@@ -9,13 +9,6 @@ font-size = 14
 # Shell
 command = /opt/homebrew/bin/fish
 
-# Keybindings — tmux-style with CTRL+Q as leader
-keybind = ctrl+q>v=new_split:right
-keybind = ctrl+q>s=new_split:down
-keybind = ctrl+d=close_surface
-keybind = ctrl+h=goto_split:left
-keybind = ctrl+l=goto_split:right
-keybind = ctrl+k=goto_split:up
-keybind = ctrl+j=goto_split:down
-keybind = ctrl+q>c=new_tab
-keybind = ctrl+q>r=reload_config
+# Keybindings: ON=splits-terminal.ghostty / OFF=splits-tmux.ghostty (empty)
+# Toggle with: terminal-splits [on|off|toggle|status]
+config-file = ~/.config/ghostty/splits.ghostty
