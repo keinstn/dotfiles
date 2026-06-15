@@ -28,6 +28,7 @@ foreach ($package in $ChocoPackages)
 $WingetPackages = @(
     "eza-community.eza",
     "Microsoft.PowerShell",
+    "Microsoft.Coreutils",
     "psmux"
 )
 
