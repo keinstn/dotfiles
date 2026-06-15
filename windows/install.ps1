@@ -34,3 +34,6 @@ foreach ($package in $WingetPackages)
 {
     winget install $package
 }
+
+# Apply dotfiles via symbolic links (stow-equivalent)
+& "$PSScriptRoot\Invoke-Stow.ps1"
