@@ -1,0 +1,15 @@
+# Disable all ghostty split keybindings — tmux handles splits in this mode
+keybind = super+d=unbind
+keybind = super+shift+d=unbind
+keybind = super+shift+enter=unbind
+keybind = super+[=unbind
+keybind = super+]=unbind
+keybind = super+alt+arrow_up=unbind
+keybind = super+alt+arrow_down=unbind
+keybind = super+alt+arrow_left=unbind
+keybind = super+alt+arrow_right=unbind
+keybind = super+ctrl+arrow_up=unbind
+keybind = super+ctrl+arrow_down=unbind
+keybind = super+ctrl+arrow_left=unbind
+keybind = super+ctrl+arrow_right=unbind
+keybind = super+ctrl+equal=unbind
