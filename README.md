@@ -114,7 +114,7 @@ terminal-splits on   # or off
 ```
 
 - **wezterm**: reloads automatically when the marker file changes
-- **ghostty**: requires a manual reload via `Ctrl+Q R` or View > Reload Config
+- **ghostty**: requires a manual reload via `Shift+Cmd+,` or Ghostty > Reload Configuration
 
 Mode state is tracked by `~/.config/terminal-splits-on` (file exists = ON).
 The ghostty keybinding file (`~/.config/ghostty/splits.ghostty`) is a runtime symlink managed by the toggle command and is excluded from git.
