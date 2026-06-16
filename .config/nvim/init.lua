@@ -261,27 +261,6 @@ require("lazy").setup({
       },
     },
     {
-      "nvim-treesitter/nvim-treesitter",
-      lazy = false,
-      build = ":TSUpdate",
-      config = function()
-        -- New API (v2): setup only accepts install_dir
-        require("nvim-treesitter").setup({})
-        -- nvim-treesitter v2 bundles queries under runtime/ which lazy.nvim
-        -- does not add to runtimepath — add it so highlights.scm is found.
-        vim.opt.rtp:append(require("nvim-treesitter.install").get_package_path("runtime"))
-        -- Enable treesitter highlighting for all filetypes
-        vim.api.nvim_create_autocmd("FileType", {
-          callback = function()
-            pcall(vim.treesitter.start)
-          end,
-        })
-      end,
-      dependencies = {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-      },
-    },
-    {
       "pwntester/octo.nvim",
       dependencies = {
         "nvim-lua/plenary.nvim",
@@ -290,6 +269,15 @@ require("lazy").setup({
       },
       config = function()
         require("octo").setup()
+      end,
+    },
+    {
+      "romus204/tree-sitter-manager.nvim",
+      dependencies = {}, -- tree-sitter CLI must be installed system-wide
+      config = function()
+        require("tree-sitter-manager").setup({
+          auto_install = true,
+        })
       end,
     },
     { "segeljakt/vim-silicon" },
