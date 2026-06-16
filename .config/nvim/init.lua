@@ -35,7 +35,7 @@ local ensure_lazy = function()
     if vim.v.shell_error ~= 0 then
       vim.api.nvim_echo({
         { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-        { out,                            "WarningMsg" },
+        { out, "WarningMsg" },
         { "\nPress any key to exit..." },
       }, true, {})
       vim.fn.getchar()
@@ -120,54 +120,72 @@ require("lazy").setup({
         },
         {
           "<c-.>",
-          function() require("sidekick.cli").toggle() end,
+          function()
+            require("sidekick.cli").toggle()
+          end,
           desc = "Sidekick Toggle",
           mode = { "n", "t", "i", "x" },
         },
         {
           "<leader>aa",
-          function() require("sidekick.cli").toggle() end,
+          function()
+            require("sidekick.cli").toggle()
+          end,
           desc = "Sidekick Toggle CLI",
         },
         {
           "<leader>as",
-          function() require("sidekick.cli").select() end,
+          function()
+            require("sidekick.cli").select()
+          end,
           -- Or to select only installed tools:
           -- require("sidekick.cli").select({ filter = { installed = true } })
           desc = "Select CLI",
         },
         {
           "<leader>ad",
-          function() require("sidekick.cli").close() end,
+          function()
+            require("sidekick.cli").close()
+          end,
           desc = "Detach a CLI Session",
         },
         {
           "<leader>at",
-          function() require("sidekick.cli").send({ msg = "{this}" }) end,
+          function()
+            require("sidekick.cli").send({ msg = "{this}" })
+          end,
           mode = { "x", "n" },
           desc = "Send This",
         },
         {
           "<leader>af",
-          function() require("sidekick.cli").send({ msg = "{file}" }) end,
+          function()
+            require("sidekick.cli").send({ msg = "{file}" })
+          end,
           desc = "Send File",
         },
         {
           "<leader>av",
-          function() require("sidekick.cli").send({ msg = "{selection}" }) end,
+          function()
+            require("sidekick.cli").send({ msg = "{selection}" })
+          end,
           mode = { "x" },
           desc = "Send Visual Selection",
         },
         {
           "<leader>ap",
-          function() require("sidekick.cli").prompt() end,
+          function()
+            require("sidekick.cli").prompt()
+          end,
           mode = { "n", "x" },
           desc = "Sidekick Select Prompt",
         },
         -- Example of a keybinding to open Claude directly
         {
           "<leader>ac",
-          function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
+          function()
+            require("sidekick.cli").toggle({ name = "claude", focus = true })
+          end,
           desc = "Sidekick Toggle Claude",
         },
       },
@@ -253,11 +271,11 @@ require("lazy").setup({
     {
       "nvim-telescope/telescope.nvim",
       keys = {
-        { ";",          "<cmd>Telescope find_files<cr>", desc = "Telescope Find Files" },
+        { ";", "<cmd>Telescope find_files<cr>", desc = "Telescope Find Files" },
         { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope Find Files" },
-        { "<leader>fg", "<cmd>Telescope live_grep<cr>",  desc = "Telescope Live Grep" },
-        { "<leader>fb", "<cmd>Telescope buffers<cr>",    desc = "Telescope Find Buffers" },
-        { "<leader>fh", "<cmd>Telescope help_tags<cr>",  desc = "Telescope Help Tags" },
+        { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope Live Grep" },
+        { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope Find Buffers" },
+        { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope Help Tags" },
       },
     },
     {
@@ -285,8 +303,13 @@ require("lazy").setup({
       "stevearc/conform.nvim",
       config = function()
         require("conform").setup({
+          formatters = {
+            stylua = {
+              args = { "--config-path", vim.fn.expand("~/.config/stylua.toml"), "--stdin-filepath", "$FILENAME", "-" },
+            },
+          },
           formatters_by_ft = {
-            lua = { "stylua --config-file ~/.config/stylua.toml" },
+            lua = { "stylua" },
             python = { "isort", "ruff", "black" },
             rust = { "rustfmt" },
             html = { "prettierd", "prettier", stop_after_first = true },
@@ -318,9 +341,27 @@ require("lazy").setup({
 
       -- Optional: set up common keybindings
       keys = {
-        { "<leader>pd", function() require("overlook.api").peek_definition() end, desc = "Overlook: Peek definition" },
-        { "<leader>pc", function() require("overlook.api").close_all() end,       desc = "Overlook: Close all popup" },
-        { "<leader>pu", function() require("overlook.api").restore_popup() end,   desc = "Overlook: Restore popup" },
+        {
+          "<leader>pd",
+          function()
+            require("overlook.api").peek_definition()
+          end,
+          desc = "Overlook: Peek definition",
+        },
+        {
+          "<leader>pc",
+          function()
+            require("overlook.api").close_all()
+          end,
+          desc = "Overlook: Close all popup",
+        },
+        {
+          "<leader>pu",
+          function()
+            require("overlook.api").restore_popup()
+          end,
+          desc = "Overlook: Restore popup",
+        },
       },
     },
     {
@@ -328,7 +369,7 @@ require("lazy").setup({
       config = function()
         require("better_escape").setup()
       end,
-    }
+    },
   },
   checker = { enabled = true },
 })
@@ -336,31 +377,31 @@ require("lazy").setup({
 -------------------- OPTIONS -------------------------------
 local indent, width = 4, 80
 cmd("colorscheme tokyonight-moon")
-opt("b", "expandtab", true)                          -- Use spaces instead of tabs
-opt("b", "formatoptions", "crqnj")                   -- Automatic formatting options
-opt("b", "shiftwidth", indent)                       -- Size of an indent
-opt("b", "smartindent", true)                        -- Insert indents automatically
-opt("b", "tabstop", indent)                          -- Number of spaces tabs count for
-opt("b", "textwidth", width)                         -- Maximum width of text
+opt("b", "expandtab", true) -- Use spaces instead of tabs
+opt("b", "formatoptions", "crqnj") -- Automatic formatting options
+opt("b", "shiftwidth", indent) -- Size of an indent
+opt("b", "smartindent", true) -- Insert indents automatically
+opt("b", "tabstop", indent) -- Number of spaces tabs count for
+opt("b", "textwidth", width) -- Maximum width of text
 opt("o", "completeopt", "menuone,noinsert,noselect") -- Completion options
-opt("o", "hidden", true)                             -- Enable background buffers
-opt("o", "ignorecase", true)                         -- Ignore case
-opt("o", "joinspaces", false)                        -- No double spaces with join
-opt("o", "scrolloff", 4)                             -- Lines of context
-opt("o", "shiftround", true)                         -- Round indent
-opt("o", "sidescrolloff", 8)                         -- Columns of context
-opt("o", "smartcase", true)                          -- Don't ignore case with capitals
-opt("o", "splitbelow", true)                         -- Put new windows below current
-opt("o", "splitright", true)                         -- Put new windows right of current
-opt("o", "termguicolors", true)                      -- True color support
-opt("o", "updatetime", 100)                          -- Delay before swap file is saved
-opt("o", "clipboard", "unnamedplus")                 -- Clipboard
-opt("w", "colorcolumn", tostring(width))             -- Line length marker
-opt("w", "cursorline", true)                         -- Highlight cursor line
-opt("w", "list", true)                               -- Show some invisible characters
-opt("w", "number", true)                             -- Show line numbers
-opt("w", "signcolumn", "yes")                        -- Show sign column
-opt("w", "wrap", false)                              -- Disable line wrap
+opt("o", "hidden", true) -- Enable background buffers
+opt("o", "ignorecase", true) -- Ignore case
+opt("o", "joinspaces", false) -- No double spaces with join
+opt("o", "scrolloff", 4) -- Lines of context
+opt("o", "shiftround", true) -- Round indent
+opt("o", "sidescrolloff", 8) -- Columns of context
+opt("o", "smartcase", true) -- Don't ignore case with capitals
+opt("o", "splitbelow", true) -- Put new windows below current
+opt("o", "splitright", true) -- Put new windows right of current
+opt("o", "termguicolors", true) -- True color support
+opt("o", "updatetime", 100) -- Delay before swap file is saved
+opt("o", "clipboard", "unnamedplus") -- Clipboard
+opt("w", "colorcolumn", tostring(width)) -- Line length marker
+opt("w", "cursorline", true) -- Highlight cursor line
+opt("w", "list", true) -- Show some invisible characters
+opt("w", "number", true) -- Show line numbers
+opt("w", "signcolumn", "yes") -- Show sign column
+opt("w", "wrap", false) -- Disable line wrap
 
 -------------------- MAPPINGS ------------------------------
 map("n", "<leader>ev", ":e $MYVIMRC<CR>")
