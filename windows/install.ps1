@@ -29,7 +29,8 @@ $WingetPackages = @(
     "eza-community.eza",
     "Microsoft.PowerShell",
     "Microsoft.Coreutils",
-    "psmux"
+    "psmux",
+    "tree-sitter.tree-sitter-cli"
 )
 
 foreach ($package in $WingetPackages)
