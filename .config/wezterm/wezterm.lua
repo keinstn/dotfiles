@@ -97,7 +97,7 @@ end
 config.keys = keys
 
 if not is_unix then
-  config.default_prog = { "nu.exe" }
+  config.default_prog = { "pwsh.exe" }
   local ok, env = pcall(require, "env")
   if ok then
     config.set_environment_variables = env.vars
