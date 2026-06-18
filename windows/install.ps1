@@ -26,6 +26,7 @@ foreach ($package in $ChocoPackages)
 }
 
 $WingetPackages = @(
+    "Clement.bottom",
     "eza-community.eza",
     "Microsoft.PowerShell",
     "Microsoft.Coreutils",
