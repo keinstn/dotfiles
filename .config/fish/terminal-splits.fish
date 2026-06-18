@@ -49,5 +49,5 @@ function __ts_apply
     end
     test -f $__ts_wez; and touch $__ts_wez
     echo "  wezterm: reloading automatically"
-    echo "  ghostty: Ctrl+Q R (or View > Reload Config) to apply"
+    echo "  ghostty: Shift+Cmd+, (or Ghostty > Reload Configuration) to apply"
 end
