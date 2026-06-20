@@ -23,8 +23,8 @@
 # npm
 .config/configstore/
 
-# wezterm
-.config/wezterm/env.lua
-
 # ghostty: runtime symlink managed by terminal-splits toggle
 .config/ghostty/splits.ghostty
+
+# secrets (not tracked; use windows/PowerShell/.env.ps1.template as a starting point)
+.env.ps1

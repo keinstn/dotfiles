@@ -11,7 +11,9 @@ local is_unix = get_os() == "Linux"
 local home = os.getenv("HOME") or os.getenv("USERPROFILE")
 local _f = io.open(home .. "/.config/terminal-splits-on", "r")
 local splits_on = _f ~= nil
-if _f then _f:close() end
+if _f then
+  _f:close()
+end
 
 local config = {}
 
@@ -98,10 +100,6 @@ config.keys = keys
 
 if not is_unix then
   config.default_prog = { "pwsh.exe" }
-  local ok, env = pcall(require, "env")
-  if ok then
-    config.set_environment_variables = env.vars
-  end
 else
   config.default_prog = { "/opt/homebrew/bin/fish" }
 end
