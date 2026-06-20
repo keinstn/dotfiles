@@ -18,6 +18,7 @@ formulas="\
   gh \
   git-secrets \
   go \
+  googleworkspace-cli \
   hashicorp/tap/terraform-ls \
   htop \
   jq \
@@ -69,8 +70,8 @@ casks="\
   cmux \
   font-hack-nerd-font \
   flutter \
+  gcloud-cli \
   ghostty \
-  google-cloud-sdk \
   neovide \
   wezterm \
 "
