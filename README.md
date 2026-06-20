@@ -14,7 +14,6 @@ dotfiles/
 │   ├── fish/          # Fish shell
 │   ├── ghostty/       # Ghostty terminal
 │   ├── mcphub/
-│   ├── nushell/       # Nushell
 │   ├── nvim/          # Neovim
 │   ├── starship.toml  # Starship prompt
 │   ├── stylua.toml
@@ -105,7 +104,7 @@ terminal-splits toggle  # switch between modes
 terminal-splits status  # show current mode
 ```
 
-Available in fish, nushell, and PowerShell.
+Available in fish, and PowerShell.
 
 **First-time setup (run once after `stow .`):**
 

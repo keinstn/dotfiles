@@ -31,7 +31,6 @@ formulas="\
   mycli \
   neovim \
   nodejs \
-  nushell \
   ollama \
   opencode \
   silicon \

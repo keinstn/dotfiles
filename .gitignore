@@ -23,9 +23,6 @@
 # npm
 .config/configstore/
 
-# nushell
-.config/nushell/*.txt
-
 # wezterm
 .config/wezterm/env.lua
 
