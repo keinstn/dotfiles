@@ -20,7 +20,7 @@ function Set-TerminalSplits {
     $is_on  = Test-Path $marker
 
     switch ($Action) {
-        'status' { Write-Host (if ($is_on) { "terminal-splits: ON" } else { "terminal-splits: OFF (tmux mode)" }) }
+        'status' { Write-Host $(if ($is_on) { "terminal-splits: ON" } else { "terminal-splits: OFF (tmux mode)" }) }
         'on'     { if ($is_on) { Write-Host "already ON"; return } ; _TS-Apply on  $marker $wez }
         'off'    { if (-not $is_on) { Write-Host "already OFF"; return } ; _TS-Apply off $marker $wez }
         'toggle' { if ($is_on) { _TS-Apply off $marker $wez } else { _TS-Apply on $marker $wez } }
