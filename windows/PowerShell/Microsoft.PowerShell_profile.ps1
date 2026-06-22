@@ -224,3 +224,8 @@ function PSConsoleHostReadLine {
 }
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 # DO NOT MODIFY -- coreutils -- 60b36fc6-2d59-49df-be51-28dd2f4c3c9a
+
+# Exclude commands overridden by Aliases.ps1
+foreach ($name in @('cat', 'find', 'ls')) {
+    $script:__COREUTILS__.Remove($name) | Out-Null
+}

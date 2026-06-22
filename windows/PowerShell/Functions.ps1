@@ -13,36 +13,6 @@ function open
     Invoke-Item $args
 }
 
-function touch
-{
-    New-Item $args
-}
-
-function cut
-{
-    param(
-        [Parameter(ValueFromPipeline=$True)] [string]$inputobject,
-        [string]$delimiter='\s+',
-        [string[]]$field
-    )
-
-    process
-    {
-        if ($null -eq $field)
-        { 
-            $inputobject -split $delimiter 
-        } else
-        {
-            ($inputobject -split $delimiter)[$field] 
-        }
-    }
-}
-
-function New-Link ($target, $link)
-{
-    New-Item -Path $link -ItemType SymbolicLink -Value $target
-}
-
 function Set-TerminalSplits {
     param([ValidateSet('on','off','toggle','status')][string]$Action = 'toggle')
     $marker = Join-Path $HOME ".config\terminal-splits-on"
