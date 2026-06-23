@@ -1,5 +1,6 @@
 #!/bin/bash
 formulas="\
+  aannoo/hcom/hcom \
   awscli \
   bat \
   bottom \
