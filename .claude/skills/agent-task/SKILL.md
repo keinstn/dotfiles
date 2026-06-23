@@ -55,4 +55,5 @@ Out (do NOT):
 
 - Title: a concise, action-oriented description of the task
 - Body: the formatted content from Step 2
+- Labels: only add if the user explicitly specifies one; otherwise do NOT add any labels
 - Use the GitHub MCP server if available; fall back to `gh issue create` otherwise
