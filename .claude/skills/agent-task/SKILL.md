@@ -55,5 +55,5 @@ Out (do NOT):
 
 - Title: a concise, action-oriented description of the task
 - Body: the formatted content from Step 2
-- Labels: only add if the user explicitly specifies one; otherwise do NOT add any labels
+- Labels: infer appropriate labels from the issue content (e.g. `bug`, `enhancement`, `documentation`, `refactoring`, `testing`). Apply best-effort — skip labels that may not exist in the repository. Do NOT add `ai-ready`. If the user explicitly specifies labels, use those instead.
 - Use the GitHub MCP server if available; fall back to `gh issue create` otherwise
