@@ -7,6 +7,35 @@ description: Create a GitHub issue for an AI coding agent task. Use when asked t
 
 Create a GitHub issue formatted for AI coding agents. Follow the steps below.
 
+## Step 0: Assess task scope
+
+Before gathering information, determine if the task should be split into
+multiple issues. Split into a parent + sub issue structure if **any** of
+the following apply:
+
+- **A. Dependencies exist** — completion of one task is a prerequisite for another
+- **B. Independently mergeable** — each part can become a separate PR and reviewed/merged independently
+- **E. Scale too large** — the task is too broad to fit in a single agent-task issue
+
+If none apply, proceed directly to Step 1.
+
+## Step 0a: Multi-issue structure
+
+If splitting is needed, create a parent issue and sub issues as follows.
+
+### Parent issue
+- Title: concise description of the overall goal
+- Body: overview, purpose, and background (no need for agent-task format)
+- Labels: same inference rules as Step 3
+
+### Sub issues
+- Follow the agent-task format (Steps 1–3) for each sub issue
+- Granularity: **one unit completable by a single agent**
+- Link each sub issue to the parent issue
+- Set `blockedBy` between sub issues where dependencies exist (criterion A applies)
+
+---
+
 ## Step 1: Gather information
 
 Collect the following from the user's description and current conversation context.
