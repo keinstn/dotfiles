@@ -28,3 +28,6 @@ curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party
     -o /usr/local/bin/diff-so-fancy
 chmod 755 /usr/local/bin/diff-so-fancy
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+
+# Install Antigravity CLI
+curl -fsSL https://antigravity.google/cli/install.sh | bash
