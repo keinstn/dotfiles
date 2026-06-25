@@ -5,6 +5,8 @@ Import-Module "$profile_dir\Functions.ps1"
 
 $env:Path = "$HOME\.cargo\bin;$env:Path"
 $env:PATH = "$HOME\.local`\bin;$env:PATH"
+$env:VOLTA_HOME = "$HOME\.volta"
+$env:PATH = "$env:VOLTA_HOME\bin;$env:PATH"
 
 if (Test-Path "$HOME\.env.ps1") { . "$HOME\.env.ps1" }
 
