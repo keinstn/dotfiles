@@ -44,7 +44,3 @@ source $HOME/.phpbrew/phpbrew.fish
 
 # Added by `rbenv init`
 status --is-interactive; and rbenv init - --no-rehash fish | source
-
-
-# Added by Antigravity CLI installer
-set -gx PATH "/Users/administrator/.local/bin" $PATH
