@@ -3,3 +3,4 @@ Set-Alias diff delta.exe -force -option 'Constant','AllScope'
 Set-Alias find fd.exe
 Set-Alias ls eza.exe -force -option 'Constant','AllScope'
 Set-Alias vim nvim.exe
+Set-Alias bash 'C:\Program Files\Git\bin\bash.exe'
