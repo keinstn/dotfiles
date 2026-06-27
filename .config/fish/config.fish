@@ -1,3 +1,23 @@
+# Load global secrets from ~/.env into environment variables
+if test -f ~/.env
+    for line in (cat ~/.env)
+        # Skip empty lines and comments
+        if string match -qr '^\s*($|#)' -- $line
+            continue
+        end
+        # Strip optional `export ` prefix
+        set line (string replace -r '^export\s+' '' -- $line)
+        # Split into KEY and VALUE on the first `=`
+        set parts (string split -m 1 '=' -- $line)
+        if test (count $parts) -eq 2
+            # Strip surrounding quotes from value
+            set val (string trim -c '"' -- $parts[2])
+            set val (string trim -c "'" -- $val)
+            set -gx $parts[1] $val
+        end
+    end
+end
+
 source ~/.config/fish/aliases.fish
 source ~/.config/fish/terminal-splits.fish
 

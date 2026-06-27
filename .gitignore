@@ -28,3 +28,4 @@
 
 # secrets (not tracked; use windows/PowerShell/.env.ps1.template as a starting point)
 .env.ps1
+.env
