@@ -10,7 +10,6 @@ dotfiles/
 │   ├── settings.json  # Claude Code settings
 │   └── CLAUDE.md      # Global instructions
 ├── .config/
-│   ├── cmux/
 │   ├── fish/          # Fish shell
 │   ├── ghostty/       # Ghostty terminal
 │   ├── mcphub/
