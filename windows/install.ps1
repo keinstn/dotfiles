@@ -41,3 +41,6 @@ foreach ($package in $WingetPackages)
 
 # Apply dotfiles via symbolic links (stow-equivalent)
 & "$PSScriptRoot\Invoke-Stow.ps1"
+
+# Install herdr
+powershell -ExecutionPolicy Bypass -c "irm https://herdr.dev/install.ps1 | iex"

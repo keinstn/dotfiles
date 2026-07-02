@@ -1,0 +1,40 @@
+onboarding = false
+# herdr configuration
+# Place this file at ~/.config/herdr/config.toml
+#
+# Keybindings are aligned with ghostty (.config/ghostty/splits-terminal.ghostty)
+# and wezterm (.config/wezterm/wezterm.lua):
+#   - prefix/leader key: ctrl+q
+#   - "v" -> split left/right, "s" -> split top/bottom
+#   - ctrl+h/j/k/l -> move focus between panes (direct, no prefix)
+#   - ctrl+d -> close current pane
+#   - prefix+c -> new tab
+
+[keys]
+# Prefix key to enter prefix mode (matches ghostty/wezterm leader).
+prefix = "ctrl+q"
+
+# New tab (matches ghostty `ctrl+q>c` / wezterm `LEADER c` SpawnTab).
+new_tab = "prefix+c"
+
+# Moved off "prefix+s" (default) so split_horizontal can use the "s" key,
+# matching the ghostty/wezterm convention below.
+settings = "prefix+shift+s"
+
+# Split panes.
+# split_vertical: vertical divider -> left/right panes.
+#   Matches ghostty `ctrl+q>v` (new_split:right) / wezterm `LEADER v` (SplitHorizontal).
+split_vertical = "prefix+v"
+# split_horizontal: horizontal divider -> top/bottom panes.
+#   Matches ghostty `ctrl+q>s` (new_split:down) / wezterm `LEADER s` (SplitVertical).
+split_horizontal = "prefix+s"
+
+# Close current pane (matches ghostty/wezterm `ctrl+d`).
+close_pane = "ctrl+d"
+
+# Move focus between panes, no prefix needed
+# (matches ghostty/wezterm direct `ctrl+h/j/k/l`).
+focus_pane_left = "ctrl+h"
+focus_pane_down = "ctrl+j"
+focus_pane_up = "ctrl+k"
+focus_pane_right = "ctrl+l"
