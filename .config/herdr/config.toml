@@ -32,9 +32,11 @@ split_horizontal = "prefix+s"
 # Close current pane (matches ghostty/wezterm `ctrl+d`).
 close_pane = "ctrl+d"
 
-# Move focus between panes, no prefix needed
-# (matches ghostty/wezterm direct `ctrl+h/j/k/l`).
-focus_pane_left = "ctrl+h"
-focus_pane_down = "ctrl+j"
-focus_pane_up = "ctrl+k"
-focus_pane_right = "ctrl+l"
+# Move focus between panes.
+# Uses prefix (not direct ctrl+h/j/k/l) because on Windows, herdr's input
+# handling normalizes Ctrl+H to the same key as Backspace, so a prefix-less
+# ctrl+h binding swallows Backspace inside panes.
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
