@@ -9,5 +9,8 @@
 ^/install\.sh$
 ^/brew\.sh$
 
+# Claude Code local settings (rewritten live by Claude Code)
+^/\.claude/settings\.local\.json$
+
 # Windows-specific configs
 ^/windows
