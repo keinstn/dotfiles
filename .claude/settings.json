@@ -1,7 +1,0 @@
-{
-  "enabledPlugins": {
-    "lua-lsp@claude-plugins-official": true
-  },
-  "editorMode": "vim",
-  "autoCompactEnabled": true
-}

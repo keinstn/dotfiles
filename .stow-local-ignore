@@ -9,9 +9,5 @@
 ^/install\.sh$
 ^/brew\.sh$
 
-# Claude Code: settings.json is rewritten live by Claude Code, so leave the
-# target file alone (settings.local.json is still stow-managed).
-^/\.claude/settings\.json$
-
 # Windows-specific configs
 ^/windows
