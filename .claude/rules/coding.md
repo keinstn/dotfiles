@@ -84,6 +84,8 @@ for it?**
   correct — not a broken promise.
 - Ordinary means to the requested end (a repro test, a needed dependency)
   are covered by the request itself.
+- A diagnosis/investigation request isn't approval to create a worktree,
+  branch, or issue — explain findings first, let them confirm.
 
 ## 8. Keep This File Lean
 

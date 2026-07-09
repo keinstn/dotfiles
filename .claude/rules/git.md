@@ -30,3 +30,8 @@ Structure:
 Before committing, check the type matches the actual change: a rename is
 `refactor`, new behavior is `feat`, tooling/config is `chore`. When torn
 between two, pick the one a reader scanning the log would expect.
+
+## Write in English
+
+Commit messages, PR titles/descriptions, and GitHub issue text are always in
+English, regardless of the conversation language.
