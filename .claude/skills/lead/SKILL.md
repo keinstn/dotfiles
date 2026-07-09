@@ -50,3 +50,7 @@ the arrangement each time.
 - Pure research/Q&A with nothing to implement.
 - Work that needs the upper model's full capability on every step (then just
   do it in the main loop).
+- Linear single-unit tasks with little to decompose or parallelize — the
+  orchestration overhead buys nothing. Consider a Sonnet main loop with an Opus
+  advisor (`advisorModel: opus`) instead: strong judgment at the decision points
+  without a lead round-trip.
