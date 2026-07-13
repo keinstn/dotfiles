@@ -11,6 +11,8 @@ $env:PATH = "$env:VOLTA_HOME\bin;$env:PATH"
 if (Test-Path "$HOME\.env.ps1") { . "$HOME\.env.ps1" }
 
 [Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding('utf-8')
+[Console]::InputEncoding = [System.Text.Encoding]::GetEncoding('utf-8')
+$OutputEncoding = [System.Text.Encoding]::GetEncoding('utf-8')
 
 Invoke-Expression (&starship init powershell)
 
