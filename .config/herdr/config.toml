@@ -17,6 +17,19 @@ prefix = "ctrl+q"
 # New tab (matches ghostty `ctrl+q>c` / wezterm `LEADER c` SpawnTab).
 new_tab = "prefix+c"
 
+# New workspace. Prefix-based so the terminal (ghostty/wezterm) can't swallow it.
+new_workspace = "prefix+t"
+
+# Cycle workspaces. Prefix-based for the same reason.
+# These take over prefix+tab / prefix+shift+tab from the default pane-cycle
+# bindings, which are freed below (pane focus stays on prefix+h/j/k/l).
+next_workspace = "prefix+tab"
+previous_workspace = "prefix+shift+tab"
+
+# Freed for next_workspace / previous_workspace above.
+cycle_pane_next = ""
+cycle_pane_previous = ""
+
 # Moved off "prefix+s" (default) so split_horizontal can use the "s" key,
 # matching the ghostty/wezterm convention below.
 settings = "prefix+shift+s"
