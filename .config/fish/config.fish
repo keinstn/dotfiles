@@ -27,7 +27,7 @@ set -g simple_ass_prompt_greeting
 
 set -g FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
-if type -q brew
+if test -x /opt/homebrew/bin/brew
     set -x PATH "/opt/homebrew/bin" $PATH
     eval (brew shellenv)
 end
