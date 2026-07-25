@@ -27,8 +27,10 @@ set -g simple_ass_prompt_greeting
 
 set -g FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
-set -x PATH "/opt/homebrew/bin" $PATH
-eval (brew shellenv)
+if type -q brew
+    set -x PATH "/opt/homebrew/bin" $PATH
+    eval (brew shellenv)
+end
 
 if type -q gh
     set -gx GITHUB_MCP_PAT (gh auth token 2>/dev/null)
@@ -49,9 +51,13 @@ set -x PATH "$HOME/go/bin" $PATH
 
 set -x PATH "/usr/local/opt/llvm/bin" $PATH
 
-eval (direnv hook fish)
+if type -q direnv
+    eval (direnv hook fish)
+end
 
-starship init fish | source
+if type -q starship
+    starship init fish | source
+end
 
 # flutter
 set -x PATH "$HOME/.pub-cache/bin" $PATH
@@ -59,8 +65,12 @@ set -x PATH "$HOME/.pub-cache/bin" $PATH
 set -x WEZTERM_CONFIG_FILE "$HOME/.config/wezterm/wezterm.lua"
 
 # phpbrew
-set -x PHPBREW_RC_ENABLE 1
-source $HOME/.phpbrew/phpbrew.fish
+if type -q phpbrew
+    set -x PHPBREW_RC_ENABLE 1
+    source $HOME/.phpbrew/phpbrew.fish
+end
 
 # Added by `rbenv init`
-status --is-interactive; and rbenv init - --no-rehash fish | source
+if type -q rbenv
+    status --is-interactive; and rbenv init - --no-rehash fish | source
+end
