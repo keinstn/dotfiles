@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Walk up from $PWD to find the nearest pubspec.yaml.
+dir="$PWD"
+while [ "$dir" != "/" ] && [ ! -f "$dir/pubspec.yaml" ]; do
+    dir="$(dirname "$dir")"
+done
+pubspec="$dir/pubspec.yaml"
+[ -f "$pubspec" ] || { echo "error: no pubspec.yaml found in $PWD or any parent directory" >&2; exit 1; }
+
+current="$(grep -E '^version: ' "$pubspec" | head -1 | sed 's/^version: //')"
+[ -n "$current" ] || { echo "error: no 'version:' line found in $pubspec" >&2; exit 1; }
+
+semver="${current%+*}"
+build="${current##*+}"
+if [ "$build" = "$current" ]; then
+    echo "error: version '$current' has no build number (expected e.g. 1.0.0+14)" >&2
+    exit 1
+fi
+new_version="${semver}+$((build + 1))"
+
+sed -i.bak "s/^version: .*/version: ${new_version}/" "$pubspec" && rm -f "$pubspec.bak"
+
+git_root="$(git -C "$dir" rev-parse --show-toplevel)"
+rel_dir="$(realpath --relative-to="$git_root" "$dir")"
+scope=""
+[ "$rel_dir" != "." ] && scope="(${rel_dir##*/})"
+
+git -C "$git_root" commit -m "chore${scope}: bump version to ${new_version}" -- "$pubspec"
+git -C "$git_root" push
+
+echo "Bumped to ${new_version} and pushed."
