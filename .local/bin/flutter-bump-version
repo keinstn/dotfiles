@@ -23,9 +23,10 @@ new_version="${semver}+$((build + 1))"
 sed -i.bak "s/^version: .*/version: ${new_version}/" "$pubspec" && rm -f "$pubspec.bak"
 
 git_root="$(git -C "$dir" rev-parse --show-toplevel)"
-rel_dir="$(realpath --relative-to="$git_root" "$dir")"
+rel_dir="${dir#$git_root}"
+rel_dir="${rel_dir#/}"
 scope=""
-[ "$rel_dir" != "." ] && scope="(${rel_dir##*/})"
+[ -n "$rel_dir" ] && scope="(${rel_dir##*/})"
 
 git -C "$git_root" commit -m "chore${scope}: bump version to ${new_version}" -- "$pubspec"
 git -C "$git_root" push
