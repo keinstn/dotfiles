@@ -8,6 +8,7 @@ source ./brew.sh
 # Install configurations via stow
 mkdir -p ~/.config
 cd "$(dirname "${BASH_SOURCE[0]}")"
+./scripts/render-agent-rules
 stow .
 
 # Change default shell to fish

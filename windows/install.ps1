@@ -40,6 +40,16 @@ foreach ($package in $WingetPackages)
 }
 
 # Apply dotfiles via symbolic links (stow-equivalent)
+$gitBashCandidates = @(
+    (Join-Path $env:ProgramFiles 'Git\bin\bash.exe'),
+    (Join-Path ${env:ProgramFiles(x86)} 'Git\bin\bash.exe')
+)
+$gitBash = $gitBashCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+if (-not $gitBash) {
+    throw 'Git Bash was not found in Program Files. Install Git for Windows before running this script.'
+}
+$renderer = Join-Path (Split-Path -Parent $PSScriptRoot) 'scripts\render-agent-rules'
+& $gitBash $renderer
 & "$PSScriptRoot\Invoke-Stow.ps1"
 
 # Install herdr

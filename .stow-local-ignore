@@ -12,6 +12,9 @@
 # Claude Code local settings (rewritten live by Claude Code)
 ^/\.claude/settings\.local\.json$
 
+# Agent rule sources are renderer input, not home-directory configuration.
+^/agent-rules
+
 # Windows-specific configs
 ^/windows
 
