@@ -1,5 +1,6 @@
 # Worktrees
 
-For implementation work in a Git repository, create an adjacent Git worktree
-before editing unless the user directs otherwise or the repository workflow
-already provides an isolated working directory.
+For multi-file, risky, or independently shippable implementation work in a
+Git repository, prefer an adjacent Git worktree. Do not create another
+worktree when already in an isolated one or when the user requests in-place
+work.
