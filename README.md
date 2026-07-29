@@ -48,9 +48,9 @@ GitHub Copilot CLI:
 stow -R .
 ```
 
-`install.sh` and `windows/install.ps1` run the renderer before linking files.
-The generated files are intentionally ignored by Git; edit `agent-rules/`, not
-`.claude/rules/`, `.codex/AGENTS.md`, or
+`install.sh` and `windows/install.ps1` run the Bash renderer before linking
+files. The generated files are intentionally ignored by Git; edit
+`agent-rules/`, not `.claude/rules/`, `.codex/AGENTS.md`, or
 `.agent-rules/copilot.instructions.md`.
 
 GitHub Copilot CLI discovers the generated instructions through
@@ -90,7 +90,8 @@ cd ~/dotfiles/windows
 ```
 
 `install.ps1` installs Chocolatey/winget packages and then runs
-`Invoke-Stow.ps1`, which is the Windows equivalent of `stow .`.
+the Bash renderer followed by `Invoke-Stow.ps1`, which is the Windows
+equivalent of `stow .`. Git Bash (`bash` on `PATH`) is required.
 
 It links every top-level entry in the repository into `$HOME` as a symbolic
 link, honoring the same `.stow-local-ignore` file used on macOS, and follows
@@ -169,7 +170,7 @@ On Windows, use `Invoke-Stow.ps1` instead of `stow`:
 
 ```powershell
 # Re-apply links after pulling changes
-./windows/Render-AgentRules.ps1
+bash ./scripts/render-agent-rules
 ./windows/Invoke-Stow.ps1
 
 # Remove links
