@@ -90,7 +90,10 @@ cd ~/dotfiles/windows
 
 `install.ps1` installs Chocolatey/winget packages and then runs
 the Bash renderer followed by `Invoke-Stow.ps1`, which is the Windows
-equivalent of `stow .`. Git Bash (`bash` on `PATH`) is required.
+equivalent of `stow .`. Git Bash is required; the installer invokes
+`C:\Program Files\Git\bin\bash.exe` or
+`C:\Program Files (x86)\Git\bin\bash.exe` directly, rather than resolving
+`bash` from `PATH`.
 
 It links every top-level entry in the repository into `$HOME` as a symbolic
 link, honoring the same `.stow-local-ignore` file used on macOS, and follows
