@@ -36,4 +36,4 @@ for rule in "${rule_names[@]}"; do
 done
 
 render_combined "$repo_root/.codex/AGENTS.md" 'Global agent guidance'
-render_combined "$repo_root/.agent-rules/copilot.instructions.md" 'Global agent guidance'
+render_combined "$repo_root/.copilot/copilot-instructions.md" 'Global agent guidance'

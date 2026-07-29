@@ -64,9 +64,6 @@ set -x PATH "$HOME/.pub-cache/bin" $PATH
 
 set -x WEZTERM_CONFIG_FILE "$HOME/.config/wezterm/wezterm.lua"
 
-# Make the Stow-managed portable guidance available to GitHub Copilot CLI.
-set -gx COPILOT_CUSTOM_INSTRUCTIONS_DIRS "$HOME/.agent-rules"
-
 # phpbrew
 if type -q phpbrew
     set -x PHPBREW_RC_ENABLE 1

@@ -7,7 +7,6 @@ $env:Path = "$HOME\.cargo\bin;$env:Path"
 $env:PATH = "$HOME\.local`\bin;$env:PATH"
 $env:VOLTA_HOME = "$HOME\.volta"
 $env:PATH = "$env:VOLTA_HOME\bin;$env:PATH"
-$env:COPILOT_CUSTOM_INSTRUCTIONS_DIRS = "$HOME\.agent-rules"
 
 if (Test-Path "$HOME\.env.ps1") { . "$HOME\.env.ps1" }
 

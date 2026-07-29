@@ -11,8 +11,8 @@ dotfiles/
 │   └── rules/         # Generated Claude Code instructions
 ├── .codex/
 │   └── AGENTS.md      # Generated Codex global instructions
-├── .agent-rules/
-│   └── copilot.instructions.md  # Generated GitHub Copilot CLI instructions
+├── .copilot/
+│   └── copilot-instructions.md  # Generated GitHub Copilot CLI instructions
 ├── .config/
 │   ├── fish/          # Fish shell
 │   ├── ghostty/       # Ghostty terminal
@@ -51,13 +51,12 @@ stow -R .
 `install.sh` and `windows/install.ps1` run the Bash renderer before linking
 files. The generated files are intentionally ignored by Git; edit
 `agent-rules/`, not `.claude/rules/`, `.codex/AGENTS.md`, or
-`.agent-rules/copilot.instructions.md`.
+`.copilot/copilot-instructions.md`.
 
-GitHub Copilot CLI discovers the generated instructions through
-`COPILOT_CUSTOM_INSTRUCTIONS_DIRS`, which is set by the Fish and PowerShell
-profiles in this repository. Open a new shell after Stow has linked the
-profiles. Other Copilot surfaces use different instruction locations, so add a
-renderer target for the specific IDE or GitHub feature when needed.
+GitHub Copilot CLI discovers the generated instructions at its standard
+user-level path, `~/.copilot/copilot-instructions.md`. Other Copilot surfaces
+use different instruction locations, so add a renderer target for the specific
+IDE or GitHub feature when needed.
 
 Stow does not replace an existing real instruction file. If a machine already
 has local guidance at `~/.codex/AGENTS.md` or under `~/.claude/rules/`, merge

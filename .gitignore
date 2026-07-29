@@ -33,4 +33,4 @@
 # Generated from agent-rules/; run scripts/render-agent-rules before stowing.
 /.claude/rules/
 /.codex/
-/.agent-rules/copilot.instructions.md
+/.copilot/
