@@ -6,9 +6,13 @@ Personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ```
 dotfiles/
+├── agent-rules/        # Source of truth for portable agent instructions
 ├── .claude/
-│   ├── settings.json  # Claude Code settings
-│   └── CLAUDE.md      # Global instructions
+│   └── rules/         # Generated Claude Code instructions
+├── .codex/
+│   └── AGENTS.md      # Generated Codex global instructions
+├── .agent-rules/
+│   └── copilot.instructions.md  # Generated GitHub Copilot CLI instructions
 ├── .config/
 │   ├── fish/          # Fish shell
 │   ├── ghostty/       # Ghostty terminal
@@ -29,7 +33,35 @@ dotfiles/
 └── .stow-local-ignore
 ```
 
-Only git-tracked files are managed by Stow. Untracked files (history, cache, secrets) remain as real files in `~/.config/`.
+Git-tracked files and renderer-generated instruction files are managed by
+Stow. Other untracked files (history, cache, secrets) remain as real files in
+`~/.config/`.
+
+## Agent instructions
+
+`agent-rules/` is the single source of truth for portable coding-agent
+guidance. The renderer creates tool-specific files for Claude Code, Codex, and
+GitHub Copilot CLI:
+
+```bash
+./scripts/render-agent-rules
+stow -R .
+```
+
+`install.sh` and `windows/install.ps1` run the renderer before linking files.
+The generated files are intentionally ignored by Git; edit `agent-rules/`, not
+`.claude/rules/`, `.codex/AGENTS.md`, or
+`.agent-rules/copilot.instructions.md`.
+
+GitHub Copilot CLI discovers the generated instructions through
+`COPILOT_CUSTOM_INSTRUCTIONS_DIRS`, which is set by the Fish and PowerShell
+profiles in this repository. Open a new shell after Stow has linked the
+profiles. Other Copilot surfaces use different instruction locations, so add a
+renderer target for the specific IDE or GitHub feature when needed.
+
+Stow does not replace an existing real instruction file. If a machine already
+has local guidance at `~/.codex/AGENTS.md` or under `~/.claude/rules/`, merge
+or move it first, then rerun the render and Stow commands.
 
 ## Setup
 
@@ -45,7 +77,7 @@ cd ~/dotfiles
 
 1. Install Xcode Command Line Tools
 2. Install Homebrew packages (`brew.sh`)
-3. Apply dotfiles via `stow .`
+3. Render agent instructions and apply dotfiles via `stow .`
 4. Set Fish as default shell
 5. Install Rust, Volta, and other tools
 
@@ -123,6 +155,7 @@ The ghostty keybinding file (`~/.config/ghostty/splits.ghostty`) is a runtime sy
 # Add a new config file
 git add .config/sometool/config
 git commit -m "[sometool] add config"
+./scripts/render-agent-rules
 stow -R .
 
 # Remove symlinks
@@ -136,6 +169,7 @@ On Windows, use `Invoke-Stow.ps1` instead of `stow`:
 
 ```powershell
 # Re-apply links after pulling changes
+./windows/Render-AgentRules.ps1
 ./windows/Invoke-Stow.ps1
 
 # Remove links

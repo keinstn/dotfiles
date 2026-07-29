@@ -40,6 +40,7 @@ foreach ($package in $WingetPackages)
 }
 
 # Apply dotfiles via symbolic links (stow-equivalent)
+& "$PSScriptRoot\Render-AgentRules.ps1"
 & "$PSScriptRoot\Invoke-Stow.ps1"
 
 # Install herdr
