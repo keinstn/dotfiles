@@ -16,7 +16,8 @@ to the task; over-applying them to trivial work is counterproductive.
 
 - Implement the smallest change that solves the requested problem.
 - Do not add speculative features, abstractions, or configurability.
-- Do not add error handling for impossible scenarios.
+- Do not add speculative error handling. Preserve the project's existing
+  error-handling boundaries.
 - Rewrite code that is substantially more complex than the problem requires.
 - Touch only files required for the request. Mention unrelated issues; do not
   fix them incidentally.
