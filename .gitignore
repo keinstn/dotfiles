@@ -30,6 +30,10 @@
 .env.ps1
 .env
 
+# PowerShell: CurrentUser-scope modules installed via Install-Module land here
+# because $PROFILE lives inside this repo path.
+windows/PowerShell/Modules/
+
 # Generated from agent-rules/; run scripts/render-agent-rules before stowing.
 /.claude/rules/
 /.codex/

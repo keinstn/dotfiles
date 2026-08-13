@@ -13,6 +13,13 @@ function open
     Invoke-Item $args
 }
 
+function .. { Set-Location .. }
+function ../ { Set-Location .. }
+function ../.. { Set-Location ..\..\ }
+function ../../ { Set-Location ..\..\ }
+function ../../.. { Set-Location ..\..\..\ }
+function ../../../ { Set-Location ..\..\..\ }
+
 function Set-TerminalSplits {
     param([ValidateSet('on','off','toggle','status')][string]$Action = 'toggle')
     $marker = Join-Path $HOME ".config\terminal-splits-on"

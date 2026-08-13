@@ -10,6 +10,12 @@ $env:PATH = "$env:VOLTA_HOME\bin;$env:PATH"
 
 if (Test-Path "$HOME\.env.ps1") { . "$HOME\.env.ps1" }
 
+Import-Module PSReadLine
+Import-Module CompletionPredictor
+Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+Set-PSReadLineOption -PredictionViewStyle InlineView
+Set-PSReadLineOption -Colors @{ InlinePrediction = '#875f5f' }
+
 [Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding('utf-8')
 [Console]::InputEncoding = [System.Text.Encoding]::GetEncoding('utf-8')
 $OutputEncoding = [System.Text.Encoding]::GetEncoding('utf-8')

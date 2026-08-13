@@ -39,6 +39,16 @@ foreach ($package in $WingetPackages)
     winget install $package
 }
 
+$PSModules = @(
+    "PSReadLine",
+    "CompletionPredictor"
+)
+
+foreach ($module in $PSModules)
+{
+    Install-Module -Name $module -Scope CurrentUser -Force -AllowClobber
+}
+
 # Apply dotfiles via symbolic links (stow-equivalent)
 $gitBashCandidates = @(
     (Join-Path $env:ProgramFiles 'Git\bin\bash.exe'),
