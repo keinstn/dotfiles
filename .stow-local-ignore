@@ -8,6 +8,7 @@
 # Scripts
 ^/install\.sh$
 ^/brew\.sh$
+^/scripts
 
 # Claude Code local settings (rewritten live by Claude Code)
 ^/\.claude/settings\.local\.json$
