@@ -1,0 +1,19 @@
+{
+  "lastChangelogVersion": "0.84.3",
+  "theme": "dark",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "gpt-5.6-luna",
+  "defaultThinkingLevel": "high",
+  "packages": [
+    "npm:@dietrichgebert/ponytail",
+    "npm:@narumitw/pi-btw",
+    "npm:@narumitw/pi-goal",
+    "npm:@quintinshaw/pi-dynamic-workflows",
+    "npm:pi-bifrost",
+    "npm:pi-web-access",
+    "npm:pi-mcp-adapter",
+    "npm:pi-subagents",
+    "npm:@burneikis/pi-vim"
+  ],
+  "tuiMode": "fullscreen"
+}
