@@ -4,7 +4,6 @@ formulas="\
   awscli \
   bat \
   bottom \
-  codersauce/tap/red \
   colima \
   csvlens \
   dep \
