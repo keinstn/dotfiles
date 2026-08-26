@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Sweep all your GitHub repos and auto-merge open Dependabot PRs.
+# Usage:
+#   dependabot-sweep            # dry-run: list PRs + CI status
+#   dependabot-sweep --merge    # approve + enable squash auto-merge (merges when CI passes)
+set -euo pipefail
+
+USER=${GITHUB_USER:-$(gh api user --jq .login)}
+MODE=list
+[[ "${1:-}" == "--merge" ]] && MODE=merge
+
+total=0
+printf "%-20s %-6s %-42s %s\n" REPO PR TITLE CI
+printf "%-20s %-6s %-42s %s\n" "--------------------" "------" "------------------------------------------" "---------"
+
+for repo in $(gh repo list "$USER" --limit 200 --json name --jq '.[].name'); do
+  # ponytail: naive check classification — treats non-success finished checks as pending;
+  # good enough for pass/fail/pending at a glance
+  # shellcheck disable=SC2086
+  gh pr list -R "$USER/$repo" --author app/dependabot --state open \
+    --json number,title,statusCheckRollup --jq '
+      def ci:
+        (map(.conclusion // .state)) as $s
+        | if ($s | length) == 0 then "no-ci"
+          elif any($s[]; . == "FAILURE" or . == "ERROR" or . == "TIMED_OUT" or . == "CANCELLED") then "FAILING"
+          elif all($s[]; . == "SUCCESS" or . == "SKIPPED" or . == "NEUTRAL") then "PASSING"
+          else "PENDING" end;
+      .[] | [.number, .title, ([.statusCheckRollup[]?] | ci)] | @tsv' |
+  while IFS=$'\t' read -r num title checks; do
+    printf "%-20s %-6s %-42s %s\n" "$repo" "#$num" "$(echo "$title" | cut -c1-42)" "$checks"
+    total=$((total + 1))
+    if [[ $MODE == merge ]]; then
+      gh pr review -R "$USER/$repo" "$num" --approve >/dev/null &&
+      gh pr merge -R "$USER/$repo" "$num" --auto --squash >/dev/null &&
+        echo "  → approved + auto-merge on"
+    fi
+  done
+done
+
+[[ $MODE == list ]] && echo "(dry-run — pass --merge to approve & auto-merge)"
