@@ -30,9 +30,13 @@ for repo in $(gh repo list "$USER" --limit 200 --json name --jq '.[].name'); do
     printf "%-20s %-6s %-42s %s\n" "$repo" "#$num" "$(echo "$title" | cut -c1-42)" "$checks"
     total=$((total + 1))
     if [[ $MODE == merge ]]; then
-      gh pr review -R "$USER/$repo" "$num" --approve >/dev/null &&
-      gh pr merge -R "$USER/$repo" "$num" --auto --squash >/dev/null &&
-        echo "  → approved + auto-merge on"
+      if [[ $checks != PASSING ]]; then
+        echo "  → skipped (checks: $checks)"
+      else
+        gh pr review -R "$USER/$repo" "$num" --approve >/dev/null &&
+        gh pr merge -R "$USER/$repo" "$num" --auto --squash >/dev/null &&
+          echo "  → approved + auto-merge on"
+      fi
     fi
   done
 done
