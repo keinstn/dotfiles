@@ -52,7 +52,7 @@ set -x PATH "$HOME/go/bin" $PATH
 set -x PATH "/usr/local/opt/llvm/bin" $PATH
 
 if type -q direnv
-    eval (direnv hook fish)
+    direnv hook fish | source
 end
 
 if type -q starship
