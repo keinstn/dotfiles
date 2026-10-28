@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+set -euo pipefail
+root=$(cd "$(dirname "$0")/.." && pwd)
+t=$(mktemp -d); trap 'rm -rf "$t"' EXIT
+mkdir "$t/bin" "$t/marks"
+fail() { echo "FAIL: $*" >&2; exit 1; }
+
+# fake claude: MODE=reload writes marker (id) for its parent fish; empty writes empty marker; none/exit3 as named
+cat > "$t/bin/claude" <<'F'
+#!/usr/bin/env bash
+echo "$*" >> "$LOG"
+[ "${1:-}" = "--resume" ] && exit 0
+case "$MODE" in
+  exit3) exit 3 ;;
+  reload) echo sess-123 > "$CLAUDE_SELF_RELOAD_DIR/$PPID" ;;
+  empty) : > "$CLAUDE_SELF_RELOAD_DIR/$PPID" ;;
+esac
+exit 0
+F
+chmod +x "$t/bin/claude"
+# run MODE [fish pre-snippet]
+run() { : > "$t/log"; PATH="$t/bin:$PATH" LOG="$t/log" MODE="$1" fish --no-config -c "set -x CLAUDE_SELF_RELOAD_DIR $t/marks; source $root/.config/fish/claude-self-reload.fish; ${2:-true}; claude foo; exit \$status"; }
+calls() { wc -l < "$t/log" | tr -d ' '; }
+
+run reload || fail "reload case exit status"
+[ "$(calls)" = 2 ] || fail "expected 2 calls: $(cat "$t/log")"
+[ "$(sed -n 2p "$t/log")" = "--resume sess-123" ] || fail "second argv: $(sed -n 2p "$t/log")"
+[ -z "$(ls -A "$t/marks")" ] || fail "marker dir not empty"
+echo ok: wrapper resumes
+
+rc=0; run exit3 || rc=$?
+[ "$rc" = 3 ] || fail "expected status 3, got $rc"
+[ "$(calls)" = 1 ] || fail "expected 1 call"
+echo ok: status propagates
+
+run none 'echo stale > $CLAUDE_SELF_RELOAD_DIR/$fish_pid'
+[ "$(calls)" = 1 ] || fail "stale marker triggered resume: $(cat "$t/log")"
+[ -z "$(ls -A "$t/marks")" ] || fail "stale marker left"
+echo ok: stale marker ignored
+
+run empty
+[ "$(calls)" = 1 ] || fail "empty marker resumed: $(cat "$t/log")"
+[ -z "$(ls -A "$t/marks")" ] || fail "empty marker left"
+echo ok: empty marker no resume
+
+rl="$root/.claude/skills/self-reload/reload.sh"
+bash -n "$rl"
+
+# parent is fish: kills and writes marker named after fish pid
+fish --no-config -c 'sleep 60 & echo $last_pid > '"$t/sleep.pid"'; wait' &
+fp=$!; sleep 1
+sp=$(cat "$t/sleep.pid")
+CLAUDE_PID=$sp CLAUDE_CODE_SESSION_ID=abc CLAUDE_SELF_RELOAD_DIR=$t/marks2 "$rl" >/dev/null
+sleep 0.3
+[ "$(cat "$t/marks2/$fp")" = abc ] || fail "marker content/name"
+kill -0 "$sp" 2>/dev/null && fail "sleep still alive"
+wait "$fp" 2>/dev/null || true
+echo ok: reload.sh kills and writes marker
+
+# parent not fish: abort, no kill, no marker
+( sleep 60 & echo $! > "$t/sleep2.pid"; wait ) &
+sleep 0.5; sp=$(cat "$t/sleep2.pid"); rc=0
+CLAUDE_PID=$sp CLAUDE_CODE_SESSION_ID=abc CLAUDE_SELF_RELOAD_DIR=$t/marks3 "$rl" >/dev/null 2>&1 || rc=$?
+[ "$rc" -ne 0 ] || fail "should fail for non-fish parent"
+kill -0 "$sp" 2>/dev/null || fail "process was killed"
+[ ! -e "$t/marks3" ] || [ -z "$(ls -A "$t/marks3")" ] || fail "marker written"
+echo ok: non-fish parent aborts
+
+# missing session id: abort, no kill
+rc=0
+env -u CLAUDE_CODE_SESSION_ID CLAUDE_PID=$sp CLAUDE_SELF_RELOAD_DIR=$t/marks3 "$rl" >/dev/null 2>&1 || rc=$?
+[ "$rc" -ne 0 ] || fail "should fail without session id"
+kill -0 "$sp" 2>/dev/null || fail "process was killed"
+kill "$sp"
+echo ok: missing env aborts
+echo ALL PASS

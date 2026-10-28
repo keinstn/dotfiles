@@ -20,6 +20,7 @@ end
 
 source ~/.config/fish/aliases.fish
 source ~/.config/fish/terminal-splits.fish
+status is-interactive; and source ~/.config/fish/claude-self-reload.fish
 
 fish_vi_key_bindings
 
