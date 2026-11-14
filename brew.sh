@@ -14,7 +14,6 @@ formulas="\
   eza \
   fd \
   fish \
-  fvm \
   fzf \
   gh \
   git-secrets \
@@ -61,14 +60,12 @@ taps="\
   anomalyco/tap \
   homebrew/cask-fonts \
   dbcli/tap \
-  leoafarias/fvm \
   getsentry/xcodebuildmcp \
 "
 
 casks="\
   claude-code \
   font-hack-nerd-font \
-  flutter \
   gcloud-cli \
   ghostty \
   neovide \

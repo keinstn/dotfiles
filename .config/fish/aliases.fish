@@ -14,7 +14,3 @@ alias ll="eza -lh --git"
 alias tmux="tmux -f ~/.config/tmux/tmux.conf"
 alias vim="nvim"
 alias kc="kubectl"
-if type -q fvm
-    alias f="fvm flutter"
-    alias d="fvm dart"
-end

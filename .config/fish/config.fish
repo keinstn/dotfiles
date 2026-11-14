@@ -60,11 +60,6 @@ if type -q starship
     starship init fish | source
 end
 
-# flutter
-if test -d "$HOME/.pub-cache/bin"
-    set -x PATH "$HOME/.pub-cache/bin" $PATH
-end
-
 set -x WEZTERM_CONFIG_FILE "$HOME/.config/wezterm/wezterm.lua"
 
 # phpbrew
