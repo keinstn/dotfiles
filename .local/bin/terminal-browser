@@ -1,0 +1,4 @@
+#!/bin/sh
+# herdr-app panes set TERM_PROGRAM=ghostty, which makes terminal-browser
+# look for Ghostty. See zenbu-labs/terminal-browser#291.
+exec env -u TERM_PROGRAM /opt/homebrew/bin/terminal-browser "$@"
