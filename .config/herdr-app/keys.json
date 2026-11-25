@@ -4,6 +4,7 @@
     "ctrl-q s": "pane.split:down",
     "ctrl-q c": "tab.new",
     "ctrl-q t": "tab.new",
+    "ctrl-q shift-n": "space.new",
     "ctrl-q n": "tab.next",
     "ctrl-q p": "tab.prev",
     "cmd-q": "app.quit",
